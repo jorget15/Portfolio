@@ -31,9 +31,9 @@ const projects = [
 	},
 	{
 		id: 5,
-		title: '“Bake Away Pastries” Website',
+		title: '"Bake Away Pastries" Website',
 		description: 'A website for a fictional bakery showcasing their products and services',
-		image: '/code.jpg',
+		image: '/BakeAway.png',
 	},
 ];
 
