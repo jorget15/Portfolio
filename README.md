@@ -1,140 +1,101 @@
-# Modern Minimal Portfolio Template
+# Jorge Taban - Portfolio
 
-[Demo](https://www.devportfoliotemplates.com/portfolio-templates/modern-minimal)
+A modern, minimal portfolio website showcasing my work as a Full Stack Developer with a Project Management mindset.
 
-## Getting Started
+## 🚀 Live Demo
 
-You have two options to get started with this template:
+[View Live Portfolio](https://your-domain.com) <!-- Update this with your actual domain -->
 
-### Option 1: Using Git Sparse Checkout
+## 🛠️ Built With
 
-If you want to clone only this specific template:
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type safety and better developer experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Smooth animations and transitions
+- **React 19** - Latest React features
 
-```bash
-git clone --no-checkout https://github.com/devportfoliotemplates/devportfoliotemplates.git
-cd devportfoliotemplates
-git sparse-checkout init --cone
-git sparse-checkout set modern-minimal-portfolio-template
-git checkout
-```
+## ✨ Features
 
-### Option 2: Direct Download
+- **Responsive Design** - Looks great on desktop, tablet, and mobile
+- **Modern Animations** - Smooth transitions with Framer Motion
+- **SEO Optimized** - Meta tags, Open Graph, and Twitter Card support
+- **TypeScript** - Type-safe development
+- **Performance Optimized** - Next.js optimization and best practices
+- **Dark Theme** - Modern dark design with gradient accents
 
-You can download this template as a ZIP file:
+## 🎯 Sections
 
-1. Visit [download-directory.github.io](https://download-directory.github.io/)
-2. Paste the URL of this portfolio folder: `https://github.com/devportfoliotemplates/devportfoliotemplates/tree/main/modern-minimal-portfolio-template`
-3. Download and extract the ZIP file
+- **Hero** - Introduction with animated name and tagline
+- **Projects** - Featured work with descriptions and links
+- **Skills** - Technical skills and technologies
+- **Contact** - Professional contact information and social links
 
-### Running the Template
+## 🚀 Quick Start
 
-Once you have the template:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jorget15/portfolio.git
+   cd portfolio
+   ```
 
-1. Install dependencies:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-2. Run the development server:
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the portfolio.
-
-## Customization
+## 📝 Customization
 
 ### Personal Information
-
-1. Update metadata in `app/layout.tsx`:
-
-   - Site title
-   - Description
-   - Open Graph metadata
-   - Favicon
-
-2. Modify content in `app/page.tsx`:
-
-   - Hero section
-   - About section
-   - Projects
-   - Contact information
-
-3. Replace assets:
-   - Replace images in the `public` directory
-   - Update social media icons
-   - Modify logo if needed
+- Update metadata in `app/layout.tsx`
+- Modify content in component files
+- Replace images in the `public` directory
+- Update contact information and social links
 
 ### Styling
+- Customize colors in `app/globals.css`
+- Modify Tailwind config in `tailwind.config.ts`
+- Adjust component styles as needed
 
-1. Colors and Theme:
+## 📦 Scripts
 
-   - Customize colors in `tailwind.config.js`
-   - Modify theme variables in `app/globals.css`
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-2. Typography:
+## 🚀 Deployment
 
-   - Update font families in `tailwind.config.js`
-   - Modify text sizes and weights
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to [Vercel](https://vercel.com)
+3. Deploy automatically on every push
 
-3. Layout:
-   - Adjust spacing and padding in component files
-   - Modify responsive breakpoints in `tailwind.config.js`
+### Other Platforms
+- **Netlify**: Connect GitHub repo and deploy
+- **Railway**: Simple deployment with automatic HTTPS
+- **GitHub Pages**: Build and deploy static files
 
-## Troubleshooting
+## 📱 Contact
 
-### Common Issues
+- **Email**: [jorge.taban@gmail.com](mailto:jorge.taban@gmail.com)
+- **LinkedIn**: [Jorge Taban](https://www.linkedin.com/in/jorgetaban/)
+- **GitHub**: [@jorget15](https://github.com/jorget15)
+- **Location**: Miami, FL
 
-1. **Build Errors**
+## 📄 License
 
-   - Ensure all dependencies are installed
-   - Clear `.next` folder and node_modules
-   - Run `npm install` again
+This project is open source and available under the [MIT License](LICENSE).
 
-2. **Styling Issues**
+---
 
-   - Run `npm run build` to ensure TailwindCSS classes are generated
-   - Check for conflicting styles in `globals.css`
+**Built with ❤️ by Jorge Taban**
 
-3. **Image Loading**
-   - Verify images are in the correct format (PNG, JPG, WebP)
-   - Check image paths are correct
-   - Ensure images are in the `public` directory
 
-## Deployment
-
-Follow these steps to deploy your portfolio for free using GitHub and Vercel:
-
-1. Create a new GitHub repository
-
-2. Push your portfolio to GitHub
-
-3. Deploy with Vercel:
-   - Go to [Vercel](https://vercel.com)
-   - Sign up or log in with GitHub
-   - Click "New Project"
-   - Import your GitHub repository
-   - Vercel will automatically detect Next.js
-   - Click "Deploy"
-
-Your portfolio will be live in minutes with a free Vercel domain (e.g., `your-repo.vercel.app`). You can later add a custom domain in your Vercel project settings.
-
-## Support
-
-If you find these templates helpful, please consider:
-
-- Starring the repository ⭐
-- Sharing with other developers
-- [Buying me a coffee](https://www.buymeacoffee.com/andreiancu) ☕
-
-For issues and feature requests, please [create an issue](https://github.com/devportfoliotemplates/devportfoliotemplates/issues).
