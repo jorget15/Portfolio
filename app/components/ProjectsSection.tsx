@@ -7,27 +7,33 @@ import Link from 'next/link';
 const projects = [
 	{
 		id: 1,
-		title: 'E-Commerce Platform',
-		description: 'A modern e-commerce platform built with Next.js and Stripe',
+		title: 'LINC-UP iOS App',
+		description: 'A platform for connecting students with for study sessions',
 		image: '/code.jpg',
 	},
 	{
 		id: 2,
-		title: 'AI Chat Application',
-		description: 'Real-time chat application powered by OpenAI',
+		title: 'Business Intelligence Dashboard',
+		description: 'Interactive dashboard for visualizing business metrics and KPIs',
 		image: '/laptop.jpg',
 	},
 	{
 		id: 3,
-		title: 'Task Management',
-		description: 'Collaborative task management tool with real-time updates',
+		title: 'Resume Improver',
+		description: 'Tool for aligning resumes with job descriptions and skip ATS filters',
 		image: '/code.jpg',
 	},
 	{
 		id: 4,
-		title: 'Portfolio Generator',
-		description: 'Dynamic portfolio generator for developers',
+		title: 'Pokemon Game (WIP)',
+		description: 'A fun and interactive game built with Pygame',
 		image: '/laptop.jpg',
+	},
+	{
+		id: 5,
+		title: '“Bake Away Pastries” Website',
+		description: 'A website for a fictional bakery showcasing their products and services',
+		image: '/code.jpg',
 	},
 ];
 
