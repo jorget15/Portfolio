@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	--background: #0e0e10;   /* darker background */
+	--foreground: #fdfdfd;   /* brighter white */
+	--accent: #073d94;       /* blue (Tailwind's blue-500) */
+}
