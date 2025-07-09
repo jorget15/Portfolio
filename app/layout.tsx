@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 		locale: 'en_US',
 		type: 'website',
 	},
-	X: {
+	twitter: {
 		card: 'summary_large_image',
 		title: 'Jorge Taban - Software Developer',
 		description: 'Detail-driven software developer creating rich, purposeful, and audience-focused digital experiences. Explore my work and the intent behind every project.',
