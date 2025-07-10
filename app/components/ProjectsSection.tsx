@@ -12,14 +12,13 @@ const projects = [
 		image: '/LincUp.png',
 		projectUrl: 'https://apps.apple.com/us/app/linc-up/id6747366414',
 		githubUrl: 'https://github.com/Growth-Logistics/Linc',
-	},
-	{
+	},	{
 		id: 2,
-		title: 'Business Intelligence Dashboard',
-		description: 'Interactive dashboard for visualizing business metrics and KPIs',
-		image: '/laptop.jpg',
-		projectUrl: '#',
-		githubUrl: '#',
+		title: 'Linc-Up Website',
+		description: 'Website for the LINC-UP iOS app, providing information and resources',
+		image: '/LincupWebsite.png',
+		projectUrl: 'https://linc-up-website.vercel.app/',
+		githubUrl: 'https://github.com/Growth-Logistics/Linc-Up-Website',
 	},
 	{
 		id: 3,
@@ -31,6 +30,14 @@ const projects = [
 	},
 	{
 		id: 4,
+		title: 'Student Registration System',
+		description: 'An application for managing fake student registrations and course enrollments',
+		image: '/StudentRegistrationSystem.png',
+		projectUrl: 'https://student-registration-system.vercel.app/',
+		githubUrl: 'https://github.com/jorget15/StudentRegistrationSystem',
+	},
+	{
+		id: 5,
 		title: 'Pokemon Python Game (WIP)',
 		description: 'A fun and interactive game built with Pygame',
 		image: '/PokePy.jpg',
@@ -38,11 +45,19 @@ const projects = [
 		githubUrl: 'https://github.com/jorget15/PokePy',
 	},
 	{
-		id: 5,
+		id: 6,
 		title: '"Bake Away Pastries" Website',
 		description: 'A website for a fictional bakery showcasing their products and services',
 		image: '/BakeAway.png',
 		projectUrl: 'https://sites.google.com/d/16P6FHpdAXpVGzNuPQYU_EDVrEDk6pPj2/p/1oq2amKw1zAETQ4xjltlgsTXf73WV4TMR/edit?pli=1',
+		githubUrl: '#',
+	},
+		{
+		id: 7,
+		title: 'Business Intelligence Dashboard',
+		description: 'Interactive dashboard for visualizing business metrics and KPIs. NDA prevents sharing details.',
+		image: '/Unavailable.jpg',
+		projectUrl: '#',
 		githubUrl: '#',
 	},
 ];
