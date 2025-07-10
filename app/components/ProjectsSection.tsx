@@ -16,8 +16,8 @@ const projects = [
 		id: 2,
 		title: 'Linc-Up Website',
 		description: 'Website for the LINC-UP iOS app, providing information and resources',
-		image: '/LincupWebsite.png',
-		projectUrl: 'https://linc-up-website.vercel.app/',
+		image: '/LincUpWebsite.png',
+		projectUrl: 'https://linc-up.org/',
 		githubUrl: 'https://github.com/Growth-Logistics/Linc-Up-Website',
 	},
 	{
