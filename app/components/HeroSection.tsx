@@ -30,8 +30,8 @@ export default function HeroSection() {
 					transition={{ duration: 0.8, delay: 0.4 }}
 					className="text-lg md:text-xl text-foreground/80 mb-8 px-4"
 				>
-	Full Stack Developer with a Project Management Mindset
-</motion.p>
+					Full Stack Developer with a Problem Solving Growth Mindset
+				</motion.p>
 
 			</div>
 
