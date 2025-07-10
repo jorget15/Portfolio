@@ -32,8 +32,8 @@ const projects = [
 		id: 4,
 		title: 'Student Registration System',
 		description: 'An application for managing fake student registrations and course enrollments',
-		image: '/StudentRegistrationSystem.png',
-		projectUrl: 'https://student-registration-system.vercel.app/',
+		image: '/StudentRegistration.png',
+		projectUrl: '#',
 		githubUrl: 'https://github.com/jorget15/StudentRegistrationSystem',
 	},
 	{
