@@ -62,8 +62,9 @@ export default function ContactSection() {
 					</a>
 
 					<a
-						href="/resume.pdf"
+						href="https://docs.google.com/document/d/1jqeEXK9_Vi2vIbikRpXgrPIRNWV48D7j/edit?usp=sharing&ouid=116770001195763770356&rtpof=true&sd=true"
 						target="_blank"
+						rel="noopener noreferrer"
 						className="group flex items-center gap-2 px-6 py-3 bg-accent/10 text-foreground rounded-full hover:bg-accent/20 transition-colors w-full sm:w-auto"
 					>
 						<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
