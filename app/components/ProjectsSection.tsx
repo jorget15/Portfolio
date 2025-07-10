@@ -40,7 +40,7 @@ const projects = [
 		id: 5,
 		title: 'Pokemon Python Game (WIP)',
 		description: 'A fun and interactive game built with Pygame',
-		image: '/PokePy.jpg',
+		image: '/PokePy.png',
 		projectUrl: '#',
 		githubUrl: 'https://github.com/jorget15/PokePy',
 	},
