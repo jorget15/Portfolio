@@ -9,7 +9,7 @@ const projects = [
 		id: 1,
 		title: 'LINC-UP iOS App',
 		description: 'A platform for connecting students with for study sessions',
-		image: '/code.jpg',
+		image: '/LincUp.png',
 	},
 	{
 		id: 2,
@@ -21,13 +21,13 @@ const projects = [
 		id: 3,
 		title: 'Resume Improver',
 		description: 'Tool for aligning resumes with job descriptions and skip ATS filters',
-		image: '/code.jpg',
+		image: '/ResumeImprover.png',
 	},
 	{
 		id: 4,
-		title: 'Pokemon Game (WIP)',
+		title: 'Pokemon Python Game (WIP)',
 		description: 'A fun and interactive game built with Pygame',
-		image: '/laptop.jpg',
+		image: '/Pokepy.jpg',
 	},
 	{
 		id: 5,
