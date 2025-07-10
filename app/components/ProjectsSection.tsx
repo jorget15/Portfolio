@@ -10,30 +10,40 @@ const projects = [
 		title: 'LINC-UP iOS App',
 		description: 'A platform for connecting students with for study sessions',
 		image: '/code.jpg',
+		projectUrl: '#',
+		githubUrl: '#',
 	},
 	{
 		id: 2,
 		title: 'Business Intelligence Dashboard',
 		description: 'Interactive dashboard for visualizing business metrics and KPIs',
 		image: '/laptop.jpg',
+		projectUrl: '#',
+		githubUrl: '#',
 	},
 	{
 		id: 3,
 		title: 'Resume Improver',
 		description: 'Tool for aligning resumes with job descriptions and skip ATS filters',
 		image: '/code.jpg',
+		projectUrl: '#',
+		githubUrl: '#',
 	},
 	{
 		id: 4,
 		title: 'Pokemon Game (WIP)',
 		description: 'A fun and interactive game built with Pygame',
 		image: '/laptop.jpg',
+		projectUrl: '#',
+		githubUrl: '#',
 	},
 	{
 		id: 5,
 		title: '"Bake Away Pastries" Website',
 		description: 'A website for a fictional bakery showcasing their products and services',
 		image: '/BakeAway.png',
+		projectUrl: 'https://sites.google.com/d/16P6FHpdAXpVGzNuPQYU_EDVrEDk6pPj2/p/1oq2amKw1zAETQ4xjltlgsTXf73WV4TMR/edit?pli=1',
+		githubUrl: '#',
 	},
 ];
 
@@ -67,10 +77,20 @@ export default function ProjectsSection() {
 							<h3 className="text-xl font-bold mb-2">{project.title}</h3>
 							<p className="text-gray-300 mb-4">{project.description}</p>
 							<div className="flex gap-4">
-								<Link href="#" className="text-sm px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">
+								<Link 
+									href={project.projectUrl} 
+									className="text-sm px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+									target={project.projectUrl !== '#' ? "_blank" : "_self"}
+									rel={project.projectUrl !== '#' ? "noopener noreferrer" : ""}
+								>
 									View Project
 								</Link>
-								<Link href="#" className="text-sm px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">
+								<Link 
+									href={project.githubUrl} 
+									className="text-sm px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+									target={project.githubUrl !== '#' ? "_blank" : "_self"}
+									rel={project.githubUrl !== '#' ? "noopener noreferrer" : ""}
+								>
 									GitHub
 								</Link>
 							</div>
