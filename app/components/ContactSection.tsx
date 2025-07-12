@@ -74,6 +74,18 @@ export default function ContactSection() {
 						</svg>
 						<span>View Resume</span>
 					</a>
+
+					<a
+						href="https://drive.google.com/file/d/1OClnX3hY5q0vgu9oibi3mGugu-crhUEi/view?usp=sharing" 
+						target="_blank"
+						rel="noopener noreferrer"
+						className="group flex items-center gap-2 px-6 py-3 bg-accent/10 text-foreground rounded-full hover:bg-accent/20 transition-colors w-full sm:w-auto"
+					>
+						<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+							<path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 12.93V14a1 1 0 10-2 0v.93A6.978 6.978 0 014.07 11H6a1 1 0 100-2H4.07A6.978 6.978 0 019 4.07V6a1 1 0 102 0V4.07A6.978 6.978 0 0115.93 9H14a1 1 0 100 2h1.93A6.978 6.978 0 0111 15.93z" />
+						</svg>
+						<span>Scrum Certification</span>
+					</a>
 				</motion.div>
 
 				<motion.div
