@@ -50,12 +50,12 @@ const projects = [
 		company: 'Personal Project',
 		category: 'Personal',
 		description: [
-			'Developed an intelligent resume optimization platform that analyzes job descriptions and provides tailored suggestions.',
-			'Implemented natural language processing to identify key skills and requirements from job postings.',
-			'Created an intuitive interface for users to upload resumes and receive actionable feedback.',
-			'Built with modern web technologies to ensure responsive design and optimal user experience.'
+			'Built a resume optimization tool that analyzes job descriptions and highlights the most relevant keywords.',
+			'Used a curated list of stop words to omit verbs and irrelevant words, focusing on core skills and requirements.',
+			'Implemented an algorithm that detects the most used words in a job posting, assigns a relevance rating based on frequency, and checks if the user\'s resume contains them.',
+			'Provides actionable feedback to help users align their resumes with job requirements.'
 		],
-		technologies: ['Python', 'Streamlit', 'NLP', 'Machine Learning', 'APIs'],
+		technologies: ['Python', 'Streamlit', 'Text-processing APIs'],
 		projectUrl: 'https://resumeimprover.streamlit.app/',
 		githubUrl: 'https://github.com/jorget15/ResumeImprover',
 	},
@@ -69,12 +69,12 @@ const projects = [
 		category: 'Personal',
 		description: [
 			'Developed a comprehensive student registration system for managing course enrollments.',
+			'Designed the database schema and created a Chen\'s ER diagram to clearly explain entities and relationships.',
 			'Implemented user authentication, course management, and enrollment tracking functionality.',
 			'Created an intuitive interface for both students and administrators.',
-			'Built with Java and modern software engineering principles.'
 		],
-		technologies: ['Java', 'Object-Oriented Programming', 'Database Management'],
-		projectUrl: '#',
+		technologies: ['Python', 'Object-Oriented Programming', 'Database Management'],
+		projectUrl: 'https://lucid.app/lucidchart/49b638c3-8e5d-4559-8517-1ab645f9ae11/edit?beaconFlowId=8C62B2891D340532&invitationId=inv_64a8b7fc-3cc5-4b19-b101-ac5832f2ccec&page=0_0#',
 		githubUrl: 'https://github.com/jorget15/StudentRegistrationSystem',
 	},
 	{
