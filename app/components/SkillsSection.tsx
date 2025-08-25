@@ -166,7 +166,7 @@ export default function SkillsSection() {
 					transition={{ duration: 0.6, delay: 0.8 }}
 					className="text-center text-white/60 mt-8 text-sm"
 				>
-					Click on any category to explore the skills ✨
+					Click on any category to explore the skills
 				</motion.p>
 			</div>
 		</section>

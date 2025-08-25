@@ -7,13 +7,13 @@ import { useState } from 'react';
 
 const projects = [
 	{
-		id: 1,
+		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
 		image: '/LincUp.png',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup',
+		category: 'Startup Platform',
 		description: [
 			'Launched and managed a technology startup specializing in mobile and web application development using Supabase and TypeScript.',
 			'Architected and built scalable front-end (React) and back-end (Node.js, PostgreSQL) systems from the ground up.',
@@ -24,25 +24,96 @@ const projects = [
 		githubUrl: 'https://github.com/Growth-Logistics/Linc',
 	},
 	{
-		id: 2,
-		title: 'Linc-Up Website',
-		shortDescription: 'Website for the LINC-UP iOS app, providing information, TOS and resources',
+		id: 1.2,
+		title: 'LINC-UP Website',
+		shortDescription: 'Marketing website and information hub for the LINC-UP mobile app',
 		image: '/LincUpWebsite.png',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup',
+		category: 'Startup Platform',
 		description: [
-			'Developed the marketing and information website for the LINC-UP mobile application.',
-			'Created responsive web design to showcase app features and facilitate user onboarding.',
-			'Implemented modern web technologies to ensure optimal performance and user experience.',
-			'Integrated with app store links and provided comprehensive information about the platform.'
+			'Developed the comprehensive marketing and information website for the LINC-UP mobile application ecosystem.',
+			'Created responsive web design to showcase app features, facilitate user onboarding, and provide platform resources.',
+			'Implemented modern web technologies to ensure optimal performance, SEO optimization, and seamless user experience.',
+			'Integrated with app store links, user documentation, terms of service, and comprehensive platform information.'
 		],
 		technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
 		projectUrl: 'https://linc-up.org/',
 		githubUrl: 'https://github.com/Growth-Logistics/Linc-Up-Website',
 	},
 	{
+		id: 2.1,
+		title: 'Soccer Analytics: CSV Data Processor',
+		shortDescription: 'Python ETL pipeline for cleaning and processing soccer statistics from CSV files',
+		image: '/SoccerCSV.png',
+		role: 'Data Engineer',
+		company: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
+		description: [
+			'Developed a robust Python ETL pipeline to process raw soccer CSV data from multiple sources into clean, structured datasets.',
+			'Implemented data validation, error handling, and transformation logic to standardize player statistics, match results, and team data.',
+			'Created automated scripts for data cleaning, duplicate removal, and format standardization across different CSV file structures.',
+			'Built data quality checks and logging systems to ensure data integrity throughout the processing pipeline.'
+		],
+		technologies: ['Python', 'Pandas', 'ETL', 'Data Cleaning', 'CSV Processing', 'Data Validation'],
+		projectUrl: '#',
+		githubUrl: 'https://github.com/jorget15/soccer-csv-processor',
+	},
+	{
+		id: 2.2,
+		title: 'Soccer Analytics: PostgreSQL Database',
+		shortDescription: 'Normalized database schema with optimized queries for soccer statistics storage',
+		image: '/SoccerDB.png',
+		role: 'Database Engineer',
+		company: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
+		description: [
+			'Designed and implemented a comprehensive PostgreSQL database schema with proper normalization and relationships.',
+			'Created optimized table structures for players, teams, matches, statistics, and performance metrics with appropriate foreign keys.',
+			'Developed stored procedures, views, and indexes to ensure fast query performance for complex analytical operations.',
+			'Implemented data insertion pipelines that seamlessly integrate with the CSV processing system for automated population.'
+		],
+		technologies: ['PostgreSQL', 'Database Design', 'SQL', 'Data Modeling', 'Performance Optimization', 'Normalization'],
+		projectUrl: '#',
+		githubUrl: 'https://github.com/jorget15/soccer-database-schema',
+	},
+	{
+		id: 2.3,
+		title: 'Soccer Analytics: PowerBI Dashboard',
+		shortDescription: 'Interactive dashboard providing comprehensive insights into soccer performance metrics',
+		image: '/SoccerDashboard.png',
+		role: 'Data Analyst & Visualizer',
+		company: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
+		description: [
+			'Built interactive PowerBI dashboards that transform raw soccer data into actionable insights for coaches and analysts.',
+			'Designed comprehensive visualizations covering player performance, team statistics, match analytics, and seasonal trends.',
+			'Created dynamic filters and drill-down capabilities allowing users to explore data across different timeframes and player segments.',
+			'Integrated with PostgreSQL database to provide real-time analytics and automated report generation for stakeholders.'
+		],
+		technologies: ['PowerBI', 'Data Visualization', 'DAX', 'Data Analysis', 'Interactive Dashboards', 'Business Intelligence'],
+		projectUrl: 'https://youtu.be/your-dashboard-video',
+		githubUrl: '#',
+	},
+	{
 		id: 3,
+		title: 'Business Intelligence Dashboard',
+		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
+		image: '/Unavailable.jpg',
+		role: 'Data Analyst',
+		company: 'JP Global Digital',
+		category: 'Professional',
+		description: [
+			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
+			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
+			'Ensured seamless integration and automation of data flows, enhancing the accuracy and efficiency of reporting systems.'
+		],
+		technologies: ['PowerBI', 'Looker Studio', 'HubSpot', 'Google Analytics', 'CSV Databases'],
+		projectUrl: '#',
+		githubUrl: '#',
+	},
+	{
+		id: 4,
 		title: 'Resume Improver',
 		shortDescription: 'Tool for optimizing resumes based on job descriptions',
 		image: '/ResumeImprover.png',
@@ -60,7 +131,7 @@ const projects = [
 		githubUrl: 'https://github.com/jorget15/ResumeImprover',
 	},
 	{
-		id: 4,
+		id: 5,
 		title: 'Student Registration System',
 		shortDescription: 'Application for managing student registrations and course enrollments',
 		image: '/StudentRegistration.png',
@@ -78,7 +149,7 @@ const projects = [
 		githubUrl: 'https://github.com/jorget15/StudentRegistrationSystem',
 	},
 	{
-		id: 5,
+		id: 6,
 		title: 'Pokemon Python Game (WIP)',
 		shortDescription: '2D adventure game inspired by Pokémon',
 		image: '/PokePy.png',
@@ -96,7 +167,7 @@ const projects = [
 		githubUrl: 'https://github.com/jorget15/PokePy',
 	},
 	{
-		id: 6,
+		id: 7,
 		title: '"Bake Away Pastries" Website',
 		shortDescription: 'Comprehensive business website with agile development',
 		image: '/BakeAway.png',
@@ -111,23 +182,6 @@ const projects = [
 		],
 		technologies: ['Google Sites', 'Photoshop', 'Jira', 'Confluence', 'Agile Methodology'],
 		projectUrl: 'https://sites.google.com/d/16P6FHpdAXpVGzNuPQYU_EDVrEDk6pPj2/p/1oq2amKw1zAETQ4xjltlgsTXf73WV4TMR/edit',
-		githubUrl: '#',
-	},
-	{
-		id: 7,
-		title: 'Business Intelligence Dashboard',
-		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
-		image: '/Unavailable.jpg',
-		role: 'Data Analyst',
-		company: 'JP Global Digital',
-		category: 'Professional',
-		description: [
-			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
-			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
-			'Ensured seamless integration and automation of data flows, enhancing the accuracy and efficiency of reporting systems.'
-		],
-		technologies: ['PowerBI', 'Looker Studio', 'HubSpot', 'Google Analytics', 'CSV Databases'],
-		projectUrl: '#',
 		githubUrl: '#',
 	},
 ];
