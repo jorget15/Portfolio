@@ -92,11 +92,11 @@ const projects = [
 			'Integrated with PostgreSQL database to provide real-time analytics and automated report generation for stakeholders.'
 		],
 		technologies: ['PowerBI', 'Data Visualization', 'DAX', 'Data Analysis', 'Interactive Dashboards', 'Business Intelligence'],
-		projectUrl: 'https://youtu.be/your-dashboard-video',
+		projectUrl: 'https://www.youtube.com/watch?v=surybA-LgC8',
 		githubUrl: '#',
 	},
 	{
-		id: 3,
+		id: 7,
 		title: 'Business Intelligence Dashboard',
 		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
 		image: '/Unavailable.jpg',
@@ -113,7 +113,7 @@ const projects = [
 		githubUrl: '#',
 	},
 	{
-		id: 4,
+		id: 3,
 		title: 'Resume Improver',
 		shortDescription: 'Tool for optimizing resumes based on job descriptions',
 		image: '/ResumeImprover.png',
@@ -129,6 +129,24 @@ const projects = [
 		technologies: ['Python', 'Streamlit', 'Text-processing APIs'],
 		projectUrl: 'https://resumeimprover.streamlit.app/',
 		githubUrl: 'https://github.com/jorget15/ResumeImprover',
+	},
+	{
+		id: 4,
+		title: 'Impostor Game',
+		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
+		image: '/ImpostorGame.png',
+		role: 'Full-Stack Developer',
+		company: 'Personal Project',
+		category: 'Game Development',
+		description: [
+			'Built a real-time multiplayer social deduction game where players try to identify the impostor among them.',
+			'Implemented WebSocket-based real-time communication enabling seamless turn-based gameplay for 3-10 players.',
+			'Developed lobby system with unique codes, voting mechanisms, and multiple word categories (Animals, Food, Objects).',
+			'Created responsive React frontend with clean UI and Node.js backend handling game state management and player connections.'
+		],
+		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Real-time Communication'],
+		projectUrl: '#',
+		githubUrl: 'https://github.com/jorget15/impostor-game',
 	},
 	{
 		id: 5,
