@@ -44,38 +44,38 @@ const projects = [
 	{
 		id: 2.1,
 		title: 'Soccer Analytics: CSV Data Processor',
-		shortDescription: 'Python ETL pipeline for cleaning and processing soccer statistics from CSV files',
+		shortDescription: 'Enterprise-grade Python ETL pipeline processing 46,000+ football players into normalized PostgreSQL',
 		image: '/SoccerCSV.png',
 		role: 'Data Engineer',
 		company: 'Personal Project',
 		category: 'Soccer Analytics Pipeline',
 		description: [
-			'Developed a robust Python ETL pipeline to process raw soccer CSV data from multiple sources into clean, structured datasets.',
-			'Implemented data validation, error handling, and transformation logic to standardize player statistics, match results, and team data.',
-			'Created automated scripts for data cleaning, duplicate removal, and format standardization across different CSV file structures.',
-			'Built data quality checks and logging systems to ensure data integrity throughout the processing pipeline.'
+			'Built a comprehensive Python application processing 200+ column FIFA/UEFA CSV files into a fully normalized PostgreSQL database with ~46,000 players.',
+			'Implemented intelligent file parsing with pattern matching for multi-league datasets (Premier League, La Liga, Bundesliga, Champions League, etc.).',
+			'Developed robust data validation pipeline with multi-encoding support (UTF-8, Latin-1, CP1252), type safety, and realistic range validation.',
+			'Created automated schema management system that initializes 17 interconnected tables with optimized indexes and foreign key relationships.'
 		],
-		technologies: ['Python', 'Pandas', 'ETL', 'Data Cleaning', 'CSV Processing', 'Data Validation'],
+		technologies: ['Python', 'PostgreSQL', 'SQLAlchemy', 'Pandas', 'Multi-Encoding Support', 'Schema Auto-Generation'],
 		projectUrl: '#',
-		githubUrl: 'https://github.com/jorget15/soccer-csv-processor',
+		githubUrl: 'https://github.com/jorget15/Players-CSV-TO-POSTGRESQL',
 	},
 	{
 		id: 2.2,
 		title: 'Soccer Analytics: PostgreSQL Database',
-		shortDescription: 'Normalized database schema with optimized queries for soccer statistics storage',
+		shortDescription: '17-table normalized schema with 500MB+ football data optimized for PowerBI analytics',
 		image: '/SoccerDB.png',
 		role: 'Database Engineer',
 		company: 'Personal Project',
 		category: 'Soccer Analytics Pipeline',
 		description: [
-			'Designed and implemented a comprehensive PostgreSQL database schema with proper normalization and relationships.',
-			'Created optimized table structures for players, teams, matches, statistics, and performance metrics with appropriate foreign keys.',
-			'Developed stored procedures, views, and indexes to ensure fast query performance for complex analytical operations.',
-			'Implemented data insertion pipelines that seamlessly integrate with the CSV processing system for automated population.'
+			'Designed enterprise-grade normalized database schema with 17 interconnected tables storing 46,000+ players across 71 countries.',
+			'Implemented specialized statistics tables (goal_stats, defensive_stats, financial_stats, advanced_expected_stats) with optimized indexing.',
+			'Built comprehensive relationship system linking players, clubs, competitions, and seasons with proper foreign key constraints.',
+			'Integrated PowerBI-ready features including flag URLs (71 countries), player images, and club badges for enhanced visualizations.'
 		],
-		technologies: ['PostgreSQL', 'Database Design', 'SQL', 'Data Modeling', 'Performance Optimization', 'Normalization'],
+		technologies: ['PostgreSQL', 'Database Normalization', 'Performance Indexing', 'Foreign Key Design', 'PowerBI Integration', 'Data Modeling'],
 		projectUrl: '#',
-		githubUrl: 'https://github.com/jorget15/soccer-database-schema',
+		githubUrl: 'https://github.com/jorget15/Players-CSV-TO-POSTGRESQL',
 	},
 	{
 		id: 2.3,
@@ -145,8 +145,8 @@ const projects = [
 			'Created responsive React frontend with clean UI and Node.js backend handling game state management and player connections.'
 		],
 		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Real-time Communication'],
-		projectUrl: '#',
-		githubUrl: 'https://github.com/jorget15/impostor-game',
+		projectUrl: 'https://impostor-game-production.up.railway.app/',
+		githubUrl: 'https://github.com/jorget15/impostor',
 	},
 	{
 		id: 5,
@@ -265,14 +265,28 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 						<p className="text-gray-400">{project.role} • {project.company}</p>
 					</div>
 
-					{/* Image */}
+					{/* Image or Video */}
 					<div className="relative aspect-video bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-lg overflow-hidden mb-6">
-						<Image 
-							src={project.image} 
-							alt={project.title} 
-							fill 
-							className="object-cover"
-						/>
+						{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') ? (
+							<iframe
+								src={project.projectUrl.includes('youtube.com') 
+									? project.projectUrl.replace('watch?v=', 'embed/') 
+									: project.projectUrl.replace('youtu.be/', 'youtube.com/embed/')
+								}
+								title={`${project.title} Demo`}
+								className="w-full h-full"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+						) : (
+							<Image 
+								src={project.image} 
+								alt={project.title} 
+								fill 
+								className="object-cover"
+							/>
+						)}
 					</div>
 
 					{/* Description */}
@@ -314,7 +328,10 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
-								View Project
+								{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') 
+									? 'Watch on YouTube' 
+									: 'View Project'
+								}
 							</Link>
 						)}
 						{project.githubUrl !== '#' && (
