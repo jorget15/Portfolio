@@ -7,7 +7,7 @@ const skillCategories = [
 	{
 		id: 1,
 		title: 'Programming Languages & Frameworks',
-		color: 'from-blue-500 to-purple-600',
+		color: 'from-blue-500 to-cyan-500',
 		skills: ['Java', 'Python', 'SQL', 'JavaScript/TypeScript', 'React', 'Node.js'],
 		description: 'Core programming languages and frameworks I use to build applications'
 	},
@@ -28,7 +28,7 @@ const skillCategories = [
 	{
 		id: 4,
 		title: 'Project Management & Collaboration',
-		color: 'from-purple-500 to-pink-600',
+		color: 'from-blue-600 to-cyan-600',
 		skills: ['Jira', 'Confluence', 'Trello', 'Git'],
 		description: 'Tools for managing projects and collaborating with teams'
 	},
@@ -63,7 +63,7 @@ export default function SkillsSection() {
 	};
 
 	return (
-		<section className="py-12 md:py-20 bg-gradient-to-b from-black to-purple-900/20">
+		<section className="py-12 md:py-20 bg-gradient-to-b from-black to-blue-900/20">
 			<div className="max-w-7xl mx-auto px-4">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}

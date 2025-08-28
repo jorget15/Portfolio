@@ -257,7 +257,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 					{/* Header */}
 					<div className="mb-6">
 						<div className="flex items-center gap-2 mb-2">
-							<span className="text-sm bg-purple-600/20 text-purple-300 px-2 py-1 rounded-full">
+							<span className="text-sm bg-blue-600/20 text-blue-300 px-2 py-1 rounded-full">
 								{project.category}
 							</span>
 						</div>
@@ -266,7 +266,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 					</div>
 
 					{/* Image or Video */}
-					<div className="relative aspect-video bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-lg overflow-hidden mb-6">
+					<div className="relative aspect-video bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
 						{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') ? (
 							<iframe
 								src={project.projectUrl.includes('youtube.com') 
@@ -323,7 +323,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 								href={project.projectUrl}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+								className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
 							>
 								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -379,7 +379,7 @@ export default function ProjectsSection() {
 							viewport={{ once: true }}
 							transition={{ duration: 0.6, delay: project.id * 0.1 }}
 							whileHover={{ scale: 1.02 }}
-							className="group relative aspect-video bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-xl overflow-hidden cursor-pointer"
+							className="group relative aspect-video bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden cursor-pointer"
 							onClick={() => setSelectedProject(project)}
 						>
 							<Image 

@@ -10,7 +10,7 @@ export default function HeroSection() {
 			transition={{ duration: 1 }}
 			className="h-screen flex items-center justify-center relative overflow-hidden"
 		>
-			<div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20" />
+			<div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-cyan-900/20" />
 			<div className="absolute inset-0">
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,0.7),rgba(0,0,0,1))]" />
 			</div>
@@ -20,7 +20,7 @@ export default function HeroSection() {
 					initial={{ y: 50 }}
 					animate={{ y: 0 }}
 					transition={{ duration: 0.8, delay: 0.2 }}
-					className="text-4xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600"
+					className="text-4xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500"
 				>
 					Jorge Taban
 				</motion.h1>
