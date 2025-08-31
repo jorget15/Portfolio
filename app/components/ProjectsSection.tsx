@@ -17,7 +17,8 @@ const projects = [
 		description: [
 			'Launched and managed a technology startup specializing in mobile and web application development using Supabase and TypeScript.',
 			'Architected and built scalable front-end (React) and back-end (Node.js, PostgreSQL) systems from the ground up.',
-			'Led end-to-end product development, including UI/UX design, agile project management, quality assurance, and deployment for App Store launch.'
+			'Led end-to-end product development, including UI/UX design, agile project management, quality assurance, and deployment for App Store launch.',
+			'Test the app with demo account: jorge.taban@gmail.com / password: 123456, or create your own account if you have a .edu email address.'
 		],
 		technologies: ['React Native', 'TypeScript', 'Supabase', 'Node.js', 'PostgreSQL'],
 		projectUrl: 'https://apps.apple.com/us/app/linc-up/id6747366414',
