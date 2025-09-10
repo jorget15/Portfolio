@@ -97,7 +97,7 @@ const projects = [
 		githubUrl: '#',
 	},
 	{
-		id: 7,
+		id: 8,
 		title: 'Business Intelligence Dashboard',
 		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
 		image: '/Unavailable.jpg',
@@ -267,7 +267,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 					</div>
 
 					{/* Image or Video */}
-					<div className="relative aspect-video bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
+					<div className="relative aspect-[4/3] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
 						{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') ? (
 							<iframe
 								src={project.projectUrl.includes('youtube.com') 
@@ -285,7 +285,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 								src={project.image} 
 								alt={project.title} 
 								fill 
-								className="object-cover"
+								className="object-contain p-4"
 							/>
 						)}
 					</div>
@@ -380,7 +380,7 @@ export default function ProjectsSection() {
 							viewport={{ once: true }}
 							transition={{ duration: 0.6, delay: project.id * 0.1 }}
 							whileHover={{ scale: 1.02 }}
-							className="group relative aspect-video bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden cursor-pointer"
+							className="group relative aspect-[3/2] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden cursor-pointer"
 							onClick={() => setSelectedProject(project)}
 						>
 							<Image 
