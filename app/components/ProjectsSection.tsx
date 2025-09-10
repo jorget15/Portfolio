@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const projects = [
 	{
@@ -13,7 +13,7 @@ const projects = [
 		image: '/LincUp.png',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup Platform',
+		category: 'LINC IOS APP',
 		description: [
 			'Launched and managed a technology startup specializing in mobile and web application development using Supabase and TypeScript.',
 			'Architected and built scalable front-end (React) and back-end (Node.js, PostgreSQL) systems from the ground up.',
@@ -31,7 +31,7 @@ const projects = [
 		image: '/LincUpWebsite.png',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup Platform',
+		category: 'LINC IOS APP',
 		description: [
 			'Developed the comprehensive marketing and information website for the LINC-UP mobile application ecosystem.',
 			'Created responsive web design to showcase app features, facilitate user onboarding, and provide platform resources.',
@@ -205,6 +205,33 @@ const projects = [
 	},
 ];
 
+// Group related projects
+const projectGroups = [
+	{
+		id: 1,
+		name: 'LINC-UP Platform',
+		projects: projects.filter(p => p.id === 1.1 || p.id === 1.2),
+		mainProject: projects.find(p => p.id === 1.1)!,
+	},
+	{
+		id: 2,
+		name: 'Soccer Analytics Pipeline',
+		projects: projects.filter(p => p.id === 2.1 || p.id === 2.2 || p.id === 2.3),
+		mainProject: projects.find(p => p.id === 2.3)!,
+	}
+];
+
+// Individual projects (not part of groups)
+const individualProjects = projects.filter(p => 
+	![1.1, 1.2, 2.1, 2.2, 2.3].includes(p.id)
+);
+
+// Combined display projects (main projects from groups + individual projects)
+const displayProjects = [
+	...projectGroups.map(group => group.mainProject),
+	...individualProjects
+];
+
 interface Project {
 	id: number;
 	title: string;
@@ -223,9 +250,42 @@ interface ProjectModalProps {
 	project: Project;
 	isOpen: boolean;
 	onClose: () => void;
+	relatedProjects?: Project[];
 }
 
-function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: ProjectModalProps) {
+	const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+	const [currentProject, setCurrentProject] = useState(project);
+
+	// Update current project when project prop changes
+	useEffect(() => {
+		setCurrentProject(project);
+		const index = relatedProjects.findIndex(p => p.id === project.id);
+		setCurrentProjectIndex(index >= 0 ? index : 0);
+	}, [project, relatedProjects]);
+
+	// Navigation functions
+	const goToNext = () => {
+		if (relatedProjects.length > 0) {
+			const nextIndex = (currentProjectIndex + 1) % relatedProjects.length;
+			setCurrentProjectIndex(nextIndex);
+			setCurrentProject(relatedProjects[nextIndex]);
+		}
+	};
+
+	const goToPrevious = () => {
+		if (relatedProjects.length > 0) {
+			const prevIndex = currentProjectIndex === 0 ? relatedProjects.length - 1 : currentProjectIndex - 1;
+			setCurrentProjectIndex(prevIndex);
+			setCurrentProject(relatedProjects[prevIndex]);
+		}
+	};
+
+	const goToProject = (index: number) => {
+		setCurrentProjectIndex(index);
+		setCurrentProject(relatedProjects[index]);
+	};
+
 	if (!isOpen) return null;
 
 	return (
@@ -257,24 +317,68 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
 					{/* Header */}
 					<div className="mb-6">
-						<div className="flex items-center gap-2 mb-2">
-							<span className="text-sm bg-blue-600/20 text-blue-300 px-2 py-1 rounded-full">
-								{project.category}
-							</span>
+						<div className="flex items-center justify-between mb-2">
+							<div className="flex items-center gap-2">
+								<span className="text-sm bg-blue-600/20 text-blue-300 px-2 py-1 rounded-full">
+									{currentProject.category}
+								</span>
+								{relatedProjects.length > 1 && (
+									<span className="text-xs text-gray-400">
+										{currentProjectIndex + 1} of {relatedProjects.length}
+									</span>
+								)}
+							</div>
+							{relatedProjects.length > 1 && (
+								<div className="flex items-center gap-2">
+									<button
+										onClick={goToPrevious}
+										className="p-1 text-gray-400 hover:text-white transition-colors"
+									>
+										<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+										</svg>
+									</button>
+									<button
+										onClick={goToNext}
+										className="p-1 text-gray-400 hover:text-white transition-colors"
+									>
+										<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+										</svg>
+									</button>
+								</div>
+							)}
 						</div>
-						<h2 className="text-2xl font-bold text-white mb-2">{project.title}</h2>
-						<p className="text-gray-400">{project.role} • {project.company}</p>
+						<h2 className="text-2xl font-bold text-white mb-2">{currentProject.title}</h2>
+						<p className="text-gray-400">{currentProject.role} • {currentProject.company}</p>
+						
+						{/* Navigation dots for related projects */}
+						{relatedProjects.length > 1 && (
+							<div className="flex items-center gap-2 mt-3">
+								{relatedProjects.map((_, index) => (
+									<button
+										key={index}
+										onClick={() => goToProject(index)}
+										className={`w-2 h-2 rounded-full transition-colors ${
+											index === currentProjectIndex 
+												? 'bg-blue-400' 
+												: 'bg-gray-600 hover:bg-gray-500'
+										}`}
+									/>
+								))}
+							</div>
+						)}
 					</div>
 
 					{/* Image or Video */}
 					<div className="relative aspect-[4/3] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
-						{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') ? (
+						{currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be') ? (
 							<iframe
-								src={project.projectUrl.includes('youtube.com') 
-									? project.projectUrl.replace('watch?v=', 'embed/') 
-									: project.projectUrl.replace('youtu.be/', 'youtube.com/embed/')
+								src={currentProject.projectUrl.includes('youtube.com') 
+									? currentProject.projectUrl.replace('watch?v=', 'embed/') 
+									: currentProject.projectUrl.replace('youtu.be/', 'youtube.com/embed/')
 								}
-								title={`${project.title} Demo`}
+								title={`${currentProject.title} Demo`}
 								className="w-full h-full"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -282,8 +386,8 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 							/>
 						) : (
 							<Image 
-								src={project.image} 
-								alt={project.title} 
+								src={currentProject.image} 
+								alt={currentProject.title} 
 								fill 
 								className="object-contain p-4"
 							/>
@@ -294,7 +398,7 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 					<div className="mb-6">
 						<h3 className="text-lg font-semibold text-white mb-3">Project Overview</h3>
 						<div className="space-y-3">
-							{project.description.map((paragraph, index) => (
+							{currentProject.description.map((paragraph, index) => (
 								<p key={index} className="text-gray-300 leading-relaxed">
 									{paragraph}
 								</p>
@@ -335,9 +439,9 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 								}
 							</Link>
 						)}
-						{project.githubUrl !== '#' && (
+						{currentProject.githubUrl !== '#' && (
 							<Link
-								href={project.githubUrl}
+								href={currentProject.githubUrl}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors"
@@ -357,6 +461,30 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
 export default function ProjectsSection() {
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
+
+	const handleProjectClick = (project: Project) => {
+		// Find if this project is part of a group
+		const group = projectGroups.find(g => 
+			g.projects.some(p => p.id === project.id)
+		);
+		
+		if (group) {
+			// If part of a group, set all related projects for navigation
+			setRelatedProjects(group.projects);
+			setSelectedProject(project);
+		} else {
+			// If individual project, just set that project
+			setRelatedProjects([project]);
+			setSelectedProject(project);
+		}
+	};
+
+	const getProjectGroup = (project: Project) => {
+		return projectGroups.find(g => 
+			g.projects.some(p => p.id === project.id)
+		);
+	};
 
 	return (
 		<>
@@ -372,7 +500,7 @@ export default function ProjectsSection() {
 				</motion.h2>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{projects.map((project) => (
+					{displayProjects.map((project) => (
 						<motion.div
 							key={project.id}
 							initial={{ opacity: 0, y: 20 }}
@@ -381,7 +509,7 @@ export default function ProjectsSection() {
 							transition={{ duration: 0.6, delay: project.id * 0.1 }}
 							whileHover={{ scale: 1.02 }}
 							className="group relative aspect-[3/2] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden cursor-pointer"
-							onClick={() => setSelectedProject(project)}
+							onClick={() => handleProjectClick(project)}
 						>
 							<Image 
 								src={project.image} 
@@ -391,10 +519,23 @@ export default function ProjectsSection() {
 							/>
 							<div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300" />
 							<div className="absolute inset-0 p-6 flex flex-col justify-between">
-								<div className="flex items-center gap-2">
-									<span className="text-xs bg-white/20 text-white px-2 py-1 rounded-full">
-										{project.category}
-									</span>
+								<div className="flex items-center justify-between">
+									<div className="flex items-center gap-2">
+										<span className="text-xs bg-white/20 text-white px-2 py-1 rounded-full">
+											{project.category}
+										</span>
+										{(() => {
+											const group = getProjectGroup(project);
+											return group && group.projects.length > 1 ? (
+												<span className="text-xs bg-blue-500/80 text-white px-2 py-1 rounded-full font-medium flex items-center gap-1">
+													<svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+													</svg>
+													{group.projects.length} Components
+												</span>
+											) : null;
+										})()}
+									</div>
 								</div>
 								<div>
 									<h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
@@ -420,6 +561,7 @@ export default function ProjectsSection() {
 					project={selectedProject}
 					isOpen={!!selectedProject}
 					onClose={() => setSelectedProject(null)}
+					relatedProjects={relatedProjects}
 				/>
 			)}
 		</>
