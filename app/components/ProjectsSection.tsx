@@ -11,6 +11,11 @@ const projects = [
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
 		image: '/LincUp.png',
+		images: [
+			'/lincUp screenshots/1.png',
+			'/lincUp screenshots/2.png',
+			'/lincUp screenshots/3.png'
+		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
 		category: 'LINC IOS APP',
