@@ -82,7 +82,12 @@ const projects = [
 		id: 2.3,
 		title: 'Soccer Analytics: PowerBI Dashboard',
 		shortDescription: 'Interactive dashboard providing comprehensive insights into soccer performance metrics',
-		image: '/SoccerDashboard.png',
+		image: '/Soccer Dashboard PowerBI/Soccer PowerBI Dashboard.png',
+		images: [
+			'/Soccer Dashboard PowerBI/1.png',
+			'/Soccer Dashboard PowerBI/2.png',
+			'/Soccer Dashboard PowerBI/3.png'
+		],
 		role: 'Data Analyst & Visualizer',
 		company: 'Personal Project',
 		category: 'Soccer Analytics Pipeline',
@@ -237,6 +242,7 @@ interface Project {
 	title: string;
 	shortDescription: string;
 	image: string;
+	images?: string[];
 	role: string;
 	company: string;
 	category: string;
@@ -256,12 +262,14 @@ interface ProjectModalProps {
 function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: ProjectModalProps) {
 	const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 	const [currentProject, setCurrentProject] = useState(project);
+	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 	// Update current project when project prop changes
 	useEffect(() => {
 		setCurrentProject(project);
 		const index = relatedProjects.findIndex(p => p.id === project.id);
 		setCurrentProjectIndex(index >= 0 ? index : 0);
+		setCurrentImageIndex(0); // Reset image index when project changes
 	}, [project, relatedProjects]);
 
 	// Navigation functions
@@ -284,6 +292,32 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 	const goToProject = (index: number) => {
 		setCurrentProjectIndex(index);
 		setCurrentProject(relatedProjects[index]);
+		setCurrentImageIndex(0); // Reset image index when changing projects
+	};
+
+	// Image navigation functions
+	const goToNextImage = () => {
+		if (currentProject.images && currentProject.images.length > 1) {
+			setCurrentImageIndex((prev) => (prev + 1) % currentProject.images!.length);
+		}
+	};
+
+	const goToPreviousImage = () => {
+		if (currentProject.images && currentProject.images.length > 1) {
+			setCurrentImageIndex((prev) => prev === 0 ? currentProject.images!.length - 1 : prev - 1);
+		}
+	};
+
+	const goToImage = (index: number) => {
+		setCurrentImageIndex(index);
+	};
+
+	// Get current image to display
+	const getCurrentImage = () => {
+		if (currentProject.images && currentProject.images.length > 0) {
+			return currentProject.images[currentImageIndex];
+		}
+		return currentProject.image;
 	};
 
 	if (!isOpen) return null;
@@ -385,12 +419,56 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								allowFullScreen
 							/>
 						) : (
-							<Image 
-								src={currentProject.image} 
-								alt={currentProject.title} 
-								fill 
-								className="object-contain p-4"
-							/>
+							<>
+								<Image 
+									src={getCurrentImage()} 
+									alt={currentProject.title} 
+									fill 
+									className="object-contain p-4"
+								/>
+								{/* Image navigation for projects with multiple images */}
+								{currentProject.images && currentProject.images.length > 1 && (
+									<>
+										{/* Previous image button */}
+										<button
+											onClick={goToPreviousImage}
+											className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+										>
+											<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+											</svg>
+										</button>
+										{/* Next image button */}
+										<button
+											onClick={goToNextImage}
+											className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+										>
+											<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+											</svg>
+										</button>
+										{/* Image counter and dots */}
+										<div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-3">
+											<span className="text-xs bg-black/50 text-white px-2 py-1 rounded-full">
+												{currentImageIndex + 1} of {currentProject.images.length}
+											</span>
+											<div className="flex items-center gap-1">
+												{currentProject.images.map((_, index) => (
+													<button
+														key={index}
+														onClick={() => goToImage(index)}
+														className={`w-2 h-2 rounded-full transition-colors ${
+															index === currentImageIndex 
+																? 'bg-blue-400' 
+																: 'bg-white/50 hover:bg-white/70'
+														}`}
+													/>
+												))}
+											</div>
+										</div>
+									</>
+								)}
+							</>
 						)}
 					</div>
 
@@ -410,7 +488,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 					<div className="mb-6">
 						<h3 className="text-lg font-semibold text-white mb-3">Technologies Used</h3>
 						<div className="flex flex-wrap gap-2">
-							{project.technologies.map((tech, index) => (
+							{currentProject.technologies.map((tech, index) => (
 								<span 
 									key={index}
 									className="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm"
@@ -423,9 +501,9 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Action buttons */}
 					<div className="flex gap-4">
-						{project.projectUrl !== '#' && (
+						{currentProject.projectUrl !== '#' && (
 							<Link
-								href={project.projectUrl}
+								href={currentProject.projectUrl}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
@@ -433,7 +511,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
-								{project.projectUrl.includes('youtube.com') || project.projectUrl.includes('youtu.be') 
+								{currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be') 
 									? 'Watch on YouTube' 
 									: 'View Project'
 								}
