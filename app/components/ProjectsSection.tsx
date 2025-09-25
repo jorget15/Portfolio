@@ -297,14 +297,16 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 	// Image navigation functions
 	const goToNextImage = () => {
-		if (currentProject.images && currentProject.images.length > 1) {
-			setCurrentImageIndex((prev) => (prev + 1) % currentProject.images!.length);
+		const totalItems = getTotalMediaItems();
+		if (totalItems > 1) {
+			setCurrentImageIndex((prev) => (prev + 1) % totalItems);
 		}
 	};
 
 	const goToPreviousImage = () => {
-		if (currentProject.images && currentProject.images.length > 1) {
-			setCurrentImageIndex((prev) => prev === 0 ? currentProject.images!.length - 1 : prev - 1);
+		const totalItems = getTotalMediaItems();
+		if (totalItems > 1) {
+			setCurrentImageIndex((prev) => prev === 0 ? totalItems - 1 : prev - 1);
 		}
 	};
 
@@ -318,6 +320,46 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 			return currentProject.images[currentImageIndex];
 		}
 		return currentProject.image;
+	};
+
+	// Check if current project has video
+	const hasVideo = () => {
+		return currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be');
+	};
+
+	// Get total media items (video + images)
+	const getTotalMediaItems = () => {
+		let total = 0;
+		if (hasVideo()) total += 1; // Add 1 for video
+		if (currentProject.images && currentProject.images.length > 0) {
+			total += currentProject.images.length;
+		} else {
+			total += 1; // Add 1 for single image
+		}
+		return total;
+	};
+
+	// Check if currently showing video (always index 0 if video exists)
+	const isShowingVideo = () => {
+		return hasVideo() && currentImageIndex === 0;
+	};
+
+	// Get current media item (video or image)
+	const getCurrentMedia = () => {
+		if (hasVideo()) {
+			if (currentImageIndex === 0) {
+				return 'video';
+			} else {
+				// Adjust index for images (subtract 1 because video is at index 0)
+				const imageIndex = currentImageIndex - 1;
+				if (currentProject.images && currentProject.images.length > 0) {
+					return currentProject.images[imageIndex];
+				}
+				return currentProject.image;
+			}
+		} else {
+			return getCurrentImage();
+		}
 	};
 
 	if (!isOpen) return null;
@@ -406,7 +448,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Image or Video */}
 					<div className="relative aspect-[4/3] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
-						{currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be') ? (
+						{isShowingVideo() ? (
 							<iframe
 								src={currentProject.projectUrl.includes('youtube.com') 
 									? currentProject.projectUrl.replace('watch?v=', 'embed/') 
@@ -419,55 +461,54 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								allowFullScreen
 							/>
 						) : (
+							<Image 
+								src={getCurrentMedia() as string} 
+								alt={currentProject.title} 
+								fill 
+								className="object-contain p-4"
+							/>
+						)}
+						
+						{/* Navigation controls for multiple media items */}
+						{getTotalMediaItems() > 1 && (
 							<>
-								<Image 
-									src={getCurrentImage()} 
-									alt={currentProject.title} 
-									fill 
-									className="object-contain p-4"
-								/>
-								{/* Image navigation for projects with multiple images */}
-								{currentProject.images && currentProject.images.length > 1 && (
-									<>
-										{/* Previous image button */}
-										<button
-											onClick={goToPreviousImage}
-											className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-										>
-											<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-											</svg>
-										</button>
-										{/* Next image button */}
-										<button
-											onClick={goToNextImage}
-											className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
-										>
-											<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-											</svg>
-										</button>
-										{/* Image counter and dots */}
-										<div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-3">
-											<span className="text-xs bg-black/50 text-white px-2 py-1 rounded-full">
-												{currentImageIndex + 1} of {currentProject.images.length}
-											</span>
-											<div className="flex items-center gap-1">
-												{currentProject.images.map((_, index) => (
-													<button
-														key={index}
-														onClick={() => goToImage(index)}
-														className={`w-2 h-2 rounded-full transition-colors ${
-															index === currentImageIndex 
-																? 'bg-blue-400' 
-																: 'bg-white/50 hover:bg-white/70'
-														}`}
-													/>
-												))}
-											</div>
-										</div>
-									</>
-								)}
+								{/* Previous media button */}
+								<button
+									onClick={goToPreviousImage}
+									className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+								>
+									<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+									</svg>
+								</button>
+								{/* Next media button */}
+								<button
+									onClick={goToNextImage}
+									className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+								>
+									<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+									</svg>
+								</button>
+								{/* Media counter and dots */}
+								<div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-3">
+									<span className="text-xs bg-black/50 text-white px-2 py-1 rounded-full">
+										{currentImageIndex + 1} of {getTotalMediaItems()}
+									</span>
+									<div className="flex items-center gap-1">
+										{Array.from({ length: getTotalMediaItems() }, (_, index) => (
+											<button
+												key={index}
+												onClick={() => goToImage(index)}
+												className={`w-2 h-2 rounded-full transition-colors ${
+													index === currentImageIndex 
+														? 'bg-blue-400' 
+														: 'bg-white/50 hover:bg-white/70'
+												}`}
+											/>
+										))}
+									</div>
+								</div>
 							</>
 						)}
 					</div>
