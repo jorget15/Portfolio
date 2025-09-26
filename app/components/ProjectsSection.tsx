@@ -10,7 +10,7 @@ const projects = [
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
-		image: '/LincUp.png',
+		image: '/LincUp Screenshots/LincUp.png',
 		images: [
 			'/LincUp Screenshots/LincUp.png',
 			'/LincUp Screenshots/Login.png',
@@ -150,7 +150,7 @@ const projects = [
 		id: 4,
 		title: 'Impostor Game',
 		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
-		image: '/ImpostorGame.png',
+		image: '/ImpostorGame/ImpostorGame.png',
 		images: [
 			'/ImpostorGame/ImpostorGame.png',
 			'/ImpostorGame/ImpostorGame2.png',
