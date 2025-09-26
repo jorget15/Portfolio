@@ -329,13 +329,6 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 		setCurrentImageIndex(index);
 	};
 
-	// Get current image to display
-	const getCurrentImage = () => {
-		if (currentProject.images && currentProject.images.length > 0) {
-			return currentProject.images[currentImageIndex];
-		}
-		return currentProject.image;
-	};
 
 	// Check if current project has video
 	const hasVideo = () => {
