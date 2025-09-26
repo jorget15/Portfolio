@@ -12,9 +12,14 @@ const projects = [
 		shortDescription: 'Mobile app for connecting students for study sessions',
 		image: '/LincUp.png',
 		images: [
-			'/lincUp screenshots/1.png',
-			'/lincUp screenshots/2.png',
-			'/lincUp screenshots/3.png'
+			'/LincUp Screenshots/LincUp.png',
+			'/LincUp Screenshots/Login.png',
+			'/LincUp Screenshots/Discover Sessions.png',
+			'/LincUp Screenshots/MySessions.png',
+			'/LincUp Screenshots/Notifications.png',
+			'/LincUp Screenshots/Online Sessions.png',
+			'/LincUp Screenshots/Propose a Session.png',
+			'/LincUp Screenshots/Sidebar.png'
 		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
@@ -146,6 +151,11 @@ const projects = [
 		title: 'Impostor Game',
 		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
 		image: '/ImpostorGame.png',
+		images: [
+			'/ImpostorGame/ImpostorGame.png',
+			'/ImpostorGame/ImpostorGame2.png',
+			'/ImpostorGame/ImpostorGame3.png'
+		],
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
 		category: 'Game Development',
@@ -338,8 +348,8 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 		if (hasVideo()) total += 1; // Add 1 for video
 		if (currentProject.images && currentProject.images.length > 0) {
 			total += currentProject.images.length;
-		} else {
-			total += 1; // Add 1 for single image
+		} else if (!hasVideo()) {
+			total += 1; // Add 1 for single main image if no video and no images array
 		}
 		return total;
 	};
@@ -363,7 +373,11 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 				return currentProject.image;
 			}
 		} else {
-			return getCurrentImage();
+			// No video - just images
+			if (currentProject.images && currentProject.images.length > 0) {
+				return currentProject.images[currentImageIndex];
+			}
+			return currentProject.image;
 		}
 	};
 
