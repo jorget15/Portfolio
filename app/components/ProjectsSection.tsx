@@ -12,14 +12,14 @@ const projects = [
 		shortDescription: 'Mobile app for connecting students for study sessions',
 		image: '/LincUp Screenshots/LincUp.png',
 		images: [
-			'/LincUp Screenshots/LincUp.png',
-			'/LincUp Screenshots/Login.png',
-			'/LincUp Screenshots/Discover Sessions.png',
-			'/LincUp Screenshots/MySessions.png',
-			'/LincUp Screenshots/Notifications.png',
-			'/LincUp Screenshots/Online Sessions.png',
-			'/LincUp Screenshots/Propose a Session.png',
-			'/LincUp Screenshots/Sidebar.png'
+			'/LincUp Screenshots/1 LincUp.png',
+			'/LincUp Screenshots/2 Login.png',
+			'/LincUp Screenshots/3 MySessions.png',
+			'/LincUp Screenshots/4 Sidebar.png',
+			'/LincUp Screenshots/5 Discover Sessions.png',
+			'/LincUp Screenshots/6 Propose a Sessions.png',
+			'/LincUp Screenshots/7 Online Sessions.png',
+			'/LincUp Screenshots/8 Notifications.png'
 		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
