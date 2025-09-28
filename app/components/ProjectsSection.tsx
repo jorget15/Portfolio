@@ -10,14 +10,14 @@ const projects = [
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
-		image: '/LincUp Screenshots/LincUp.png',
+		image: '/LincUp Screenshots/1 LincUp.png',
 		images: [
 			'/LincUp Screenshots/1 LincUp.png',
 			'/LincUp Screenshots/2 Login.png',
 			'/LincUp Screenshots/3 MySessions.png',
 			'/LincUp Screenshots/4 Sidebar.png',
 			'/LincUp Screenshots/5 Discover Sessions.png',
-			'/LincUp Screenshots/6 Propose a Sessions.png',
+			'/LincUp Screenshots/6 Propose a Session.png',
 			'/LincUp Screenshots/7 Online Sessions.png',
 			'/LincUp Screenshots/8 Notifications.png'
 		],
