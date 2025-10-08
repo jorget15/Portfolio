@@ -10,16 +10,17 @@ const projects = [
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
-		image: '/LincUp Screenshots/LincUp.png',
+		image: '/LincUp Screenshots/1 LincUp.png',
 		images: [
-			'/LincUp Screenshots/LincUp.png',
-			'/LincUp Screenshots/Login.png',
-			'/LincUp Screenshots/Discover Sessions.png',
-			'/LincUp Screenshots/MySessions.png',
-			'/LincUp Screenshots/Notifications.png',
-			'/LincUp Screenshots/Online Sessions.png',
-			'/LincUp Screenshots/Propose a Session.png',
-			'/LincUp Screenshots/Sidebar.png'
+			'/LincUp Screenshots/1 LincUp.png',
+			'/LincUp Screenshots/2 Login.png',
+			'/LincUp Screenshots/3 MySessions.png',
+			'/LincUp Screenshots/4 Sidebar.png',
+			'/LincUp Screenshots/5 Discover Sessions.png',
+			'/LincUp Screenshots/6 Propose a Session.png',
+			'/LincUp Screenshots/7 Online Sessions.png',
+			'/LincUp Screenshots/8 Notifications.png'
+			
 		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
@@ -382,76 +383,87 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
-				className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+				className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-50"
 				onClick={onClose}
 			>
 				<motion.div
-					initial={{ scale: 0.8, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
-					exit={{ scale: 0.8, opacity: 0 }}
-					transition={{ duration: 0.3 }}
-					className="bg-gray-900 rounded-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+					initial={{ scale: 0.9, opacity: 0, y: 20 }}
+					animate={{ scale: 1, opacity: 1, y: 0 }}
+					exit={{ scale: 0.9, opacity: 0, y: 20 }}
+					transition={{ duration: 0.3, ease: "easeOut" }}
+					className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 border border-gray-700/50 rounded-2xl shadow-2xl p-6 md:p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
 					onClick={(e) => e.stopPropagation()}
 				>
+					{/* Decorative gradient overlay */}
+					<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-t-2xl"></div>
+					
 					{/* Close button */}
 					<button
 						onClick={onClose}
-						className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+						className="absolute top-4 right-4 text-gray-400 hover:text-white transition-all hover:rotate-90 duration-300 bg-gray-800/50 hover:bg-gray-700/50 rounded-full p-2 backdrop-blur-sm z-10"
 					>
-						<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
 
 					{/* Header */}
-					<div className="mb-6">
-						<div className="flex items-center justify-between mb-2">
-							<div className="flex items-center gap-2">
-								<span className="text-sm bg-blue-600/20 text-blue-300 px-2 py-1 rounded-full">
+					<div className="mb-6 md:mb-8">
+						<div className="flex items-center justify-between mb-3">
+							<div className="flex items-center gap-2 flex-wrap">
+								<span className="text-sm bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg">
 									{currentProject.category}
 								</span>
 								{relatedProjects.length > 1 && (
-									<span className="text-xs text-gray-400">
-										{currentProjectIndex + 1} of {relatedProjects.length}
+									<span className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
+										Part {currentProjectIndex + 1} of {relatedProjects.length}
 									</span>
 								)}
 							</div>
 							{relatedProjects.length > 1 && (
-								<div className="flex items-center gap-2">
+								<div className="flex items-center gap-1">
 									<button
 										onClick={goToPrevious}
-										className="p-1 text-gray-400 hover:text-white transition-colors"
+										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
+										aria-label="Previous project"
 									>
-										<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
 										</svg>
 									</button>
 									<button
 										onClick={goToNext}
-										className="p-1 text-gray-400 hover:text-white transition-colors"
+										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
+										aria-label="Next project"
 									>
-										<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
 										</svg>
 									</button>
 								</div>
 							)}
 						</div>
-						<h2 className="text-2xl font-bold text-white mb-2">{currentProject.title}</h2>
-						<p className="text-gray-400">{currentProject.role} • {currentProject.company}</p>
+						<h2 className="text-3xl md:text-4xl font-bold text-white mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{currentProject.title}</h2>
+						<div className="flex items-center gap-2 text-gray-400">
+							<svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+							</svg>
+							<p className="text-sm">{currentProject.role} • {currentProject.company}</p>
+						</div>
 						
 						{/* Navigation dots for related projects */}
 						{relatedProjects.length > 1 && (
-							<div className="flex items-center gap-2 mt-3">
+							<div className="flex items-center gap-2 mt-4">
 								{relatedProjects.map((_, index) => (
 									<button
 										key={index}
 										onClick={() => goToProject(index)}
-										className={`w-2 h-2 rounded-full transition-colors ${
+										className={`h-1.5 rounded-full transition-all duration-300 ${
 											index === currentProjectIndex 
-												? 'bg-blue-400' 
-												: 'bg-gray-600 hover:bg-gray-500'
+												? 'bg-gradient-to-r from-blue-500 to-cyan-500 w-8' 
+												: 'bg-gray-600 hover:bg-gray-500 w-1.5'
 										}`}
+										aria-label={`Go to project ${index + 1}`}
 									/>
 								))}
 							</div>
@@ -459,7 +471,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 					</div>
 
 					{/* Image or Video */}
-					<div className="relative aspect-[4/3] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-lg overflow-hidden mb-6">
+					<div className="relative aspect-[16/9] bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-cyan-900/30 rounded-xl overflow-hidden mb-6 md:mb-8 border border-gray-700/30 shadow-xl">
 						{isShowingVideo() ? (
 							<iframe
 								src={currentProject.projectUrl.includes('youtube.com') 
@@ -477,7 +489,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								src={getCurrentMedia() as string} 
 								alt={currentProject.title} 
 								fill 
-								className="object-contain p-4"
+								className="object-contain p-3 md:p-4"
 							/>
 						)}
 						
@@ -487,36 +499,39 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								{/* Previous media button */}
 								<button
 									onClick={goToPreviousImage}
-									className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+									className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm text-white p-2.5 rounded-full transition-all hover:scale-110 shadow-lg"
+									aria-label="Previous image"
 								>
-									<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
 									</svg>
 								</button>
 								{/* Next media button */}
 								<button
 									onClick={goToNextImage}
-									className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+									className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 backdrop-blur-sm text-white p-2.5 rounded-full transition-all hover:scale-110 shadow-lg"
+									aria-label="Next image"
 								>
-									<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
 									</svg>
 								</button>
 								{/* Media counter and dots */}
-								<div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-3">
-									<span className="text-xs bg-black/50 text-white px-2 py-1 rounded-full">
-										{currentImageIndex + 1} of {getTotalMediaItems()}
+								<div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+									<span className="text-xs text-white font-medium">
+										{currentImageIndex + 1} / {getTotalMediaItems()}
 									</span>
-									<div className="flex items-center gap-1">
+									<div className="flex items-center gap-1.5">
 										{Array.from({ length: getTotalMediaItems() }, (_, index) => (
 											<button
 												key={index}
 												onClick={() => goToImage(index)}
-												className={`w-2 h-2 rounded-full transition-colors ${
+												className={`rounded-full transition-all duration-300 ${
 													index === currentImageIndex 
-														? 'bg-blue-400' 
-														: 'bg-white/50 hover:bg-white/70'
+														? 'bg-blue-400 w-2 h-2' 
+														: 'bg-white/40 hover:bg-white/60 w-1.5 h-1.5'
 												}`}
+												aria-label={`Go to image ${index + 1}`}
 											/>
 										))}
 									</div>
@@ -526,11 +541,14 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 					</div>
 
 					{/* Description */}
-					<div className="mb-6">
-						<h3 className="text-lg font-semibold text-white mb-3">Project Overview</h3>
-						<div className="space-y-3">
+					<div className="mb-6 md:mb-8">
+						<div className="flex items-center gap-2 mb-4">
+							<div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+							<h3 className="text-xl font-bold text-white">Project Overview</h3>
+						</div>
+						<div className="space-y-3 bg-gray-800/30 rounded-xl p-4 md:p-5 border border-gray-700/30">
 							{currentProject.description.map((paragraph, index) => (
-								<p key={index} className="text-gray-300 leading-relaxed">
+								<p key={index} className="text-gray-300 leading-relaxed text-sm md:text-base">
 									{paragraph}
 								</p>
 							))}
@@ -538,13 +556,16 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 					</div>
 
 					{/* Technologies */}
-					<div className="mb-6">
-						<h3 className="text-lg font-semibold text-white mb-3">Technologies Used</h3>
+					<div className="mb-6 md:mb-8">
+						<div className="flex items-center gap-2 mb-4">
+							<div className="w-1 h-6 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
+							<h3 className="text-xl font-bold text-white">Tech Stack</h3>
+						</div>
 						<div className="flex flex-wrap gap-2">
 							{currentProject.technologies.map((tech, index) => (
 								<span 
 									key={index}
-									className="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm"
+									className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 hover:from-blue-600/30 hover:to-cyan-600/30 text-blue-300 px-4 py-2 rounded-lg text-sm font-medium border border-blue-500/20 transition-all hover:scale-105 hover:shadow-lg"
 								>
 									{tech}
 								</span>
@@ -553,20 +574,20 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 					</div>
 
 					{/* Action buttons */}
-					<div className="flex gap-4">
+					<div className="flex flex-col sm:flex-row gap-3">
 						{currentProject.projectUrl !== '#' && (
 							<Link
 								href={currentProject.projectUrl}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
+								className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3.5 rounded-xl transition-all hover:scale-105 hover:shadow-xl shadow-blue-500/50 font-medium"
 							>
 								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
 								{currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be') 
-									? 'Watch on YouTube' 
-									: 'View Project'
+									? 'Watch Demo' 
+									: 'View Live Project'
 								}
 							</Link>
 						)}
@@ -575,12 +596,12 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								href={currentProject.githubUrl}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors"
+								className="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3.5 rounded-xl transition-all hover:scale-105 border border-gray-700 hover:border-gray-600 font-medium"
 							>
 								<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
 								</svg>
-								GitHub
+								View Source Code
 							</Link>
 						)}
 					</div>
@@ -620,66 +641,89 @@ export default function ProjectsSection() {
 	return (
 		<>
 			<section className="py-12 md:py-20 px-4 max-w-7xl mx-auto">
-				<motion.h2
+				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
 					transition={{ duration: 0.6 }}
-					className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center"
+					className="text-center mb-12 md:mb-16"
 				>
-					Featured Projects
-				</motion.h2>
+					<h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+						Featured Projects
+					</h2>
+					<p className="text-gray-400 text-lg max-w-2xl mx-auto">
+						Explore my portfolio of full-stack applications, data analytics projects, and innovative solutions
+					</p>
+					<div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mt-6 rounded-full"></div>
+				</motion.div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{displayProjects.map((project) => (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+					{displayProjects.map((project, index) => (
 						<motion.div
 							key={project.id}
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							transition={{ duration: 0.6, delay: project.id * 0.1 }}
-							whileHover={{ scale: 1.02 }}
-							className="group relative aspect-[3/2] bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden cursor-pointer"
+							transition={{ duration: 0.6, delay: index * 0.1 }}
+							whileHover={{ y: -8 }}
+							className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
 							onClick={() => handleProjectClick(project)}
 						>
+							{/* Background gradient overlay */}
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+							
+							{/* Image */}
 							<Image 
 								src={project.image} 
 								alt={project.title} 
 								fill 
-								className="object-cover transition-transform group-hover:scale-105" 
+								className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110" 
 							/>
-							<div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300" />
-							<div className="absolute inset-0 p-6 flex flex-col justify-between">
-								<div className="flex items-center justify-between">
-									<div className="flex items-center gap-2">
-										<span className="text-xs bg-white/20 text-white px-2 py-1 rounded-full">
+							
+							{/* Dark overlay - becomes lighter on hover */}
+							<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-transparent transition-all duration-300 z-20" />
+							
+							{/* Content */}
+							<div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between z-30">
+								{/* Top badges */}
+								<div className="flex items-start justify-between gap-2">
+									<div className="flex flex-col gap-2">
+										<span className="text-xs bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm w-fit">
 											{project.category}
 										</span>
 										{(() => {
 											const group = getProjectGroup(project);
 											return group && group.projects.length > 1 ? (
-												<span className="text-xs bg-blue-500/80 text-white px-2 py-1 rounded-full font-medium flex items-center gap-1">
-													<svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-													</svg>
-													{group.projects.length} Components
+												<span className="text-xs bg-purple-500/90 text-white px-3 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm w-fit">
+													{group.projects.length} Parts
 												</span>
 											) : null;
 										})()}
 									</div>
+									
+									{/* View icon */}
+									<div className="bg-white/10 backdrop-blur-md rounded-full p-2.5 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+										<svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+										</svg>
+									</div>
 								</div>
-								<div>
-									<h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-									<p className="text-gray-300 text-sm mb-3">{project.shortDescription}</p>
-									<p className="text-gray-400 text-xs">{project.role}</p>
+								
+								{/* Bottom content */}
+								<div className="transform transition-all duration-300 group-hover:translate-y-0">
+									<h3 className="text-xl md:text-2xl font-bold mb-2 text-white drop-shadow-lg">{project.title}</h3>
+									<p className="text-gray-200 text-sm mb-3 line-clamp-2 drop-shadow-md">{project.shortDescription}</p>
+									<div className="flex items-center gap-2">
+										<div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+										<p className="text-gray-300 text-xs font-medium">{project.role}</p>
+									</div>
 								</div>
 							</div>
-							{/* Click indicator */}
-							<div className="absolute top-4 right-4 bg-white/20 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-								<svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-								</svg>
+							
+							{/* Shine effect on hover */}
+							<div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-40 pointer-events-none">
+								<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
 							</div>
 						</motion.div>
 					))}

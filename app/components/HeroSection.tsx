@@ -15,12 +15,12 @@ export default function HeroSection() {
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,0.7),rgba(0,0,0,1))]" />
 			</div>
 
-			<div className="relative z-10 text-center">
+			<div className="relative z-10 text-center px-4">
 				<motion.h1
 					initial={{ y: 50 }}
 					animate={{ y: 0 }}
 					transition={{ duration: 0.8, delay: 0.2 }}
-					className="text-4xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500"
+					className="text-4xl md:text-7xl font-bold mb-6 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500"
 				>
 					Jorge Taban
 				</motion.h1>
@@ -28,7 +28,7 @@ export default function HeroSection() {
 					initial={{ y: 50, opacity: 0 }}
 					animate={{ y: 0, opacity: 1 }}
 					transition={{ duration: 0.8, delay: 0.4 }}
-					className="text-lg md:text-xl text-foreground/80 mb-8 px-4"
+					className="text-lg md:text-xl text-foreground/80 mb-8"
 				>
 					Full Stack Developer with a Problem Solving Growth Mindset
 				</motion.p>
