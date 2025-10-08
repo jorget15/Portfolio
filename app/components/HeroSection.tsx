@@ -20,7 +20,7 @@ export default function HeroSection() {
 					initial={{ y: 50 }}
 					animate={{ y: 0 }}
 					transition={{ duration: 0.8, delay: 0.2 }}
-					className="text-4xl md:text-7xl font-bold mb-6 pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500"
+					className="text-4xl md:text-7xl font-bold mb-6 pb-4 pt-2 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500"
 				>
 					Jorge Taban
 				</motion.h1>

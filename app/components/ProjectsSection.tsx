@@ -443,31 +443,39 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								</div>
 							)}
 						</div>
-						<h2 className="text-3xl md:text-4xl font-bold text-white mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{currentProject.title}</h2>
+						<h2 className="text-3xl md:text-4xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{currentProject.title}</h2>
+						
+						{/* Navigation dots for related projects - Now more visible */}
+						{relatedProjects.length > 1 && (
+							<div className="flex items-center gap-3 mb-4 bg-gray-800/30 rounded-lg px-4 py-3 border border-gray-700/30">
+								<span className="text-xs text-gray-400 font-medium">Navigate:</span>
+								<div className="flex items-center gap-2">
+									{relatedProjects.map((relProject, index) => (
+										<button
+											key={index}
+											onClick={() => goToProject(index)}
+											className={`h-2 rounded-full transition-all duration-300 ${
+												index === currentProjectIndex 
+													? 'bg-gradient-to-r from-blue-500 to-cyan-500 w-12 shadow-lg shadow-blue-500/50' 
+													: 'bg-gray-600 hover:bg-gray-500 w-2'
+											}`}
+											aria-label={`Go to ${relProject.title}`}
+											title={relProject.title}
+										/>
+									))}
+								</div>
+								<span className="text-xs text-gray-500">
+									{currentProjectIndex + 1}/{relatedProjects.length}
+								</span>
+							</div>
+						)}
+						
 						<div className="flex items-center gap-2 text-gray-400">
 							<svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
 							</svg>
 							<p className="text-sm">{currentProject.role} • {currentProject.company}</p>
 						</div>
-						
-						{/* Navigation dots for related projects */}
-						{relatedProjects.length > 1 && (
-							<div className="flex items-center gap-2 mt-4">
-								{relatedProjects.map((_, index) => (
-									<button
-										key={index}
-										onClick={() => goToProject(index)}
-										className={`h-1.5 rounded-full transition-all duration-300 ${
-											index === currentProjectIndex 
-												? 'bg-gradient-to-r from-blue-500 to-cyan-500 w-8' 
-												: 'bg-gray-600 hover:bg-gray-500 w-1.5'
-										}`}
-										aria-label={`Go to project ${index + 1}`}
-									/>
-								))}
-							</div>
-						)}
 					</div>
 
 					{/* Image or Video */}
@@ -687,15 +695,15 @@ export default function ProjectsSection() {
 							<div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between z-30">
 								{/* Top badges */}
 								<div className="flex items-start justify-between gap-2">
-									<div className="flex flex-col gap-2">
+									<div className="flex items-center gap-2">
 										<span className="text-xs bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm w-fit">
 											{project.category}
 										</span>
 										{(() => {
 											const group = getProjectGroup(project);
 											return group && group.projects.length > 1 ? (
-												<span className="text-xs bg-purple-500/90 text-white px-3 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm w-fit">
-													{group.projects.length} Parts
+												<span className="text-[10px] bg-purple-500/70 text-white/90 px-2 py-1 rounded-md font-medium backdrop-blur-sm">
+													{group.projects.length}
 												</span>
 											) : null;
 										})()}
