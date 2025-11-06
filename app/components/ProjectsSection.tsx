@@ -224,6 +224,42 @@ const projects = [
 		projectUrl: 'https://sites.google.com/d/16P6FHpdAXpVGzNuPQYU_EDVrEDk6pPj2/p/1oq2amKw1zAETQ4xjltlgsTXf73WV4TMR/edit',
 		githubUrl: '#',
 	},
+	{
+		id: 9,
+		title: 'UnityAid — Disaster Response System',
+		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
+		image: '/UnityAid.png',
+		role: 'Full-Stack Developer',
+		company: 'ShellHacks Hackathon',
+		category: 'Hackathon',
+		description: [
+			'Built an intelligent disaster response coordination system featuring conversational AI that asks clarifying questions when confidence is below 70% for accurate emergency triage.',
+			'Implemented multi-agent architecture with smart priority classification (75%+ accuracy), interactive Folium maps for click-to-pin location selection, and real-time ticket management dashboard.',
+			'Developed context-aware question generation tailored to emergency types (medical, safety, vulnerable populations) with dynamic priority adjustment from 1-5 based on responses.',
+			'Created comprehensive Streamlit interface with live monitoring, resource capacity tracking, and intelligent ticket composition from freeform descriptions with transparent confidence scoring.'
+		],
+		technologies: ['Python', 'Streamlit', 'Google ADK', 'Google Generative AI', 'Folium Maps', 'Multi-Agent Systems', 'Natural Language Processing'],
+		projectUrl: 'https://devpost.com/software/unityaid',
+		githubUrl: 'https://github.com/eilyntudares/UnityAid',
+	},
+	{
+		id: 10,
+		title: 'Memento',
+		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
+		image: '/Memento.png',
+		role: 'Full-Stack Developer',
+		company: 'ShellHacks Hackathon',
+		category: 'Hackathon',
+		description: [
+			'Built an AI-powered slideshow generation system that creates complete educational presentations from a single topic using Google\'s Agent Development Kit (ADK).',
+			'Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, intelligent image search, and narrated audio synthesis.',
+			'Developed dynamic slide layouts with automatic aspect ratio detection, multi-source image fallback (Wikimedia Commons → Google CSE → Generated placeholders), and text-to-speech narration.',
+			'Created comprehensive pipeline generating diverse subtopics, relevant visuals, and complete video presentations with all components automatically assembled.'
+		],
+		technologies: ['Python', 'Google ADK', 'Google Generative AI', 'Multi-Agent Systems', 'Wikimedia Commons API', 'Google CSE', 'Text-to-Speech'],
+		projectUrl: '#',
+		githubUrl: 'https://github.com/jorget15/Memento2',
+	},
 ];
 
 // Group related projects
