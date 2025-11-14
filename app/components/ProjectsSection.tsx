@@ -129,7 +129,7 @@ const projects: Project[] = [
 		image: '/SoccerCSV.png',
 		role: 'Data Engineer',
 		company: 'Personal Project',
-		category: 'Personal Project - Part 1/3',
+		category: 'Personal Project',
 		description: [
 			'Built a comprehensive Python application processing 200+ column FIFA/UEFA CSV files into a fully normalized PostgreSQL database with ~46,000 players.',
 			'Implemented intelligent file parsing with pattern matching for multi-league datasets (Premier League, La Liga, Bundesliga, Champions League, etc.).',
@@ -147,7 +147,7 @@ const projects: Project[] = [
 		image: '/SoccerDB.png',
 		role: 'Database Engineer',
 		company: 'Personal Project',
-		category: 'Personal Project - Part 2/3',
+		category: 'Personal Project',
 		description: [
 			'Designed enterprise-grade normalized database schema with 17 interconnected tables storing 46,000+ players across 71 countries.',
 			'Implemented specialized statistics tables (goal_stats, defensive_stats, financial_stats, advanced_expected_stats) with optimized indexing.',
@@ -170,7 +170,7 @@ const projects: Project[] = [
 		],
 		role: 'Data Analyst & Visualizer',
 		company: 'Personal Project',
-		category: 'Personal Project - Part 3/3',
+		category: 'Personal Project',
 		description: [
 			'Built interactive PowerBI dashboards that transform raw soccer data into actionable insights for coaches and analysts.',
 			'Designed comprehensive visualizations covering player performance, team statistics, match analytics, and seasonal trends.',
@@ -217,8 +217,8 @@ const projects: Project[] = [
 		githubUrl: 'https://github.com/jorget15/ResumeImprover',
 	},
 	{
-		id: 4,
-		title: 'Impostor Game',
+		id: 4.1,
+		title: 'Impostor Game V1',
 		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
 		image: '/ImpostorGame/ImpostorGame.png',
 		images: [
@@ -238,6 +238,29 @@ const projects: Project[] = [
 		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Real-time Communication'],
 		projectUrl: 'https://impostor-game-production.up.railway.app/',
 		githubUrl: 'https://github.com/jorget15/impostor',
+	},
+	{
+		id: 4.2,
+		title: 'Games Center',
+		shortDescription: 'Enhanced multiplayer game platform with scalable architecture for multiple game modes',
+		image: '/GamesCenter/GamesCenter1.png',
+		images: [
+			'/GamesCenter/GamesCenter1.png',
+			'/GamesCenter/GamesCenter2.png'
+		],
+		role: 'Full-Stack Developer',
+		company: 'Personal Project',
+		category: 'Personal Project',
+		description: [
+			'Rebuilt the multiplayer game platform with improved architecture designed to support multiple game types.',
+			'Implemented modular game engine allowing easy addition of new game modes beyond the original impostor concept.',
+			'Enhanced WebSocket infrastructure for better scalability and real-time performance across larger player counts.',
+			'Developed extensible codebase with clear separation of concerns, enabling rapid deployment of new game mechanics.',
+			'Created foundation for a multi-game platform while maintaining the core social deduction gameplay of V1.'
+		],
+		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Modular Architecture', 'Scalable Design'],
+		projectUrl: 'https://gamescenter.onrender.com/',
+		githubUrl: 'https://github.com/jorget15/GamesCenter',
 	},
 	{
 		id: 5,
@@ -294,11 +317,15 @@ const projects: Project[] = [
 		githubUrl: '#',
 	},
 	{
-		id: 9,
-		title: 'UnityAid — Disaster Response System',
-		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-		image: '/UnityAid.jpg',
-		role: 'Full-Stack Developer',
+	id: 9,
+	title: 'UnityAid — Disaster Response System',
+	shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
+	image: '/UnityAid/UnityAid1.png',
+	images: [
+		'/UnityAid/UnityAid1.jpg',
+		'/UnityAid/UnityAid2.jpg'
+	],
+	role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
 		category: 'Hackathon Project',
 		description: [
@@ -312,11 +339,11 @@ const projects: Project[] = [
 		githubUrl: 'https://github.com/eilyntudares/UnityAid',
 	},
 	{
-		id: 10,
-		title: 'Memento',
-		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
-		image: '/Memento.png',
-		role: 'Full-Stack Developer',
+	id: 10,
+	title: 'Memento',
+	shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
+	image: '/Unavailable.jpg',
+	role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
 		category: 'Hackathon Project',
 		description: [
@@ -344,18 +371,36 @@ const projectGroups = [
 		name: 'Soccer Analytics Pipeline',
 		projects: projects.filter(p => p.id === 2.1 || p.id === 2.2 || p.id === 2.3),
 		mainProject: projects.find(p => p.id === 2.3)!,
+	},
+	{
+		id: 3,
+		name: 'Impostor Game Series',
+		projects: projects.filter(p => p.id === 4.1 || p.id === 4.2),
+		mainProject: projects.find(p => p.id === 4.2)!,
 	}
 ];
 
 // Individual projects (not part of groups)
 const individualProjects = projects.filter(p => 
-	![1.1, 1.2, 2.1, 2.2, 2.3].includes(p.id)
+	![1.1, 1.2, 2.1, 2.2, 2.3, 4.1, 4.2].includes(p.id)
 );
 
-// Combined display projects (main projects from groups + individual projects)
+// Combined display projects with custom order
 const displayProjects = [
-	...projectGroups.map(group => group.mainProject),
-	...individualProjects
+	// 1. EVE (id: 0)
+	projects.find(p => p.id === 0)!,
+	// 2. LINC-UP
+	projectGroups.find(g => g.id === 1)!.mainProject,
+	// 3. UnityAid (id: 9)
+	projects.find(p => p.id === 9)!,
+	// 4. Soccer Analytics Pipeline
+	projectGroups.find(g => g.id === 2)!.mainProject,
+	// 5. Memento (id: 10)
+	projects.find(p => p.id === 10)!,
+	// 6. Impostor Game Series
+	projectGroups.find(g => g.id === 3)!.mainProject,
+	// 7. Rest of the projects (excluding the ones already added)
+	...individualProjects.filter(p => ![0, 9, 10].includes(p.id))
 ];
 
 interface ProjectModalProps {
@@ -503,41 +548,43 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Header */}
 					<div className="mb-6 md:mb-8">
-						<div className="flex items-center justify-between mb-3">
-							<div className="flex items-center gap-2 flex-wrap">
-								<span className="text-sm bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg">
-									{currentProject.category}
-								</span>
-								{relatedProjects.length > 1 && (
-									<span className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
-										Part {currentProjectIndex + 1} of {relatedProjects.length}
-									</span>
-								)}
-							</div>
+						<div className="flex items-center gap-2 flex-wrap mb-3">
+							<span className="text-sm bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg">
+								{currentProject.category}
+							</span>
 							{relatedProjects.length > 1 && (
-								<div className="flex items-center gap-1">
-									<button
-										onClick={goToPrevious}
-										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
-										aria-label="Previous project"
-									>
-										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-										</svg>
-									</button>
-									<button
-										onClick={goToNext}
-										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
-										aria-label="Next project"
-									>
-										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-										</svg>
-									</button>
-								</div>
+								<span className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
+									Part {currentProjectIndex + 1} of {relatedProjects.length}
+								</span>
 							)}
 						</div>
 						<h2 className="text-3xl md:text-4xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{currentProject.title}</h2>
+						
+						{/* Navigation arrows - Moved below title for better visibility */}
+						{relatedProjects.length > 1 && (
+							<div className="flex items-center gap-3 mb-4">
+								<button
+									onClick={goToPrevious}
+									className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 rounded-lg transition-all backdrop-blur-sm border border-gray-700/30 hover:border-gray-600/50"
+									aria-label="Previous project"
+								>
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+									</svg>
+									<span className="text-sm font-medium">Previous</span>
+								</button>
+								<button
+									onClick={goToNext}
+									className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 rounded-lg transition-all backdrop-blur-sm border border-gray-700/30 hover:border-gray-600/50"
+									aria-label="Next project"
+								>
+									<span className="text-sm font-medium">Next</span>
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+									</svg>
+								</button>
+							</div>
+						)}
 						
 						{/* Navigation dots for related projects - Now more visible */}
 						{relatedProjects.length > 1 && (
