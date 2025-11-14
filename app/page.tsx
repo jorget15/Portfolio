@@ -1,6 +1,7 @@
 'use client';
 
 import SpacePortfolio from './components/Space/SpacePortfolio';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Old portfolio (keep for reference or fallback)
 // import HeroSection from './components/HeroSection';
@@ -12,6 +13,7 @@ export default function MinimalModernPortfolio() {
 	return (
 		<div className="min-h-screen bg-black text-white">
 			<SpacePortfolio />
+			<SpeedInsights />
 		</div>
 	);
 }
