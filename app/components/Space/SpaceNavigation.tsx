@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useMemo, useRef } from 'react';
+import Image from 'next/image';
 import { useSoundEffect } from '@/app/hooks/useSoundEffect';
 
 interface Planet {
@@ -159,17 +160,18 @@ function InteractivePlanet({ planet, onSelect, selectedId }: PlanetProps) {
 				transition={{
 					duration: 60,
 					repeat: Infinity,
-					ease: "linear",
-				}}
-			>
-				<img 
-					src={planet.imagePath} 
-					alt={planet.name}
-					className="w-full h-full object-cover rounded-full"
-				/>
-			</motion.div>
-
-			{/* Orbit ring */}
+				ease: "linear",
+			}}
+		>
+			<Image 
+				src={planet.imagePath} 
+				alt={planet.name}
+				fill
+				sizes="280px"
+				className="object-cover rounded-full"
+				unoptimized={planet.imagePath.includes('.gif')}
+			/>
+		</motion.div>			{/* Orbit ring */}
 			<motion.div
 				className="absolute inset-[-10px] border-2 border-dashed border-cyan-400 rounded-full"
 				style={{
@@ -244,13 +246,16 @@ function Asteroid({ imagePath, size, startX, startY, duration, delay }: Asteroid
 				height: size,
 			}}
 		>
-			<img 
+			<Image 
 				src={imagePath} 
 				alt="Asteroid"
-				className="w-full h-full object-contain"
+				width={size}
+				height={size}
+				className="object-contain"
 				style={{
 					filter: 'drop-shadow(0 0 10px rgba(100,150,255,0.3))',
 				}}
+				unoptimized
 			/>
 		</motion.div>
 	);
