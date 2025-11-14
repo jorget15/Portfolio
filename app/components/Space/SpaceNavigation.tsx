@@ -332,7 +332,7 @@ export default function SpaceNavigation({ onNavigate }: { onNavigate: (section: 
 				transition={{ duration: selectedId ? 0.95 : 0.6, ease: [0.22, 0.61, 0.36, 1] }}
 				style={{ transformOrigin: '0 0' }}
 			>
-				{planets.map((planet, index) => (
+				{planets.map((planet) => (
 					<div key={planet.id}>
 						<InteractivePlanet planet={planet} onSelect={handleSelect} selectedId={selectedId} />
 					</div>

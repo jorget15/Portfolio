@@ -5,7 +5,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-const projects = [
+interface Project {
+	id: number;
+	title: string;
+	shortDescription: string;
+	image: string;
+	role: string;
+	company: string;
+	category: string;
+	awards?: string[];
+	description: string[];
+	technologies: string[];
+	technicalHighlights?: string[];
+	futureEnhancements?: string[];
+	projectUrl: string;
+	githubUrl?: string;
+	videoUrl?: string;
+	images?: string[];
+}
+
+const projects: Project[] = [
 	{
 		id: 0,
 		title: 'EVE - AI Security Camera',
@@ -339,21 +358,6 @@ const displayProjects = [
 	...individualProjects
 ];
 
-interface Project {
-	id: number;
-	title: string;
-	shortDescription: string;
-	image: string;
-	images?: string[];
-	role: string;
-	company: string;
-	category: string;
-	description: string[];
-	technologies: string[];
-	projectUrl: string;
-	githubUrl: string;
-}
-
 interface ProjectModalProps {
 	project: Project;
 	isOpen: boolean;
@@ -419,7 +423,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 	// Check if current project has video
 	const hasVideo = () => {
-		const videoUrl = (currentProject as any).videoUrl;
+		const videoUrl = currentProject.videoUrl;
 		if (videoUrl) {
 			return videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be');
 		}
@@ -570,14 +574,14 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Image or Video */}
 					<div className="relative aspect-[16/9] bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-cyan-900/30 rounded-xl overflow-hidden mb-6 md:mb-8 border border-gray-700/30 shadow-xl">
-						{isShowingVideo() ? (
-							<iframe
-								src={(() => {
-									const videoUrl = (currentProject as any).videoUrl || currentProject.projectUrl;
-									return videoUrl.includes('youtube.com') 
-										? videoUrl.replace('watch?v=', 'embed/') 
-										: videoUrl.replace('youtu.be/', 'youtube.com/embed/');
-								})()}
+					{isShowingVideo() ? (
+						<iframe
+							src={(() => {
+								const videoUrl = currentProject.videoUrl || currentProject.projectUrl;
+								return videoUrl.includes('youtube.com') 
+									? videoUrl.replace('watch?v=', 'embed/') 
+									: videoUrl.replace('youtu.be/', 'youtube.com/embed/');
+							})()}
 								title={`${currentProject.title} Demo`}
 								className="w-full h-full"
 								frameBorder="0"
@@ -691,7 +695,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								}
 							</Link>
 						)}
-						{currentProject.githubUrl !== '#' && (
+						{currentProject.githubUrl && currentProject.githubUrl !== '#' && (
 							<Link
 								href={currentProject.githubUrl}
 								target="_blank"

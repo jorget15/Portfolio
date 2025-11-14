@@ -9,6 +9,7 @@ export function useSoundEffect(enabled: boolean = true) {
 
 	useEffect(() => {
 		if (enabled && typeof window !== 'undefined') {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
 			
 			// Resume AudioContext on user interaction (required by browsers)
