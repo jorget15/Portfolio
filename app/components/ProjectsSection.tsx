@@ -32,7 +32,7 @@ const projects: Project[] = [
 		image: '/EVE.jpg',
 		role: 'Embedded Systems & AI Engineer',
 		company: 'SharkByte Hackathon',
-		category: 'Hardware & AI',
+		category: 'Hackathon Winner',
 		awards: ['🥈 2nd Best Overall Project', '🥇 1st Place ARM Architecture'],
 		description: [
 			'Built an autonomous security camera inspired by EVE from WALL·E, combining edge AI and cloud reasoning for intelligent monitoring.',
@@ -93,7 +93,7 @@ const projects: Project[] = [
 		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'LINC IOS APP',
+		category: 'Startup Project',
 		description: [
 			'Launched and managed a technology startup specializing in mobile and web application development using Supabase and TypeScript.',
 			'Architected and built scalable front-end (React) and back-end (Node.js, PostgreSQL) systems from the ground up.',
@@ -111,7 +111,7 @@ const projects: Project[] = [
 		image: '/LincUpWebsite.png',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'LINC IOS APP',
+		category: 'Startup Project',
 		description: [
 			'Developed the comprehensive marketing and information website for the LINC-UP mobile application ecosystem.',
 			'Created responsive web design to showcase app features, facilitate user onboarding, and provide platform resources.',
@@ -129,7 +129,7 @@ const projects: Project[] = [
 		image: '/SoccerCSV.png',
 		role: 'Data Engineer',
 		company: 'Personal Project',
-		category: 'Soccer Analytics Pipeline',
+		category: 'Personal Project - Part 1/3',
 		description: [
 			'Built a comprehensive Python application processing 200+ column FIFA/UEFA CSV files into a fully normalized PostgreSQL database with ~46,000 players.',
 			'Implemented intelligent file parsing with pattern matching for multi-league datasets (Premier League, La Liga, Bundesliga, Champions League, etc.).',
@@ -147,7 +147,7 @@ const projects: Project[] = [
 		image: '/SoccerDB.png',
 		role: 'Database Engineer',
 		company: 'Personal Project',
-		category: 'Soccer Analytics Pipeline',
+		category: 'Personal Project - Part 2/3',
 		description: [
 			'Designed enterprise-grade normalized database schema with 17 interconnected tables storing 46,000+ players across 71 countries.',
 			'Implemented specialized statistics tables (goal_stats, defensive_stats, financial_stats, advanced_expected_stats) with optimized indexing.',
@@ -170,7 +170,7 @@ const projects: Project[] = [
 		],
 		role: 'Data Analyst & Visualizer',
 		company: 'Personal Project',
-		category: 'Soccer Analytics Pipeline',
+		category: 'Personal Project - Part 3/3',
 		description: [
 			'Built interactive PowerBI dashboards that transform raw soccer data into actionable insights for coaches and analysts.',
 			'Designed comprehensive visualizations covering player performance, team statistics, match analytics, and seasonal trends.',
@@ -188,7 +188,7 @@ const projects: Project[] = [
 		image: '/Unavailable.jpg',
 		role: 'Data Analyst',
 		company: 'JP Global Digital',
-		category: 'Professional',
+		category: 'Professional Work',
 		description: [
 			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
 			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
@@ -205,7 +205,7 @@ const projects: Project[] = [
 		image: '/ResumeImprover.png',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Personal',
+		category: 'Personal Project',
 		description: [
 			'Built a resume optimization tool that analyzes job descriptions and highlights the most relevant keywords.',
 			'Used a curated list of stop words to omit verbs and irrelevant words, focusing on core skills and requirements.',
@@ -228,7 +228,7 @@ const projects: Project[] = [
 		],
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Game Development',
+		category: 'Personal Project',
 		description: [
 			'Built a real-time multiplayer social deduction game where players try to identify the impostor among them.',
 			'Implemented WebSocket-based real-time communication enabling seamless turn-based gameplay for 3-10 players.',
@@ -246,7 +246,7 @@ const projects: Project[] = [
 		image: '/StudentRegistration.png',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Personal',
+		category: 'Personal Project',
 		description: [
 			'Developed a comprehensive student registration system for managing course enrollments.',
 			'Designed the database schema and created a Chen\'s ER diagram to clearly explain entities and relationships.',
@@ -264,7 +264,7 @@ const projects: Project[] = [
 		image: '/PokePy.png',
 		role: 'Game Developer',
 		company: 'Personal Project',
-		category: 'Personal',
+		category: 'Personal Project',
 		description: [
 			'Developed a 2D adventure game inspired by Pokémon, leveraging Python\'s Pygame library for graphics and gameplay mechanics.',
 			'Integrated external API calls to fetch real Pokémon data for dynamic character selection.',
@@ -282,7 +282,7 @@ const projects: Project[] = [
 		image: '/BakeAway.png',
 		role: 'Designer/Scrum Master',
 		company: 'University of Miami',
-		category: 'Academic',
+		category: 'Academic Project',
 		description: [
 			'Led a team in developing a comprehensive website for a fictitious business using Jira and Confluence, emphasizing agile methodologies.',
 			'Coordinated the creation of Epics, Stories, and Tasks, effectively managing the project lifecycle.',
@@ -297,10 +297,10 @@ const projects: Project[] = [
 		id: 9,
 		title: 'UnityAid — Disaster Response System',
 		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-		image: '/UnityAid.png',
+		image: '/UnityAid.jpg',
 		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
-		category: 'Hackathon',
+		category: 'Hackathon Project',
 		description: [
 			'Built an intelligent disaster response coordination system featuring conversational AI that asks clarifying questions when confidence is below 70% for accurate emergency triage.',
 			'Implemented multi-agent architecture with smart priority classification (75%+ accuracy), interactive Folium maps for click-to-pin location selection, and real-time ticket management dashboard.',
@@ -318,7 +318,7 @@ const projects: Project[] = [
 		image: '/Memento.png',
 		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
-		category: 'Hackathon',
+		category: 'Hackathon Project',
 		description: [
 			'Built an AI-powered slideshow generation system that creates complete educational presentations from a single topic using Google\'s Agent Development Kit (ADK).',
 			'Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, intelligent image search, and narrated audio synthesis.',
