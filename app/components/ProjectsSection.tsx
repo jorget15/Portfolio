@@ -5,7 +5,76 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-const projects = [
+interface Project {
+	id: number;
+	title: string;
+	shortDescription: string;
+	image: string;
+	role: string;
+	company: string;
+	category: string;
+	awards?: string[];
+	description: string[];
+	technologies: string[];
+	technicalHighlights?: string[];
+	futureEnhancements?: string[];
+	projectUrl: string;
+	githubUrl?: string;
+	videoUrl?: string;
+	images?: string[];
+}
+
+const projects: Project[] = [
+	{
+		id: 0,
+		title: 'EVE - AI Security Camera',
+		shortDescription: 'Autonomous vision system with real-time tracking and AI-powered event analysis',
+		image: '/EVE.jpg',
+		role: 'Embedded Systems & AI Engineer',
+		company: 'SharkByte Hackathon',
+		category: 'Hardware & AI',
+		awards: ['🥈 2nd Best Overall Project', '🥇 1st Place ARM Architecture'],
+		description: [
+			'Built an autonomous security camera inspired by EVE from WALL·E, combining edge AI and cloud reasoning for intelligent monitoring.',
+			'Achieved real-time person tracking using YOLOv11n with ByteTrack on Jetson Orin Nano, controlling pan/tilt servos at 15 FPS.',
+			'Integrated Google Gemini for multimodal scene understanding, generating contextual descriptions and severity classifications (info/warning/critical).',
+			'Developed full-stack pipeline: embedded tracking → Gemini analysis → Supabase storage → React dashboard → Discord webhooks → React Native iOS app.',
+			'Engineered hybrid AI workflow balancing on-device inference (YOLOv11n with TensorRT) and cloud processing (Gemini) for low-latency autonomous operation.',
+			'Overcame servo torque, latency, and hardware constraints through iterative testing to achieve smooth real-time tracking in 36 hours.'
+		],
+		technologies: [
+			'Jetson Orin Nano',
+			'YOLOv11n',
+			'ByteTrack',
+			'TensorRT',
+			'Google Gemini',
+			'OpenCV',
+			'Python',
+			'FastAPI',
+			'React',
+			'React Native',
+			'Supabase',
+			'Discord Webhooks',
+			'PCA9685 Servo Controller'
+		],
+		technicalHighlights: [
+			'Real-time object tracking with servo control at 15 FPS on ARM architecture',
+			'Hybrid edge-cloud AI pipeline: local detection + cloud reasoning',
+			'Asynchronous image upload to Supabase while processing Gemini responses',
+			'Multi-platform real-time updates (web dashboard + iOS app)',
+			'Automated event classification with Discord webhook notifications',
+			'Optimized for low-power hardware with continuous operation'
+		],
+		futureEnhancements: [
+			'Video summaries with ElevenLabs narration',
+			'Multi-camera centralized management',
+			'Anomaly detection with unsupervised learning',
+			'Cloudflare Workers AI for edge inference'
+		],
+		projectUrl: 'https://devpost.com/software/eve-enhanced-vision-entity',
+		githubUrl: 'https://github.com/Edugre/sharkbytes2025',
+		videoUrl: 'https://www.youtube.com/watch?v=ZPSZIEP53A0',
+	},
 	{
 		id: 1.1,
 		title: 'LINC-UP iOS App',
@@ -289,21 +358,6 @@ const displayProjects = [
 	...individualProjects
 ];
 
-interface Project {
-	id: number;
-	title: string;
-	shortDescription: string;
-	image: string;
-	images?: string[];
-	role: string;
-	company: string;
-	category: string;
-	description: string[];
-	technologies: string[];
-	projectUrl: string;
-	githubUrl: string;
-}
-
 interface ProjectModalProps {
 	project: Project;
 	isOpen: boolean;
@@ -369,6 +423,10 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 	// Check if current project has video
 	const hasVideo = () => {
+		const videoUrl = currentProject.videoUrl;
+		if (videoUrl) {
+			return videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be');
+		}
 		return currentProject.projectUrl.includes('youtube.com') || currentProject.projectUrl.includes('youtu.be');
 	};
 
@@ -516,12 +574,14 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Image or Video */}
 					<div className="relative aspect-[16/9] bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-cyan-900/30 rounded-xl overflow-hidden mb-6 md:mb-8 border border-gray-700/30 shadow-xl">
-						{isShowingVideo() ? (
-							<iframe
-								src={currentProject.projectUrl.includes('youtube.com') 
-									? currentProject.projectUrl.replace('watch?v=', 'embed/') 
-									: currentProject.projectUrl.replace('youtu.be/', 'youtube.com/embed/')
-								}
+					{isShowingVideo() ? (
+						<iframe
+							src={(() => {
+								const videoUrl = currentProject.videoUrl || currentProject.projectUrl;
+								return videoUrl.includes('youtube.com') 
+									? videoUrl.replace('watch?v=', 'embed/') 
+									: videoUrl.replace('youtu.be/', 'youtube.com/embed/');
+							})()}
 								title={`${currentProject.title} Demo`}
 								className="w-full h-full"
 								frameBorder="0"
@@ -635,7 +695,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								}
 							</Link>
 						)}
-						{currentProject.githubUrl !== '#' && (
+						{currentProject.githubUrl && currentProject.githubUrl !== '#' && (
 							<Link
 								href={currentProject.githubUrl}
 								target="_blank"
