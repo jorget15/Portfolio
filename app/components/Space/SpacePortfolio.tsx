@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import LoadingScreen from './LoadingScreen';
 import SpaceBackground from './SpaceBackground';
 import CustomCursor from './CustomCursor';
-import SpaceNavigation from './SpaceNavigation';
+import SpaceNavigation3D from './SpaceNavigation3D';
 import { useSoundEffect } from '@/app/hooks/useSoundEffect';
 
 // Import your existing sections
@@ -91,7 +91,7 @@ export default function SpacePortfolio() {
 						transition={{ duration: 0.8 }}
 						className="fixed inset-0 z-40 flex items-center justify-center"
 					>
-						<div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500" />
+						<div className="w-20 h-20 rounded-full bg-black" />
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -108,7 +108,7 @@ export default function SpacePortfolio() {
 							transition={{ duration: 0.5 }}
 							className="relative z-20"
 						>
-							<SpaceNavigation onNavigate={handleNavigate} />
+							<SpaceNavigation3D onNavigate={handleNavigate} />
 						</motion.div>
 					)}
 
