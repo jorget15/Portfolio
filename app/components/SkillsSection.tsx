@@ -8,21 +8,21 @@ const skillCategories = [
 		id: 1,
 		title: 'Programming Languages & Frameworks',
 		color: 'from-blue-500 to-cyan-500',
-		skills: ['Java', 'Python', 'SQL', 'JavaScript/TypeScript', 'React', 'Node.js', 'React Native'],
+		skills: ['Java', 'Python', 'SQL', 'JavaScript/TypeScript', 'React', 'Node.js', 'React Native', 'Streamlit'],
 		description: 'Core programming languages and frameworks I use to build applications'
 	},
 	{
 		id: 2,
 		title: 'AI & Machine Learning',
 		color: 'from-purple-500 to-pink-500',
-		skills: ['YOLOv11', 'TensorRT', 'Google Gemini API', 'Computer Vision', 'Object Detection', 'Edge AI', 'Multimodal AI'],
+		skills: ['YOLOv11', 'TensorRT', 'Google Gemini API', 'Google ADK', 'Computer Vision', 'Object Detection', 'Edge AI', 'Multimodal AI', 'Multi-Agent Systems', 'NLP', 'Text-to-Speech'],
 		description: 'AI/ML tools and frameworks for intelligent systems'
 	},
 	{
 		id: 3,
 		title: 'Hardware & Embedded Systems',
 		color: 'from-green-500 to-emerald-600',
-		skills: ['NVIDIA Jetson Orin Nano', 'Arduino', 'Servo Control', 'Camera Integration', 'Real-time Processing'],
+		skills: ['NVIDIA Jetson Orin Nano', 'Servo Control', 'Camera Integration', 'Real-time Processing'],
 		description: 'Hardware platforms and embedded systems development'
 	},
 	{
@@ -41,27 +41,34 @@ const skillCategories = [
 	},
 	{
 		id: 6,
+		title: 'APIs & Integrations',
+		color: 'from-cyan-500 to-blue-500',
+		skills: ['Wikimedia Commons API', 'Google CSE', 'Folium Maps', 'REST APIs'],
+		description: 'External APIs and integration tools'
+	},
+	{
+		id: 7,
 		title: 'Project Management & Collaboration',
 		color: 'from-blue-600 to-cyan-600',
 		skills: ['Jira', 'Confluence', 'Trello', 'Git'],
 		description: 'Tools for managing projects and collaborating with teams'
 	},
 	{
-		id: 7,
+		id: 8,
 		title: 'CRM & Business Tools',
 		color: 'from-indigo-500 to-blue-600',
 		skills: ['HubSpot'],
 		description: 'Customer relationship management and business automation'
 	},
 	{
-		id: 8,
+		id: 9,
 		title: 'Languages',
 		color: 'from-yellow-500 to-orange-600',
 		skills: ['English', 'Spanish'],
 		description: 'Fluent communication in multiple languages'
 	},
 	{
-		id: 9,
+		id: 10,
 		title: 'Soft Skills',
 		color: 'from-pink-500 to-rose-600',
 		skills: ['Agile/Scrum', 'Project Management', 'Problem-solving', 'Adaptability', 'Rapid Prototyping'],
