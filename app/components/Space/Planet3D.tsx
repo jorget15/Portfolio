@@ -14,6 +14,8 @@ interface Planet3DProps {
 	onPointerOver?: () => void;
 	onPointerOut?: () => void;
 	isSpaceStation?: boolean;
+	isFocused?: boolean;
+	isHidden?: boolean;
 }
 
 // Constants for hitbox sizes
@@ -31,6 +33,10 @@ const ANIMATION_CONFIG = {
 	DRIFT_AMPLITUDE: { x: 0.3, y: 0.2 },
 	HOVER_SCALE: 1.2,
 	SCALE_LERP: 0.1,
+	FOCUS_SCALE: 3.5,
+	FOCUS_POSITION: [0, 0, 8] as [number, number, number],
+	FOCUS_ROTATION_SPEED: 0.0005,
+	FOCUS_LERP: 0.05,
 } as const;
 
 export default function Planet3D({
@@ -42,6 +48,8 @@ export default function Planet3D({
 	onPointerOver,
 	onPointerOut,
 	isSpaceStation = false,
+	isFocused = false,
+	isHidden = false,
 }: Planet3DProps) {
 	const meshRef = useRef<THREE.Group>(null);
 	const [modelCenter, setModelCenter] = useState<THREE.Vector3>(new THREE.Vector3(0, 0, 0));
@@ -82,37 +90,63 @@ export default function Planet3D({
 		const { clock } = state;
 		const { rotation, floatSpeed, drift } = animationParams;
 
-		// Continuous rotation with unique speeds per axis
-		meshRef.current.rotation.x += rotation.x;
-		meshRef.current.rotation.y += rotation.y;
-		meshRef.current.rotation.z += rotation.z;
+		if (isFocused) {
+			// Focus mode: slow rotation, move to center, scale up
+			meshRef.current.rotation.y += ANIMATION_CONFIG.FOCUS_ROTATION_SPEED;
+			
+			// Smoothly animate to focus position
+			meshRef.current.position.lerp(
+				new THREE.Vector3(...ANIMATION_CONFIG.FOCUS_POSITION),
+				ANIMATION_CONFIG.FOCUS_LERP
+			);
+			
+			// Scale up to fill screen
+			const targetScale = scale * ANIMATION_CONFIG.FOCUS_SCALE;
+			meshRef.current.scale.lerp(
+				new THREE.Vector3(targetScale, targetScale, targetScale),
+				ANIMATION_CONFIG.FOCUS_LERP
+			);
+		} else if (isHidden) {
+			// Fade out other planets when one is focused
+			meshRef.current.scale.lerp(
+				new THREE.Vector3(0, 0, 0),
+				ANIMATION_CONFIG.FOCUS_LERP
+			);
+		} else {
+			// Normal mode: continuous rotation with unique speeds per axis
+			meshRef.current.rotation.x += rotation.x;
+			meshRef.current.rotation.y += rotation.y;
+			meshRef.current.rotation.z += rotation.z;
 
-		// Floating and drifting motion
-		const floatY = Math.sin(clock.elapsedTime * floatSpeed) * ANIMATION_CONFIG.FLOAT_AMPLITUDE;
-		const driftX = Math.sin(clock.elapsedTime * drift.x) * ANIMATION_CONFIG.DRIFT_AMPLITUDE.x;
-		const driftY = Math.cos(clock.elapsedTime * drift.y) * ANIMATION_CONFIG.DRIFT_AMPLITUDE.y;
+			// Floating and drifting motion
+			const floatY = Math.sin(clock.elapsedTime * floatSpeed) * ANIMATION_CONFIG.FLOAT_AMPLITUDE;
+			const driftX = Math.sin(clock.elapsedTime * drift.x) * ANIMATION_CONFIG.DRIFT_AMPLITUDE.x;
+			const driftY = Math.cos(clock.elapsedTime * drift.y) * ANIMATION_CONFIG.DRIFT_AMPLITUDE.y;
 
-		meshRef.current.position.set(
-			position[0] + driftX,
-			position[1] + floatY + driftY,
-			position[2]
-		);
+			meshRef.current.position.set(
+				position[0] + driftX,
+				position[1] + floatY + driftY,
+				position[2]
+			);
 
-		// Smooth scale animation on hover
-		const targetScale = isHovered ? scale * ANIMATION_CONFIG.HOVER_SCALE : scale;
-		meshRef.current.scale.lerp(
-			new THREE.Vector3(targetScale, targetScale, targetScale),
-			ANIMATION_CONFIG.SCALE_LERP
-		);
+			// Smooth scale animation on hover
+			const targetScale = isHovered ? scale * ANIMATION_CONFIG.HOVER_SCALE : scale;
+			meshRef.current.scale.lerp(
+				new THREE.Vector3(targetScale, targetScale, targetScale),
+				ANIMATION_CONFIG.SCALE_LERP
+			);
+		}
 	});
 
 	const handlePointerOver = (e: any) => {
+		if (isHidden) return;
 		e.stopPropagation();
 		onPointerOver?.();
 		document.body.style.cursor = 'pointer';
 	};
 
 	const handlePointerOut = (e: any) => {
+		if (isHidden) return;
 		e.stopPropagation();
 		onPointerOut?.();
 		document.body.style.cursor = 'auto';
@@ -121,7 +155,7 @@ export default function Planet3D({
 	return (
 		<group
 			ref={meshRef}
-			onClick={onClick}
+			onClick={isHidden ? undefined : onClick}
 			onPointerOver={handlePointerOver}
 			onPointerOut={handlePointerOut}
 		>

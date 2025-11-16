@@ -33,12 +33,20 @@ const FOG_CONFIG = {
 } as const;
 
 // Camera controller for subtle parallax movement
-function CameraRig() {
+function CameraRig({ isFocused }: { isFocused: boolean }) {
 	useFrame((state) => {
-		const t = state.clock.elapsedTime;
-		state.camera.position.x = Math.sin(t * CAMERA_CONFIG.SWAY_SPEED.x) * CAMERA_CONFIG.SWAY_AMPLITUDE.x;
-		state.camera.position.y = Math.cos(t * CAMERA_CONFIG.SWAY_SPEED.y) * CAMERA_CONFIG.SWAY_AMPLITUDE.y;
-		state.camera.lookAt(0, 0, 0);
+		if (isFocused) {
+			// Keep camera still when focused
+			state.camera.position.x = 0;
+			state.camera.position.y = 0;
+			state.camera.lookAt(0, 0, 0);
+		} else {
+			// Normal parallax movement
+			const t = state.clock.elapsedTime;
+			state.camera.position.x = Math.sin(t * CAMERA_CONFIG.SWAY_SPEED.x) * CAMERA_CONFIG.SWAY_AMPLITUDE.x;
+			state.camera.position.y = Math.cos(t * CAMERA_CONFIG.SWAY_SPEED.y) * CAMERA_CONFIG.SWAY_AMPLITUDE.y;
+			state.camera.lookAt(0, 0, 0);
+		}
 	});
 	
 	return null;
@@ -87,6 +95,7 @@ interface SpaceNavigation3DProps {
 export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps) {
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
 	const [scaleFactor, setScaleFactor] = useState<number>(SCALE_BREAKPOINTS.DESKTOP.factor);
+	const [focusedPlanet, setFocusedPlanet] = useState<string | null>(null);
 
 	// Memoize hovered planet lookup
 	const hoveredPlanet = useMemo(
@@ -134,7 +143,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 				camera={{ position: CAMERA_CONFIG.POSITION, fov: CAMERA_CONFIG.FOV }}
 				style={{ background: 'transparent' }}
 			>
-				<CameraRig />
+				<CameraRig isFocused={focusedPlanet !== null} />
 				
 				{/* Lighting setup */}
 				<ambientLight intensity={LIGHTING_CONFIG.AMBIENT.intensity} />
@@ -162,11 +171,22 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 						modelPath={planet.modelPath}
 						position={planet.position}
 						scale={planet.scale * scaleFactor}
-						onClick={() => onNavigate(planet.section)}
+						onClick={() => {
+							if (focusedPlanet === planet.id) {
+								// Second click: navigate
+								onNavigate(planet.section);
+							} else {
+								// First click: focus
+								setFocusedPlanet(planet.id);
+								setHoveredId(null);
+							}
+						}}
 						isHovered={hoveredId === planet.id}
 						onPointerOver={() => setHoveredId(planet.id)}
 						onPointerOut={() => setHoveredId(null)}
 						isSpaceStation={planet.id === 'about'}
+						isFocused={focusedPlanet === planet.id}
+						isHidden={focusedPlanet !== null && focusedPlanet !== planet.id}
 					/>
 				))}
 			</Canvas>
