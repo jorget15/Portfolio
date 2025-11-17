@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, memo } from 'react';
 
 interface Star {
 	id: number;
@@ -12,7 +12,7 @@ interface Star {
 	opacity: number;
 }
 
-export default function SpaceBackground() {
+const SpaceBackground = memo(function SpaceBackground() {
 	// Memoize stars array to avoid regenerating on every render
 	const stars = useMemo<Star[]>(() => 
 		Array.from({ length: 150 }, (_, i) => ({
@@ -49,13 +49,14 @@ export default function SpaceBackground() {
 	}, []);
 
 	return (
-		<div className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0">
+		<div className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" style={{ willChange: 'transform' }}>
 			{/* Galaxy disc effect with subtle movement */}
 			<div className="absolute inset-0 z-10 flex items-center justify-center">
 				<motion.div 
 					className="w-full h-full"
 					style={{
 						transformOrigin: 'center center',
+						willChange: 'transform',
 					}}
 					animate={{
 						rotate: [0, 360],
@@ -80,6 +81,7 @@ export default function SpaceBackground() {
 			{/* Nebula clouds */}
 			<motion.div
 				className="absolute inset-0 opacity-30"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.05,
 					y: mousePosition.y * -0.05,
@@ -94,6 +96,7 @@ export default function SpaceBackground() {
 			{/* Stars with parallax layers */}
 			<motion.div
 				className="absolute inset-0"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.02,
 					y: mousePosition.y * -0.02,
@@ -127,6 +130,7 @@ export default function SpaceBackground() {
 			{/* Closer stars with more parallax */}
 			<motion.div
 				className="absolute inset-0"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.05,
 					y: mousePosition.y * -0.05,
@@ -182,4 +186,6 @@ export default function SpaceBackground() {
 			))}
 		</div>
 	);
-}
+});
+
+export default SpaceBackground;

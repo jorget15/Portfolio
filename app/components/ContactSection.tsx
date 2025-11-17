@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
-export default function ContactSection() {
+const ContactSection = memo(function ContactSection() {
 	return (
 		<section className="min-h-screen py-12 md:py-20 px-4 text-white relative overflow-hidden">
 			{/* Ambient background effects */}
@@ -142,7 +143,9 @@ export default function ContactSection() {
 						</motion.a>
 					</div>
 				</motion.div>
-			</div>
-		</section>
+		</div>
+	</section>
 	);
-}
+});
+
+export default ContactSection;

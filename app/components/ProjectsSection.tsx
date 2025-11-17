@@ -29,7 +29,7 @@ const projects: Project[] = [
 		id: 0,
 		title: 'EVE - AI Security Camera',
 		shortDescription: 'Autonomous vision system with real-time tracking and AI-powered event analysis',
-		image: '/EVE.jpg',
+		image: '/EVE.webp',
 		role: 'Embedded Systems & AI Engineer',
 		company: 'SharkByte Hackathon',
 		category: 'Hardware & AI',
@@ -79,16 +79,16 @@ const projects: Project[] = [
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
-		image: '/LincUp Screenshots/1 LincUp.png',
+		image: '/LincUp Screenshots/1 LincUp.webp',
 		images: [
-			'/LincUp Screenshots/1 LincUp.png',
-			'/LincUp Screenshots/2 Login.png',
-			'/LincUp Screenshots/3 MySessions.png',
-			'/LincUp Screenshots/4 Sidebar.png',
-			'/LincUp Screenshots/5 Discover Sessions.png',
-			'/LincUp Screenshots/6 Propose a Session.png',			
-			'/LincUp Screenshots/7 Online Sessions.png',
-			'/LincUp Screenshots/8 Notifications.png',
+			'/LincUp Screenshots/1 LincUp.webp',
+			'/LincUp Screenshots/2 Login.webp',
+			'/LincUp Screenshots/3 MySessions.webp',
+			'/LincUp Screenshots/4 Sidebar.webp',
+			'/LincUp Screenshots/5 Discover Sessions.webp',
+			'/LincUp Screenshots/6 Propose a Session.webp',			
+			'/LincUp Screenshots/7 Online Sessions.webp',
+			'/LincUp Screenshots/8 Notifications.webp',
 
 		],
 		role: 'Founder & Full-Stack Developer',
@@ -108,7 +108,7 @@ const projects: Project[] = [
 		id: 1.2,
 		title: 'LINC-UP Website',
 		shortDescription: 'Marketing website and information hub for the LINC-UP mobile app',
-		image: '/LincUpWebsite.png',
+		image: '/LincUpWebsite.webp',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
 		category: 'LINC IOS APP',
@@ -126,7 +126,7 @@ const projects: Project[] = [
 		id: 2.1,
 		title: 'Soccer Analytics: CSV Data Processor',
 		shortDescription: 'Enterprise-grade Python ETL pipeline processing 46,000+ football players into normalized PostgreSQL',
-		image: '/SoccerCSV.png',
+		image: '/SoccerCSV.webp',
 		role: 'Data Engineer',
 		company: 'Personal Project',
 		category: 'Soccer Analytics Pipeline',
@@ -144,7 +144,7 @@ const projects: Project[] = [
 		id: 2.2,
 		title: 'Soccer Analytics: PostgreSQL Database',
 		shortDescription: '17-table normalized schema with 500MB+ football data optimized for PowerBI analytics',
-		image: '/SoccerDB.png',
+		image: '/SoccerDB.webp',
 		role: 'Database Engineer',
 		company: 'Personal Project',
 		category: 'Soccer Analytics Pipeline',
@@ -162,11 +162,11 @@ const projects: Project[] = [
 		id: 2.3,
 		title: 'Soccer Analytics: PowerBI Dashboard',
 		shortDescription: 'Interactive dashboard providing comprehensive insights into soccer performance metrics',
-		image: '/Soccer Dashboard PowerBI/Soccer PowerBI Dashboard.png',
+		image: '/Soccer Dashboard PowerBI/Soccer PowerBI Dashboard.webp',
 		images: [
-			'/Soccer Dashboard PowerBI/1.png',
-			'/Soccer Dashboard PowerBI/2.png',
-			'/Soccer Dashboard PowerBI/3.png'
+			'/Soccer Dashboard PowerBI/1.webp',
+			'/Soccer Dashboard PowerBI/2.webp',
+			'/Soccer Dashboard PowerBI/3.webp'
 		],
 		role: 'Data Analyst & Visualizer',
 		company: 'Personal Project',
@@ -185,7 +185,7 @@ const projects: Project[] = [
 		id: 8,
 		title: 'Business Intelligence Dashboard',
 		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
-		image: '/Unavailable.jpg',
+		image: '/Unavailable.webp',
 		role: 'Data Analyst',
 		company: 'JP Global Digital',
 		category: 'Professional',
@@ -202,7 +202,7 @@ const projects: Project[] = [
 		id: 3,
 		title: 'Resume Improver',
 		shortDescription: 'Tool for optimizing resumes based on job descriptions',
-		image: '/ResumeImprover.png',
+		image: '/ResumeImprover.webp',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
 		category: 'Personal',
@@ -220,11 +220,11 @@ const projects: Project[] = [
 		id: 4,
 		title: 'Impostor Game',
 		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
-		image: '/ImpostorGame/ImpostorGame.png',
+		image: '/ImpostorGame/ImpostorGame.webp',
 		images: [
-			'/ImpostorGame/ImpostorGame.png',
-			'/ImpostorGame/ImpostorGame2.png',
-			'/ImpostorGame/ImpostorGame3.png'
+			'/ImpostorGame/ImpostorGame.webp',
+			'/ImpostorGame/ImpostorGame2.webp',
+			'/ImpostorGame/ImpostorGame3.webp'
 		],
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
@@ -243,7 +243,7 @@ const projects: Project[] = [
 		id: 5,
 		title: 'Student Registration System',
 		shortDescription: 'Application for managing student registrations and course enrollments',
-		image: '/StudentRegistration.png',
+		image: '/StudentRegistration.webp',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
 		category: 'Personal',
@@ -261,7 +261,7 @@ const projects: Project[] = [
 		id: 6,
 		title: 'Pokemon Python Game (WIP)',
 		shortDescription: '2D adventure game inspired by Pokémon',
-		image: '/PokePy.png',
+		image: '/PokePy.webp',
 		role: 'Game Developer',
 		company: 'Personal Project',
 		category: 'Personal',
@@ -279,7 +279,7 @@ const projects: Project[] = [
 		id: 7,
 		title: '"Bake Away Pastries" Website',
 		shortDescription: 'Comprehensive business website with agile development',
-		image: '/BakeAway.png',
+		image: '/BakeAway.webp',
 		role: 'Designer/Scrum Master',
 		company: 'University of Miami',
 		category: 'Academic',
@@ -297,7 +297,7 @@ const projects: Project[] = [
 		id: 9,
 		title: 'UnityAid — Disaster Response System',
 		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-		image: '/UnityAid.png',
+		image: '/UnityAid.webp',
 		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
 		category: 'Hackathon',
@@ -315,7 +315,7 @@ const projects: Project[] = [
 		id: 10,
 		title: 'Memento',
 		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
-		image: '/Memento.png',
+		image: '/Memento.webp',
 		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
 		category: 'Hackathon',
@@ -593,6 +593,8 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								src={getCurrentMedia() as string} 
 								alt={currentProject.title} 
 								fill 
+								loading="lazy"
+								sizes="(max-width: 768px) 100vw, 90vw"
 								className="object-contain p-3 md:p-4"
 							/>
 						)}
@@ -781,6 +783,8 @@ export default function ProjectsSection() {
 								src={project.image} 
 								alt={project.title} 
 								fill 
+								loading="lazy"
+								sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 								className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110" 
 							/>
 							
@@ -846,3 +850,4 @@ export default function ProjectsSection() {
 		</>
 	);
 }
+

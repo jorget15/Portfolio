@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 const skillCategories = [
 	{
@@ -76,7 +76,7 @@ const skillCategories = [
 	}
 ];
 
-export default function SkillsSection() {
+const SkillsSection = memo(function SkillsSection() {
 	const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
 
 	const toggleCategory = (categoryId: number) => {
@@ -192,4 +192,6 @@ export default function SkillsSection() {
 			</div>
 		</section>
 	);
-}
+});
+
+export default SkillsSection;
