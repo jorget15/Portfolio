@@ -69,7 +69,7 @@ const ANIMATION_CONFIG = {
 // Calculate focus position using shared constant
 // Note: actual Z varies per planet type; this is the base
 // Y is set to -1.5 to position planets lower on screen during focus
-const FOCUS_POSITION: [number, number, number] = [0, -1.5, FOCUS_POSITION_Z];
+const FOCUS_POSITION: [number, number, number] = [0, -1, FOCUS_POSITION_Z];
 
 export default function Planet3D({
 	modelPath,
