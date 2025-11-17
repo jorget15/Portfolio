@@ -316,7 +316,7 @@ export default function SpaceNavigation({ onNavigate }: { onNavigate: (section: 
 				className="absolute top-8 left-0 right-0 text-center z-40 pointer-events-none px-4"
 			>
 				<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-					Explore My Universe
+					Explore Jorge Taban
 				</h1>
 				<p className="text-gray-400 text-lg drop-shadow-lg">
 					Click on any planet to begin your journey

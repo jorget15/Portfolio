@@ -74,7 +74,7 @@ export default function SpacePortfolio() {
 
 			{/* Main Content */}
 			<div className="relative z-20">
-				<AnimatePresence mode="wait">
+				<AnimatePresence mode="sync">
 					{currentSection === 'space' && !isLoading && (
 						<div key="space" className="relative z-20">
 							<SpaceNavigation3D onNavigate={handleNavigate} />
@@ -82,31 +82,55 @@ export default function SpacePortfolio() {
 					)}
 
 					{currentSection === 'projects' && (
-						<div key="projects" className="min-h-screen">
+						<motion.div 
+							key="projects" 
+							className="min-h-screen"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.4, ease: "easeOut" }}
+						>
 							<BackButton onClick={handleBackToSpace} />
 							<ProjectsSection />
-						</div>
+						</motion.div>
 					)}
 
 					{currentSection === 'skills' && (
-						<div key="skills" className="min-h-screen">
+						<motion.div 
+							key="skills" 
+							className="min-h-screen"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.4, ease: "easeOut" }}
+						>
 							<BackButton onClick={handleBackToSpace} />
 							<SkillsSection />
-						</div>
+						</motion.div>
 					)}
 
 					{currentSection === 'contact' && (
-						<div key="contact" className="min-h-screen">
+						<motion.div 
+							key="contact" 
+							className="min-h-screen"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.4, ease: "easeOut" }}
+						>
 							<BackButton onClick={handleBackToSpace} />
 							<ContactSection />
-						</div>
+						</motion.div>
 					)}
 
 					{currentSection === 'about' && (
-						<div key="about" className="min-h-screen">
+						<motion.div 
+							key="about" 
+							className="min-h-screen"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.4, ease: "easeOut" }}
+						>
 							<BackButton onClick={handleBackToSpace} />
 							<HeroSection />
-						</div>
+						</motion.div>
 					)}
 				</AnimatePresence>
 			</div>
