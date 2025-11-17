@@ -37,7 +37,7 @@ export default function SpaceBackground() {
 					x: (e.clientX / window.innerWidth) * 100,
 					y: (e.clientY / window.innerHeight) * 100,
 				});
-				raffId = null;
+				rafId = null;
 			});
 		};
 
