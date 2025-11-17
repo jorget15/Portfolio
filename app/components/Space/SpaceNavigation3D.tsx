@@ -6,7 +6,16 @@ import { motion } from 'framer-motion';
 import Planet3D from './Planet3D';
 import * as THREE from 'three';
 import { useGLTF, AdaptiveDpr, AdaptiveEvents, Preload } from '@react-three/drei';
-import { FOCUS_POSITION_Z, FOCUS_POSITION_Z_PLANETS, CAMERA_CONFIG, SCALE_BREAKPOINTS, LIGHTING_CONFIG, FOG_CONFIG, getFocusZ } from './config';
+import { DRACOLoader } from 'three-stdlib';
+import { FOCUS_POSITION_Z, CAMERA_CONFIG, SCALE_BREAKPOINTS, LIGHTING_CONFIG, FOG_CONFIG, getFocusZ } from './config';
+
+// Configure DRACO loader for mesh compression support
+if (typeof window !== 'undefined') {
+	const dracoLoader = new DRACOLoader();
+	dracoLoader.setDecoderPath('/draco/');
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	(useGLTF as any).setDRACOLoader?.(dracoLoader);
+}
 
 // Camera controller for subtle parallax movement
 function CameraRig({ isFocused, isLanding, landingProgress, planetScale = 1.0, isStationLanding = false }: { isFocused: boolean; isLanding: boolean; landingProgress: number; planetScale?: number; isStationLanding?: boolean }) {
@@ -44,7 +53,7 @@ function CameraRig({ isFocused, isLanding, landingProgress, planetScale = 1.0, i
 				// Special "enter" profile for the space station: dolly in and narrow FOV, then fade to content
 				// Narrow FOV during station enter (perspective cameras only)
 				const persp = camera as THREE.PerspectiveCamera;
-				if (typeof (persp as any).fov === 'number') {
+				if ('fov' in persp && typeof persp.fov === 'number') {
 					if (initialFovRef.current === undefined || initialFovRef.current === null) {
 						initialFovRef.current = persp.fov;
 					}
@@ -57,7 +66,7 @@ function CameraRig({ isFocused, isLanding, landingProgress, planetScale = 1.0, i
 				camera.lookAt(0, 0, planetZ);
 				// Zoom by narrowing FOV
 				const targetFov = 32;
-				if (typeof (persp as any).fov === 'number') {
+				if ('fov' in persp && typeof persp.fov === 'number') {
 					persp.fov = THREE.MathUtils.lerp(initialFovRef.current, targetFov, easeProgress);
 					persp.updateProjectionMatrix();
 				}
@@ -99,7 +108,7 @@ const PLANETS_DATA = [
 	{
 		id: 'projects',
 		name: 'Projects Galaxy',
-		modelPath: '/3D planets/planet1.glb',
+		modelPath: '/3D planets/planet1_compressed.glb',
 		position: [0, -2.2, 5] as [number, number, number],
 		scale: 1.5,
 		section: 'projects' as const,
@@ -109,7 +118,7 @@ const PLANETS_DATA = [
 	{
 		id: 'skills',
 		name: 'Skills Nebula',
-		modelPath: '/3D planets/planet2.glb',
+		modelPath: '/3D planets/planet2_compressed.glb',
 		position: [-8.5, 0.5, 0.5] as [number, number, number],
 		scale: 1.0,
 		section: 'skills' as const,
@@ -119,7 +128,7 @@ const PLANETS_DATA = [
 	{
 		id: 'contact',
 		name: 'Contact Portal',
-		modelPath: '/3D planets/planet3.glb',
+		modelPath: '/3D planets/planet3_compressed.glb',
 		position: [0, 2.8, -7] as [number, number, number],
 		scale: 0.9,
 		section: 'contact' as const,
@@ -129,7 +138,7 @@ const PLANETS_DATA = [
 	{
 		id: 'about',
 		name: 'About Station',
-		modelPath: '/3D planets/space_station.glb',
+		modelPath: '/3D planets/space_station_compressed.glb',
 		position: [8.5, 0.5, 0.5] as [number, number, number],
 		scale: 0.025,
 		section: 'about' as const,
@@ -224,12 +233,6 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 		const timer = setTimeout(() => setIsFocusComplete(true), 400);
 		return () => clearTimeout(timer);
 	}, [focusedPlanet]);
-
-	// Memoize hovered planet lookup
-	const hoveredPlanet = useMemo(
-		() => PLANETS_DATA.find(p => p.id === hoveredId),
-		[hoveredId]
-	);
 
 	// Helpers to traverse planets while focused
 	const planetIds = useMemo(() => PLANETS_DATA.map(p => p.id) as Array<(typeof PLANETS_DATA)[number]['id']>, []);
@@ -327,7 +330,10 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 	// Preload GLTF assets to reduce runtime loading during focus/landing
 	useEffect(() => {
 		PLANETS_DATA.forEach((p) => {
-			try { (useGLTF as any).preload?.(p.modelPath); } catch {}
+			try { 
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				(useGLTF as any).preload?.(p.modelPath); 
+			} catch {}
 		});
 	}, []);
 
@@ -486,15 +492,15 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 									isLanding={false}
 									landingProgress={0}
 							isFormationFocus={!!focusedPlanet && !isLanding}
-							focusOffset={(planet as any).focusOffset ?? [0,0,0]}
+							focusOffset={'focusOffset' in planet ? planet.focusOffset : [0,0,0]}
 							isInteractive={!focusedPlanet || focusedPlanet === planet.id}
-							focusZ={getFocusZ(planet.id)}
-									showHud={!focusedPlanet && hoveredId === planet.id}
-									hud={{
-										title: planet.name,
-										description: (planet as any).description,
-										stats: (planet as any).stats ?? [],
-									}}
+								focusZ={getFocusZ(planet.id)}
+								showHud={!focusedPlanet && hoveredId === planet.id}
+								hud={{
+									title: planet.name,
+									description: 'description' in planet ? planet.description : '',
+									stats: 'stats' in planet ? [...planet.stats] : [],
+								}}
 							groupRef={(node) => { planetRefs.current[planet.id] = node; }}
 							/>
 							))}

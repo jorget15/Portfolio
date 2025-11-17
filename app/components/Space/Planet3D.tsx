@@ -3,8 +3,17 @@
 import { useRef, useEffect, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
+import { DRACOLoader } from 'three-stdlib';
 import * as THREE from 'three';
-import { FOCUS_POSITION_Z, FOCUS_POSITION_Z_PLANETS } from './config';
+import { FOCUS_POSITION_Z } from './config';
+
+// Configure DRACO loader for mesh compression
+if (typeof window !== 'undefined') {
+	const dracoLoader = new DRACOLoader();
+	dracoLoader.setDecoderPath('/draco/');
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	(useGLTF as any).setDRACOLoader?.(dracoLoader);
+}
 
 interface Planet3DProps {
 	modelPath: string;
@@ -34,7 +43,7 @@ interface Planet3DProps {
 	focusZ?: number;
 	// Main hub HUD overlay
 	showHud?: boolean;
-	hud?: { title: string; description: string; stats: string[] };
+	hud?: { title: string; description: string; stats: readonly string[] };
 }
 
 // Constants for hitbox sizes

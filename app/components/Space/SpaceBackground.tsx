@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
 interface Star {
 	id: number;
@@ -13,31 +13,39 @@ interface Star {
 }
 
 export default function SpaceBackground() {
-	const [stars, setStars] = useState<Star[]>([]);
-	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-	useEffect(() => {
-		// Generate stars
-		const newStars: Star[] = Array.from({ length: 200 }, (_, i) => ({
+	// Memoize stars array to avoid regenerating on every render
+	const stars = useMemo<Star[]>(() => 
+		Array.from({ length: 150 }, (_, i) => ({
 			id: i,
 			x: Math.random() * 100,
 			y: Math.random() * 100,
 			size: Math.random() * 2 + 0.5,
 			speed: Math.random() * 2 + 1,
 			opacity: Math.random() * 0.5 + 0.3,
-		}));
-		setStars(newStars);
+		}))
+	, []);
+	
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-		// Track mouse for parallax
+	useEffect(() => {
+		// Throttle mouse move events to reduce re-renders
+		let rafId: number | null = null;
 		const handleMouseMove = (e: MouseEvent) => {
-			setMousePosition({
-				x: (e.clientX / window.innerWidth) * 100,
-				y: (e.clientY / window.innerHeight) * 100,
+			if (rafId !== null) return;
+			rafId = requestAnimationFrame(() => {
+				setMousePosition({
+					x: (e.clientX / window.innerWidth) * 100,
+					y: (e.clientY / window.innerHeight) * 100,
+				});
+				raffId = null;
 			});
 		};
 
-		window.addEventListener('mousemove', handleMouseMove);
-		return () => window.removeEventListener('mousemove', handleMouseMove);
+		window.addEventListener('mousemove', handleMouseMove, { passive: true });
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+			if (rafId !== null) cancelAnimationFrame(rafId);
+		};
 	}, []);
 
 	return (

@@ -2,17 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import LoadingScreen from './LoadingScreen';
-import SpaceBackground from './SpaceBackground';
-import CustomCursor from './CustomCursor';
-import SpaceNavigation3D from './SpaceNavigation3D';
 import { useSoundEffect } from '@/app/hooks/useSoundEffect';
 
-// Import your existing sections
-import ProjectsSection from '../ProjectsSection';
-import SkillsSection from '../SkillsSection';
-import ContactSection from '../ContactSection';
-import HeroSection from '../HeroSection';
+// Dynamically load heavier components to improve initial performance
+const SpaceBackground = dynamic(() => import('./SpaceBackground'), { ssr: false });
+const CustomCursor = dynamic(() => import('./CustomCursor'), { ssr: false });
+const SpaceNavigation3D = dynamic(() => import('./SpaceNavigation3D'), { ssr: false, loading: () => (
+	<div className="w-full h-screen" aria-hidden />
+) });
+
+// Content sections are large; code-split them to load on demand
+const ProjectsSection = dynamic(() => import('../ProjectsSection'));
+const SkillsSection = dynamic(() => import('../SkillsSection'));
+const ContactSection = dynamic(() => import('../ContactSection'));
+const HeroSection = dynamic(() => import('../HeroSection'));
 
 type Section = 'space' | 'projects' | 'skills' | 'contact' | 'about';
 
@@ -36,9 +41,21 @@ export default function SpacePortfolio() {
 	// Background music: start after loading and keep playing continuously
 	useEffect(() => {
 		if (!isLoading) {
-			startBackgroundMusic('/Mario Reverse.mp3', { volume: 0.12, lowpassHz: 1100 });
+			// Defer audio start to idle to avoid blocking main work
+			const start = () => startBackgroundMusic('/Mario Reverse.mp3', { volume: 0.12, lowpassHz: 1100 });
+			let idleId: number | undefined;
+			if (typeof (window as any).requestIdleCallback === 'function') {
+				idleId = (window as any).requestIdleCallback(start, { timeout: 1500 });
+			} else {
+				setTimeout(start, 0);
+			}
+			return () => {
+				if (idleId && typeof (window as any).cancelIdleCallback === 'function') {
+					(window as any).cancelIdleCallback(idleId);
+				}
+				stopBackgroundMusic(0);
+			};
 		}
-		// Cleanup on unmount only
 		return () => {
 			stopBackgroundMusic(0);
 		};
