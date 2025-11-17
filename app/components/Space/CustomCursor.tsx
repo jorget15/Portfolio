@@ -6,8 +6,16 @@ import { motion } from 'framer-motion';
 export default function CustomCursor() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [isPointer, setIsPointer] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
+		// Detect if device has touch (mobile/tablet)
+		const checkMobile = () => {
+			setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+		};
+		
+		checkMobile();
+
 		const handleMouseMove = (e: MouseEvent) => {
 			setMousePosition({ x: e.clientX, y: e.clientY });
 			
@@ -23,6 +31,11 @@ export default function CustomCursor() {
 		window.addEventListener('mousemove', handleMouseMove);
 		return () => window.removeEventListener('mousemove', handleMouseMove);
 	}, []);
+
+	// Don't render custom cursor on mobile/touch devices
+	if (isMobile) {
+		return null;
+	}
 
 	return (
 		<>
