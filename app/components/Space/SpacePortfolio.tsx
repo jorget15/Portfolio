@@ -44,13 +44,17 @@ export default function SpacePortfolio() {
 			// Defer audio start to idle to avoid blocking main work
 			const start = () => startBackgroundMusic('/Mario Reverse.mp3', { volume: 0.12, lowpassHz: 1100 });
 			let idleId: number | undefined;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			if (typeof (window as any).requestIdleCallback === 'function') {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				idleId = (window as any).requestIdleCallback(start, { timeout: 1500 });
 			} else {
 				setTimeout(start, 0);
 			}
 			return () => {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				if (idleId && typeof (window as any).cancelIdleCallback === 'function') {
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					(window as any).cancelIdleCallback(idleId);
 				}
 				stopBackgroundMusic(0);

@@ -13,9 +13,6 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
-  // Enable SWC minification (faster than Terser)
-  swcMinify: true,
-  
   // Optimize chunks for better caching
   experimental: {
     optimizePackageImports: ['framer-motion', '@react-three/fiber', '@react-three/drei'],

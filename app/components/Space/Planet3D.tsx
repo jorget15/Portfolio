@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import { DRACOLoader } from 'three-stdlib';
 import * as THREE from 'three';
@@ -102,6 +102,7 @@ export default function Planet3D({
 		if (typeof groupRef === 'function') {
 			(groupRef as (instance: THREE.Group | null) => void)(rotatorRef.current);
 		} else if (typeof groupRef === 'object' && groupRef !== null && 'current' in groupRef) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(groupRef as any).current = rotatorRef.current;
 		}
 	};
@@ -252,7 +253,7 @@ export default function Planet3D({
 		}
 	});
 
-	const handlePointerOver = (e: any) => {
+	const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
 		if (isHidden) return;
 		if (!isInteractive) return;
 		e.stopPropagation();
@@ -260,7 +261,7 @@ export default function Planet3D({
 		document.body.style.cursor = 'pointer';
 	};
 
-	const handlePointerOut = (e: any) => {
+	const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
 		if (isHidden) return;
 		if (!isInteractive) return;
 		e.stopPropagation();
