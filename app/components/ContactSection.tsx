@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
-export default function ContactSection() {
+const ContactSection = memo(function ContactSection() {
 	return (
-		<section className="min-h-screen py-12 md:py-20 px-4 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white relative overflow-hidden">
+		<section className="min-h-screen py-12 md:py-20 px-4 text-white relative overflow-hidden">
 			{/* Ambient background effects */}
 			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
 			<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
@@ -142,7 +143,9 @@ export default function ContactSection() {
 						</motion.a>
 					</div>
 				</motion.div>
-			</div>
-		</section>
+		</div>
+	</section>
 	);
-}
+});
+
+export default ContactSection;

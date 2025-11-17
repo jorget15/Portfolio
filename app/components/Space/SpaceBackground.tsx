@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, memo } from 'react';
 
 interface Star {
 	id: number;
@@ -12,42 +12,51 @@ interface Star {
 	opacity: number;
 }
 
-export default function SpaceBackground() {
-	const [stars, setStars] = useState<Star[]>([]);
-	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-	useEffect(() => {
-		// Generate stars
-		const newStars: Star[] = Array.from({ length: 200 }, (_, i) => ({
+const SpaceBackground = memo(function SpaceBackground() {
+	// Memoize stars array to avoid regenerating on every render
+	const stars = useMemo<Star[]>(() => 
+		Array.from({ length: 150 }, (_, i) => ({
 			id: i,
 			x: Math.random() * 100,
 			y: Math.random() * 100,
 			size: Math.random() * 2 + 0.5,
 			speed: Math.random() * 2 + 1,
 			opacity: Math.random() * 0.5 + 0.3,
-		}));
-		setStars(newStars);
+		}))
+	, []);
+	
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-		// Track mouse for parallax
+	useEffect(() => {
+		// Throttle mouse move events to reduce re-renders
+		let rafId: number | null = null;
 		const handleMouseMove = (e: MouseEvent) => {
-			setMousePosition({
-				x: (e.clientX / window.innerWidth) * 100,
-				y: (e.clientY / window.innerHeight) * 100,
+			if (rafId !== null) return;
+			rafId = requestAnimationFrame(() => {
+				setMousePosition({
+					x: (e.clientX / window.innerWidth) * 100,
+					y: (e.clientY / window.innerHeight) * 100,
+				});
+				rafId = null;
 			});
 		};
 
-		window.addEventListener('mousemove', handleMouseMove);
-		return () => window.removeEventListener('mousemove', handleMouseMove);
+		window.addEventListener('mousemove', handleMouseMove, { passive: true });
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+			if (rafId !== null) cancelAnimationFrame(rafId);
+		};
 	}, []);
 
 	return (
-		<div className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0">
+		<div className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" style={{ willChange: 'transform' }}>
 			{/* Galaxy disc effect with subtle movement */}
 			<div className="absolute inset-0 z-10 flex items-center justify-center">
 				<motion.div 
 					className="w-full h-full"
 					style={{
 						transformOrigin: 'center center',
+						willChange: 'transform',
 					}}
 					animate={{
 						rotate: [0, 360],
@@ -72,6 +81,7 @@ export default function SpaceBackground() {
 			{/* Nebula clouds */}
 			<motion.div
 				className="absolute inset-0 opacity-30"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.05,
 					y: mousePosition.y * -0.05,
@@ -86,6 +96,7 @@ export default function SpaceBackground() {
 			{/* Stars with parallax layers */}
 			<motion.div
 				className="absolute inset-0"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.02,
 					y: mousePosition.y * -0.02,
@@ -119,6 +130,7 @@ export default function SpaceBackground() {
 			{/* Closer stars with more parallax */}
 			<motion.div
 				className="absolute inset-0"
+				style={{ willChange: 'transform' }}
 				animate={{
 					x: mousePosition.x * -0.05,
 					y: mousePosition.y * -0.05,
@@ -174,4 +186,6 @@ export default function SpaceBackground() {
 			))}
 		</div>
 	);
-}
+});
+
+export default SpaceBackground;

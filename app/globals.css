@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: fixed;
+	overscroll-behavior: none;
+}
+
 body {
 	--background: #0e0e10;   /* darker background */
 	--foreground: #fdfdfd;   /* brighter white */

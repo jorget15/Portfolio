@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function HeroSection() {
 	return (
@@ -15,7 +16,25 @@ export default function HeroSection() {
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,0.7),rgba(0,0,0,1))]" />
 			</div>
 
-			<div className="relative z-10 text-center px-4">
+			<div className="relative z-10 text-center px-4 flex flex-col items-center">
+				{/* Profile Image */}
+				<motion.div
+					initial={{ scale: 0, opacity: 0 }}
+					animate={{ scale: 1, opacity: 1 }}
+					transition={{ duration: 0.6, delay: 0.1 }}
+					className="mb-8"
+				>
+					<div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-cyan-500/50 shadow-2xl shadow-cyan-500/20">
+						<Image
+							src="/Mugshot.jpg"
+							alt="Jorge Taban"
+							fill
+							className="object-cover"
+							priority
+						/>
+					</div>
+				</motion.div>
+
 				<motion.h1
 					initial={{ y: 50 }}
 					animate={{ y: 0 }}

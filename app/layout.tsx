@@ -2,15 +2,22 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Analytics } from "@vercel/analytics/next"
+import OrientationPrompt from './components/OrientationPrompt';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
 	subsets: ['latin'],
+	display: 'swap',
+	preload: true,
+	fallback: ['system-ui', 'arial'],
 });
 
 const geistMono = Geist_Mono({
 	variable: '--font-geist-mono',
 	subsets: ['latin'],
+	display: 'swap',
+	preload: true,
+	fallback: ['monospace'],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +59,7 @@ export const metadata: Metadata = {
 		siteName: 'Jorge Taban - Portfolio',
 		images: [
 			{
-				url: '/og-image.jpg',
+				url: '/og-image.webp',
 				width: 1200,
 				height: 630,
 				alt: 'Jorge Taban - Modern Minimal Portfolio',
@@ -66,7 +73,7 @@ export const metadata: Metadata = {
 		title: 'Jorge Taban - Software Developer',
 		description: 'Detail-driven software developer creating rich, purposeful, and audience-focused digital experiences. Explore my work and the intent behind every project.',
 		creator: '@JorgeTaban',
-		images: ['/og-image.jpg'],
+		images: ['/og-image.webp'],
 	},
 	robots: {
 		index: true,
@@ -88,8 +95,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+				<link rel="dns-prefetch" href="https://vercel.live" />
+			</head>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<OrientationPrompt />
+				{children}
+			</body>
 		    <Analytics />
 		</html>
 	);
 }
+

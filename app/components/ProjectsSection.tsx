@@ -29,10 +29,10 @@ const projects: Project[] = [
 		id: 0,
 		title: 'EVE - AI Security Camera',
 		shortDescription: 'Autonomous vision system with real-time tracking and AI-powered event analysis',
-		image: '/EVE.jpg',
+		image: '/EVE.webp',
 		role: 'Embedded Systems & AI Engineer',
 		company: 'SharkByte Hackathon',
-		category: 'Hackathon Winner',
+		category: 'Hardware & AI',
 		awards: ['🥈 2nd Best Overall Project', '🥇 1st Place ARM Architecture'],
 		description: [
 			'Built an autonomous security camera inspired by EVE from WALL·E, combining edge AI and cloud reasoning for intelligent monitoring.',
@@ -79,21 +79,21 @@ const projects: Project[] = [
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
-		image: '/LincUp Screenshots/1 LincUp.png',
+		image: '/LincUp Screenshots/1 LincUp.webp',
 		images: [
-			'/LincUp Screenshots/1 LincUp.png',
-			'/LincUp Screenshots/2 Login.png',
-			'/LincUp Screenshots/3 MySessions.png',
-			'/LincUp Screenshots/4 Sidebar.png',
-			'/LincUp Screenshots/5 Discover Sessions.png',
-			'/LincUp Screenshots/6 Propose a Session.png',			
-			'/LincUp Screenshots/7 Online Sessions.png',
-			'/LincUp Screenshots/8 Notifications.png',
+			'/LincUp Screenshots/1 LincUp.webp',
+			'/LincUp Screenshots/2 Login.webp',
+			'/LincUp Screenshots/3 MySessions.webp',
+			'/LincUp Screenshots/4 Sidebar.webp',
+			'/LincUp Screenshots/5 Discover Sessions.webp',
+			'/LincUp Screenshots/6 Propose a Session.webp',			
+			'/LincUp Screenshots/7 Online Sessions.webp',
+			'/LincUp Screenshots/8 Notifications.webp',
 
 		],
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup Project',
+		category: 'LINC IOS APP',
 		description: [
 			'Launched and managed a technology startup specializing in mobile and web application development using Supabase and TypeScript.',
 			'Architected and built scalable front-end (React) and back-end (Node.js, PostgreSQL) systems from the ground up.',
@@ -108,10 +108,10 @@ const projects: Project[] = [
 		id: 1.2,
 		title: 'LINC-UP Website',
 		shortDescription: 'Marketing website and information hub for the LINC-UP mobile app',
-		image: '/LincUpWebsite.png',
+		image: '/LincUpWebsite.webp',
 		role: 'Founder & Full-Stack Developer',
 		company: 'Growth Logistics',
-		category: 'Startup Project',
+		category: 'LINC IOS APP',
 		description: [
 			'Developed the comprehensive marketing and information website for the LINC-UP mobile application ecosystem.',
 			'Created responsive web design to showcase app features, facilitate user onboarding, and provide platform resources.',
@@ -126,10 +126,10 @@ const projects: Project[] = [
 		id: 2.1,
 		title: 'Soccer Analytics: CSV Data Processor',
 		shortDescription: 'Enterprise-grade Python ETL pipeline processing 46,000+ football players into normalized PostgreSQL',
-		image: '/SoccerCSV.png',
+		image: '/SoccerCSV.webp',
 		role: 'Data Engineer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
 		description: [
 			'Built a comprehensive Python application processing 200+ column FIFA/UEFA CSV files into a fully normalized PostgreSQL database with ~46,000 players.',
 			'Implemented intelligent file parsing with pattern matching for multi-league datasets (Premier League, La Liga, Bundesliga, Champions League, etc.).',
@@ -144,10 +144,10 @@ const projects: Project[] = [
 		id: 2.2,
 		title: 'Soccer Analytics: PostgreSQL Database',
 		shortDescription: '17-table normalized schema with 500MB+ football data optimized for PowerBI analytics',
-		image: '/SoccerDB.png',
+		image: '/SoccerDB.webp',
 		role: 'Database Engineer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
 		description: [
 			'Designed enterprise-grade normalized database schema with 17 interconnected tables storing 46,000+ players across 71 countries.',
 			'Implemented specialized statistics tables (goal_stats, defensive_stats, financial_stats, advanced_expected_stats) with optimized indexing.',
@@ -162,15 +162,15 @@ const projects: Project[] = [
 		id: 2.3,
 		title: 'Soccer Analytics: PowerBI Dashboard',
 		shortDescription: 'Interactive dashboard providing comprehensive insights into soccer performance metrics',
-		image: '/Soccer Dashboard PowerBI/Soccer PowerBI Dashboard.png',
+		image: '/Soccer Dashboard PowerBI/Soccer PowerBI Dashboard.webp',
 		images: [
-			'/Soccer Dashboard PowerBI/1.png',
-			'/Soccer Dashboard PowerBI/2.png',
-			'/Soccer Dashboard PowerBI/3.png'
+			'/Soccer Dashboard PowerBI/1.webp',
+			'/Soccer Dashboard PowerBI/2.webp',
+			'/Soccer Dashboard PowerBI/3.webp'
 		],
 		role: 'Data Analyst & Visualizer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Soccer Analytics Pipeline',
 		description: [
 			'Built interactive PowerBI dashboards that transform raw soccer data into actionable insights for coaches and analysts.',
 			'Designed comprehensive visualizations covering player performance, team statistics, match analytics, and seasonal trends.',
@@ -185,10 +185,10 @@ const projects: Project[] = [
 		id: 8,
 		title: 'Business Intelligence Dashboard',
 		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
-		image: '/Unavailable.jpg',
+		image: '/Unavailable.webp',
 		role: 'Data Analyst',
 		company: 'JP Global Digital',
-		category: 'Professional Work',
+		category: 'Professional',
 		description: [
 			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
 			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
@@ -202,10 +202,10 @@ const projects: Project[] = [
 		id: 3,
 		title: 'Resume Improver',
 		shortDescription: 'Tool for optimizing resumes based on job descriptions',
-		image: '/ResumeImprover.png',
+		image: '/ResumeImprover.webp',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Personal',
 		description: [
 			'Built a resume optimization tool that analyzes job descriptions and highlights the most relevant keywords.',
 			'Used a curated list of stop words to omit verbs and irrelevant words, focusing on core skills and requirements.',
@@ -217,18 +217,18 @@ const projects: Project[] = [
 		githubUrl: 'https://github.com/jorget15/ResumeImprover',
 	},
 	{
-		id: 4.1,
-		title: 'Impostor Game V1',
+		id: 4,
+		title: 'Impostor Game',
 		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
-		image: '/ImpostorGame/ImpostorGame.png',
+		image: '/ImpostorGame/ImpostorGame.webp',
 		images: [
-			'/ImpostorGame/ImpostorGame.png',
-			'/ImpostorGame/ImpostorGame2.png',
-			'/ImpostorGame/ImpostorGame3.png'
+			'/ImpostorGame/ImpostorGame.webp',
+			'/ImpostorGame/ImpostorGame2.webp',
+			'/ImpostorGame/ImpostorGame3.webp'
 		],
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Game Development',
 		description: [
 			'Built a real-time multiplayer social deduction game where players try to identify the impostor among them.',
 			'Implemented WebSocket-based real-time communication enabling seamless turn-based gameplay for 3-10 players.',
@@ -240,36 +240,13 @@ const projects: Project[] = [
 		githubUrl: 'https://github.com/jorget15/impostor',
 	},
 	{
-		id: 4.2,
-		title: 'Games Center',
-		shortDescription: 'Enhanced multiplayer game platform with scalable architecture for multiple game modes',
-		image: '/GamesCenter/GamesCenter1.png',
-		images: [
-			'/GamesCenter/GamesCenter1.png',
-			'/GamesCenter/GamesCenter2.png'
-		],
-		role: 'Full-Stack Developer',
-		company: 'Personal Project',
-		category: 'Personal Project',
-		description: [
-			'Rebuilt the multiplayer game platform with improved architecture designed to support multiple game types.',
-			'Implemented modular game engine allowing easy addition of new game modes beyond the original impostor concept.',
-			'Enhanced WebSocket infrastructure for better scalability and real-time performance across larger player counts.',
-			'Developed extensible codebase with clear separation of concerns, enabling rapid deployment of new game mechanics.',
-			'Created foundation for a multi-game platform while maintaining the core social deduction gameplay of V1.'
-		],
-		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Modular Architecture', 'Scalable Design'],
-		projectUrl: 'https://gamescenter.onrender.com/',
-		githubUrl: 'https://github.com/jorget15/GamesCenter',
-	},
-	{
 		id: 5,
 		title: 'Student Registration System',
 		shortDescription: 'Application for managing student registrations and course enrollments',
-		image: '/StudentRegistration.png',
+		image: '/StudentRegistration.webp',
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Personal',
 		description: [
 			'Developed a comprehensive student registration system for managing course enrollments.',
 			'Designed the database schema and created a Chen\'s ER diagram to clearly explain entities and relationships.',
@@ -284,10 +261,10 @@ const projects: Project[] = [
 		id: 6,
 		title: 'Pokemon Python Game (WIP)',
 		shortDescription: '2D adventure game inspired by Pokémon',
-		image: '/PokePy.png',
+		image: '/PokePy.webp',
 		role: 'Game Developer',
 		company: 'Personal Project',
-		category: 'Personal Project',
+		category: 'Personal',
 		description: [
 			'Developed a 2D adventure game inspired by Pokémon, leveraging Python\'s Pygame library for graphics and gameplay mechanics.',
 			'Integrated external API calls to fetch real Pokémon data for dynamic character selection.',
@@ -302,10 +279,10 @@ const projects: Project[] = [
 		id: 7,
 		title: '"Bake Away Pastries" Website',
 		shortDescription: 'Comprehensive business website with agile development',
-		image: '/BakeAway.png',
+		image: '/BakeAway.webp',
 		role: 'Designer/Scrum Master',
 		company: 'University of Miami',
-		category: 'Academic Project',
+		category: 'Academic',
 		description: [
 			'Led a team in developing a comprehensive website for a fictitious business using Jira and Confluence, emphasizing agile methodologies.',
 			'Coordinated the creation of Epics, Stories, and Tasks, effectively managing the project lifecycle.',
@@ -317,17 +294,13 @@ const projects: Project[] = [
 		githubUrl: '#',
 	},
 	{
-	id: 9,
-	title: 'UnityAid — Disaster Response System',
-	shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-	image: '/UnityAid/UnityAid1.png',
-	images: [
-		'/UnityAid/UnityAid1.jpg',
-		'/UnityAid/UnityAid2.jpg'
-	],
-	role: 'Full-Stack Developer',
+		id: 9,
+		title: 'UnityAid — Disaster Response System',
+		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
+		image: '/UnityAid.webp',
+		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
-		category: 'Hackathon Project',
+		category: 'Hackathon',
 		description: [
 			'Built an intelligent disaster response coordination system featuring conversational AI that asks clarifying questions when confidence is below 70% for accurate emergency triage.',
 			'Implemented multi-agent architecture with smart priority classification (75%+ accuracy), interactive Folium maps for click-to-pin location selection, and real-time ticket management dashboard.',
@@ -339,13 +312,13 @@ const projects: Project[] = [
 		githubUrl: 'https://github.com/eilyntudares/UnityAid',
 	},
 	{
-	id: 10,
-	title: 'Memento',
-	shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
-	image: '/Unavailable.jpg',
-	role: 'Full-Stack Developer',
+		id: 10,
+		title: 'Memento',
+		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
+		image: '/Memento.webp',
+		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
-		category: 'Hackathon Project',
+		category: 'Hackathon',
 		description: [
 			'Built an AI-powered slideshow generation system that creates complete educational presentations from a single topic using Google\'s Agent Development Kit (ADK).',
 			'Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, intelligent image search, and narrated audio synthesis.',
@@ -371,36 +344,18 @@ const projectGroups = [
 		name: 'Soccer Analytics Pipeline',
 		projects: projects.filter(p => p.id === 2.1 || p.id === 2.2 || p.id === 2.3),
 		mainProject: projects.find(p => p.id === 2.3)!,
-	},
-	{
-		id: 3,
-		name: 'Impostor Game Series',
-		projects: projects.filter(p => p.id === 4.1 || p.id === 4.2),
-		mainProject: projects.find(p => p.id === 4.2)!,
 	}
 ];
 
 // Individual projects (not part of groups)
 const individualProjects = projects.filter(p => 
-	![1.1, 1.2, 2.1, 2.2, 2.3, 4.1, 4.2].includes(p.id)
+	![1.1, 1.2, 2.1, 2.2, 2.3].includes(p.id)
 );
 
-// Combined display projects with custom order
+// Combined display projects (main projects from groups + individual projects)
 const displayProjects = [
-	// 1. EVE (id: 0)
-	projects.find(p => p.id === 0)!,
-	// 2. LINC-UP
-	projectGroups.find(g => g.id === 1)!.mainProject,
-	// 3. UnityAid (id: 9)
-	projects.find(p => p.id === 9)!,
-	// 4. Soccer Analytics Pipeline
-	projectGroups.find(g => g.id === 2)!.mainProject,
-	// 5. Memento (id: 10)
-	projects.find(p => p.id === 10)!,
-	// 6. Impostor Game Series
-	projectGroups.find(g => g.id === 3)!.mainProject,
-	// 7. Rest of the projects (excluding the ones already added)
-	...individualProjects.filter(p => ![0, 9, 10].includes(p.id))
+	...projectGroups.map(group => group.mainProject),
+	...individualProjects
 ];
 
 interface ProjectModalProps {
@@ -548,43 +503,41 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 
 					{/* Header */}
 					<div className="mb-6 md:mb-8">
-						<div className="flex items-center gap-2 flex-wrap mb-3">
-							<span className="text-sm bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg">
-								{currentProject.category}
-							</span>
-							{relatedProjects.length > 1 && (
-								<span className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
-									Part {currentProjectIndex + 1} of {relatedProjects.length}
+						<div className="flex items-center justify-between mb-3">
+							<div className="flex items-center gap-2 flex-wrap">
+								<span className="text-sm bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full font-medium shadow-lg">
+									{currentProject.category}
 								</span>
+								{relatedProjects.length > 1 && (
+									<span className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
+										Part {currentProjectIndex + 1} of {relatedProjects.length}
+									</span>
+								)}
+							</div>
+							{relatedProjects.length > 1 && (
+								<div className="flex items-center gap-1">
+									<button
+										onClick={goToPrevious}
+										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
+										aria-label="Previous project"
+									>
+										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+										</svg>
+									</button>
+									<button
+										onClick={goToNext}
+										className="p-2 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-lg transition-all backdrop-blur-sm"
+										aria-label="Next project"
+									>
+										<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+										</svg>
+									</button>
+								</div>
 							)}
 						</div>
 						<h2 className="text-3xl md:text-4xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{currentProject.title}</h2>
-						
-						{/* Navigation arrows - Moved below title for better visibility */}
-						{relatedProjects.length > 1 && (
-							<div className="flex items-center gap-3 mb-4">
-								<button
-									onClick={goToPrevious}
-									className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 rounded-lg transition-all backdrop-blur-sm border border-gray-700/30 hover:border-gray-600/50"
-									aria-label="Previous project"
-								>
-									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-									</svg>
-									<span className="text-sm font-medium">Previous</span>
-								</button>
-								<button
-									onClick={goToNext}
-									className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white bg-gray-800/50 hover:bg-gray-700/50 rounded-lg transition-all backdrop-blur-sm border border-gray-700/30 hover:border-gray-600/50"
-									aria-label="Next project"
-								>
-									<span className="text-sm font-medium">Next</span>
-									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-									</svg>
-								</button>
-							</div>
-						)}
 						
 						{/* Navigation dots for related projects - Now more visible */}
 						{relatedProjects.length > 1 && (
@@ -640,6 +593,8 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 								src={getCurrentMedia() as string} 
 								alt={currentProject.title} 
 								fill 
+								loading="lazy"
+								sizes="(max-width: 768px) 100vw, 90vw"
 								className="object-contain p-3 md:p-4"
 							/>
 						)}
@@ -828,6 +783,8 @@ export default function ProjectsSection() {
 								src={project.image} 
 								alt={project.title} 
 								fill 
+								loading="lazy"
+								sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 								className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110" 
 							/>
 							
@@ -893,3 +850,4 @@ export default function ProjectsSection() {
 		</>
 	);
 }
+

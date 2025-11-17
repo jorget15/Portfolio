@@ -1,0 +1,78 @@
+JORGE TABAN
+Jorge.taban@gmail.com ~ +1 (786) 573-4203 ~ https://www.linkedin.com/in/jorgetaban/ ~ https://github.com/jorget15
+https://portfolio-sepia-two-61.vercel.app/
+
+SUMMARY OF QUALIFICATIONS
+Full-stack software developer with proven expertise in React, TypeScript, Python, and real-time web technologies, delivering production applications from database design to deployment. Experienced in building AI-powered systems, multiplayer platforms, and enterprise data pipelines. Track record includes hackathon awards (2nd Overall, 1st ARM Architecture), launching a startup platform (LINC-UP), and creating scalable solutions using Node.js, PostgreSQL, WebSockets, and cloud services. Combines technical depth with business acumen to solve real-world problems through clean, efficient, and data-driven solutions.
+
+EDUCATION
+Florida International University (FIU) – B.A. Computer Science, GPA 3.32				            Expected Jul 2026
+University of Miami (UM) – Professional Scrum Master/Scrum.org certified					        March 2023
+
+PROFESSIONAL EXPERIENCE
+INIT Build | Florida International University								   January 2025 - Present
+Lead Developer - CNCT Project
+•	Leading development of CNCT, a social coordination platform enabling FIU students to create and join activities (sports, study groups, hobbies) with integrated messaging and participant tracking.
+•	Building full-stack application using React + Vite, TypeScript, TailwindCSS, Express (Node.js), and Supabase (PostgreSQL + Storage).
+•	Implementing Auth.js authentication, real-time messaging system, event management, and responsive UI with Framer animations.
+•	Architecting features including user profiles, "Who's Going" lists, comment threads, friend systems, and content moderation tools.
+
+Logistics Growth Lab, LLC | Miami, Florida								December 2024 - Present
+Founder & Full-Stack Developer
+•	Designed and launched LINC-UP (iOS App + Web Platform), a React Native + Supabase platform bridging gaps in FIU's Learning Assistant program by enabling students to coordinate study sessions with .edu authentication and real-time notifications.
+•	Architected normalized SQL schemas (7+ tables), 21+ database functions, and 16 triggers ensuring reliable data management and scalability for 1000+ potential users.
+•	Built responsive marketing website with Next.js and Tailwind CSS, achieving App Store approval and live production deployment.
+•	Managed end-to-end product lifecycle including UI/UX design, agile sprint planning, quality assurance, and App Store deployment.
+
+Florida International University | Miami, Florida	 					  January 2025 - August 2025
+Learning Assistant 
+•	Supervised 40+ students through group sessions and in-class exercises in Java and foundational programming concepts.
+•	Strengthened leadership, communication, and teaching skills by translating complex programming and data structures into clear, approachable explanations.
+
+JP Global Digital, LLC | Miami, Florida								    April 2022 - August 2024
+Data Analyst & Operations Coordinator 
+•	Automated data pipelines integrating HubSpot, Google Analytics, CSV databases, and SQL → reduced manual reporting time by 50%.
+•	Created and delivered 5+ interactive dashboards (Power BI, Looker Studio) providing real-time KPI tracking and business intelligence for executives across 3 departments.
+•	Led Agile workflows and sprint planning using Jira & Confluence, improving team efficiency and project delivery timelines.
+
+Parawatts, CO | Paraguay, Asuncion	  							      August 2021 - April 2022
+Operations Manager 
+•	Directed 18-person team; improved operational efficiency by 25% through process optimization and workflow restructuring.
+•	Proposed and oversaw $30K structural upgrades enabling crypto mining operations to launch 3 months ahead of schedule, safeguarding ~$60K/month in revenue and reducing operational risk.
+
+TECHNICAL PROJECTS & ACHIEVEMENTS
+EVE - AI Security Camera (SharkByte Hackathon - 🥈 2nd Overall, 🥇 1st ARM Architecture)		    January 2025
+•	Built autonomous security camera using Jetson Orin Nano with real-time person tracking (YOLOv11n, ByteTrack, TensorRT) at 15 FPS controlling pan/tilt servos.
+•	Integrated Google Gemini for multimodal AI scene analysis with severity classification (info/warning/critical) and Discord webhooks.
+•	Developed full-stack pipeline: embedded tracking → Gemini cloud reasoning → Supabase storage → React dashboard → React Native iOS app.
+
+UnityAid - Disaster Response System (ShellHacks Hackathon)					         October 2024
+•	Built intelligent disaster response platform with conversational AI asking clarifying questions when confidence < 70% for emergency triage.
+•	Implemented multi-agent architecture with 75%+ accuracy priority classification, interactive Folium maps, and real-time ticket management.
+•	Developed context-aware question generation tailored to emergency types with dynamic priority adjustment (1-5 scale).
+
+Memento - AI Slideshow Generator (ShellHacks Hackathon)						         October 2024
+•	Built AI-powered presentation system creating complete educational slideshows from a single topic using Google's Agent Development Kit.
+•	Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, image search, and audio synthesis.
+•	Developed dynamic slide layouts with automatic aspect ratio detection and multi-source image fallback (Wikimedia → Google CSE → placeholders).
+
+Games Center - Multiplayer Gaming Platform							        November 2024
+•	Created scalable multiplayer game platform with modular architecture supporting multiple game modes (Impostor, future expansions).
+•	Implemented real-time WebSocket infrastructure (Socket.IO) handling lobbies, voting mechanisms, and 3-10 player sessions.
+•	Designed extensible codebase with separation of concerns enabling rapid deployment of new game mechanics.
+
+Soccer Analytics Pipeline - Full-Stack Data Project						           August 2024
+•	Built enterprise-grade Python ETL processing 200+ column FIFA/UEFA CSV files → normalized PostgreSQL database with 46,000+ players.
+•	Designed 17-table schema with optimized indexes, foreign keys, and specialized statistics tables (goal_stats, defensive_stats, financial_stats).
+•	Created interactive Power BI dashboards transforming raw data into actionable insights with dynamic filters and drill-down capabilities.
+
+TECHNICAL SKILLS
+Languages & Frameworks: React, React Native, TypeScript, JavaScript, Python, Java, Node.js, Next.js, Express, SQL, Streamlit
+Real-Time & Networking: WebSockets, Socket.IO, REST APIs, FastAPI
+AI & Machine Learning: Google Gemini, Google ADK, YOLOv11n, TensorRT, ByteTrack, Multi-Agent Systems, NLP
+Databases & Backend: PostgreSQL, Supabase, Database Normalization, Schema Design, SQLAlchemy, Triggers & Functions
+Data & Analytics: Power BI, Looker Studio, Google Analytics, Pandas, Data Modeling, ETL Pipelines, Data Wrangling
+Cloud & DevOps: Railway, Render, Vercel, App Store Deployment, Git/GitHub
+Hardware & Embedded: Jetson Orin Nano, OpenCV, PCA9685 Servo Controller, ARM Architecture
+Tools & Methodologies: Jira, Confluence, Trello, Agile/Scrum, HubSpot, VS Code
+Languages: English (fluent) and Spanish (Native)
