@@ -9,6 +9,20 @@ import { useGLTF, AdaptiveDpr, AdaptiveEvents, Preload } from '@react-three/drei
 import { DRACOLoader } from 'three-stdlib';
 import { FOCUS_POSITION_Z, CAMERA_CONFIG, SCALE_BREAKPOINTS, LIGHTING_CONFIG, FOG_CONFIG, getFocusZ } from './config';
 
+// Check if WebGL is supported
+function isWebGLSupported() {
+	if (typeof window === 'undefined') return false;
+	try {
+		const canvas = document.createElement('canvas');
+		return !!(
+			window.WebGLRenderingContext &&
+			(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+		);
+	} catch {
+		return false;
+	}
+}
+
 // Configure DRACO loader for mesh compression support
 if (typeof window !== 'undefined') {
 	const dracoLoader = new DRACOLoader();
@@ -154,6 +168,7 @@ interface SpaceNavigation3DProps {
 }
 
 export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps) {
+	const [webGLSupported, setWebGLSupported] = useState(true);
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
 	const [scaleFactor, setScaleFactor] = useState<number>(SCALE_BREAKPOINTS.DESKTOP.factor);
 	const [focusedPlanet, setFocusedPlanet] = useState<string | null>(null);
@@ -164,6 +179,11 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 		scale: number;
 		rotation: [number, number, number];
 	} | null>(null);
+
+	// Check WebGL support on mount
+	useEffect(() => {
+		setWebGLSupported(isWebGLSupported());
+	}, []);
 
 	// Formation group ref and targets for rotation/translation to bring focused planet forward
 	const formationRef = useRef<THREE.Group>(null);
@@ -336,6 +356,29 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 			} catch {}
 		});
 	}, []);
+
+	// WebGL fallback UI
+	if (!webGLSupported) {
+		return (
+			<div className="relative w-full h-screen flex items-center justify-center bg-black text-white">
+				<div className="text-center px-4">
+					<h2 className="text-2xl md:text-4xl font-bold mb-4">3D Navigation Unavailable</h2>
+					<p className="text-gray-400 mb-8">Your browser doesn't support WebGL. Here are direct links:</p>
+					<div className="flex flex-col gap-4 max-w-md mx-auto">
+						{PLANETS_DATA.map((planet) => (
+							<button
+								key={planet.id}
+								onClick={() => onNavigate(planet.section)}
+								className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all font-medium"
+							>
+								{planet.name}
+							</button>
+						))}
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="relative w-full h-screen">

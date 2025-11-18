@@ -9,9 +9,17 @@ import { useSoundEffect } from '@/app/hooks/useSoundEffect';
 // Dynamically load heavier components to improve initial performance
 const SpaceBackground = dynamic(() => import('./SpaceBackground'), { ssr: false });
 const CustomCursor = dynamic(() => import('./CustomCursor'), { ssr: false });
-const SpaceNavigation3D = dynamic(() => import('./SpaceNavigation3D'), { ssr: false, loading: () => (
-	<div className="w-full h-screen" aria-hidden />
-) });
+const SpaceNavigation3D = dynamic(() => import('./SpaceNavigation3D'), { 
+	ssr: false, 
+	loading: () => (
+		<div className="w-full h-screen flex items-center justify-center text-white" aria-label="Loading 3D space navigation">
+			<div className="text-center">
+				<div className="text-2xl mb-2">🚀</div>
+				<div>Loading Space Navigation...</div>
+			</div>
+		</div>
+	)
+});
 
 // Content sections are large; code-split them to load on demand
 const ProjectsSection = dynamic(() => import('../ProjectsSection'));

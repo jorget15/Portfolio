@@ -117,6 +117,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 					transition={{ delay: 0.5 }}
 					className="absolute inset-0 z-50 flex items-center justify-center bg-black cursor-pointer"
 					onClick={handleStart}
+					onTouchStart={handleStart}
 				>
 					<motion.div
 						className="text-center font-mono"
@@ -127,7 +128,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 							▶
 						</div>
 						<h2 className="text-xl md:text-3xl font-bold text-white mb-4 tracking-wider">
-							[ CLICK TO INITIALIZE ]
+							[ TAP TO INITIALIZE ]
 						</h2>
 						<p className="text-gray-400 text-sm tracking-wide">
 							AUDIO SYSTEMS READY
