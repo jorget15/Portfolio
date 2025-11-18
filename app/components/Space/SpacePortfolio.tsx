@@ -89,7 +89,7 @@ export default function SpacePortfolio() {
 	}, [currentSection, isLoading]); // Only re-run when section changes
 
 	return (
-		<div className="relative min-h-screen overflow-hidden">
+		<div className="relative min-h-screen">
 			{/* Loading Screen */}
 			<AnimatePresence>
 				{isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
