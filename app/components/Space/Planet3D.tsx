@@ -95,6 +95,37 @@ export default function Planet3D({
 }: Planet3DProps) {
 	const meshRef = useRef<THREE.Group>(null); // outer group: position/scale only (no rotation)
 	const rotatorRef = useRef<THREE.Group>(null); // inner group: handle all rotations
+
+	// Adaptive HUD settings by viewport size
+	const [hudScale, setHudScale] = useState(1);
+	const [hudYOffset, setHudYOffset] = useState(1.35);
+	const [hudMaxWidthClass, setHudMaxWidthClass] = useState('max-w-sm md:max-w-md');
+	const [hudDescLimit, setHudDescLimit] = useState(90);
+
+	useEffect(() => {
+		const updateHud = () => {
+			const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
+			if (w < 640) {
+				setHudScale(0.85);
+				setHudYOffset(1.1);
+				setHudMaxWidthClass('max-w-[220px]');
+				setHudDescLimit(60);
+			} else if (w < 1024) {
+				setHudScale(0.95);
+				setHudYOffset(1.25);
+				setHudMaxWidthClass('max-w-sm');
+				setHudDescLimit(80);
+			} else {
+				setHudScale(1);
+				setHudYOffset(1.35);
+				setHudMaxWidthClass('max-w-md');
+				setHudDescLimit(100);
+			}
+		};
+		updateHud();
+		window.addEventListener('resize', updateHud);
+		return () => window.removeEventListener('resize', updateHud);
+	}, []);
 	// Ref merger to also expose the internal group to parent when requested
 	const setGroupRef = (node: THREE.Group | null) => {
 		meshRef.current = node;
@@ -290,10 +321,13 @@ export default function Planet3D({
 			{/* Main hub HUD overlay anchored above the planet (only when not focused) */}
 			{showHud && !isFocused && !isLanding && hud && (
 				<Html
-					position={[0, Math.max(1.1, scale * 1.35), 0]}
+					position={[0, Math.max(1.05, scale * hudYOffset), 0]}
 					className="pointer-events-none"
 				>
-					<div className="relative max-w-sm md:max-w-md select-none">
+					<div
+						className={`relative ${hudMaxWidthClass} select-none`}
+						style={{ transform: `scale(${hudScale})`, transformOrigin: 'center bottom' }}
+					>
 						<div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-cyan-400/60" />
 						<div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-cyan-400/60" />
 						<div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-cyan-400/60" />
@@ -315,7 +349,7 @@ export default function Planet3D({
 							</div>
 							{/* Compact Description (simpler main view) */}
 							<p className="text-gray-300 mb-2 text-xs leading-relaxed relative">
-								{(hud.description?.length ?? 0) > 90 ? `${hud.description?.slice(0, 90)}…` : hud.description}
+								{(hud.description?.length ?? 0) > hudDescLimit ? `${hud.description?.slice(0, hudDescLimit)}…` : hud.description}
 							</p>
 							<div className="mt-3 pt-2 border-t border-cyan-400/20 flex items-center justify-center gap-2 relative">
 								<div className="w-1 h-1 bg-cyan-400 rounded-full" />
