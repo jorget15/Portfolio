@@ -363,7 +363,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 			<div className="relative w-full h-screen flex items-center justify-center bg-black text-white">
 				<div className="text-center px-4">
 					<h2 className="text-2xl md:text-4xl font-bold mb-4">3D Navigation Unavailable</h2>
-					<p className="text-gray-400 mb-8">Your browser doesn't support WebGL. Here are direct links:</p>
+					<p className="text-gray-400 mb-8">Your browser doesn&apos;t support WebGL. Here are direct links:</p>
 					<div className="flex flex-col gap-4 max-w-md mx-auto">
 						{PLANETS_DATA.map((planet) => (
 							<button
