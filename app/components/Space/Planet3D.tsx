@@ -105,21 +105,31 @@ export default function Planet3D({
 	useEffect(() => {
 		const updateHud = () => {
 			const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
-			if (w < 640) {
-				setHudScale(0.85);
-				setHudYOffset(1.1);
+			if (w <= 360) {
+				setHudScale(0.65);
+				setHudYOffset(1.0);
+				setHudMaxWidthClass('max-w-[200px]');
+				setHudDescLimit(50);
+			} else if (w < 480) {
+				setHudScale(0.75);
+				setHudYOffset(1.05);
 				setHudMaxWidthClass('max-w-[220px]');
 				setHudDescLimit(60);
+			} else if (w < 640) {
+				setHudScale(0.85);
+				setHudYOffset(1.1);
+				setHudMaxWidthClass('max-w-[260px]');
+				setHudDescLimit(70);
 			} else if (w < 1024) {
 				setHudScale(0.95);
 				setHudYOffset(1.25);
 				setHudMaxWidthClass('max-w-sm');
-				setHudDescLimit(80);
+				setHudDescLimit(85);
 			} else {
 				setHudScale(1);
 				setHudYOffset(1.35);
 				setHudMaxWidthClass('max-w-md');
-				setHudDescLimit(100);
+				setHudDescLimit(110);
 			}
 		};
 		updateHud();
