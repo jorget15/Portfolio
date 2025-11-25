@@ -297,7 +297,7 @@ const projects: Project[] = [
 		id: 9,
 		title: 'UnityAid — Disaster Response System',
 		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-		image: '/UnityAid.webp',
+		image: '/UnityAid/UnityAid.webp',
 		role: 'Full-Stack Developer',
 		company: 'ShellHacks Hackathon',
 		category: 'Hackathon',
@@ -310,6 +310,7 @@ const projects: Project[] = [
 		technologies: ['Python', 'Streamlit', 'Google ADK', 'Google Generative AI', 'Folium Maps', 'Multi-Agent Systems', 'Natural Language Processing'],
 		projectUrl: 'https://devpost.com/software/unityaid',
 		githubUrl: 'https://github.com/eilyntudares/UnityAid',
+		images: ['/UnityAid/UnityAid.webp', '/UnityAid/UnityAid2.webp'],
 	},
 	{
 		id: 10,
