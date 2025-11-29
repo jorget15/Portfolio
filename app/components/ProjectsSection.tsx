@@ -201,26 +201,34 @@ const projects: Project[] = [
 	},
 	{
 		id: 4,
-		title: 'Impostor Game',
-		shortDescription: 'Multiplayer social deduction game with real-time WebSocket communication',
-		image: '/ImpostorGame/ImpostorGame.webp',
+		title: 'GamesCenter',
+		shortDescription: 'Modular real-time multiplayer game platform with plugin architecture and session persistence',
+		image: '/GamesCenter/GamesCenter1.webp',
 		images: [
-			'/ImpostorGame/ImpostorGame.webp',
-			'/ImpostorGame/ImpostorGame2.webp',
-			'/ImpostorGame/ImpostorGame3.webp'
+			'/GamesCenter/GamesCenter1.webp',
+			'/GamesCenter/GamesCenter2.webp'
 		],
 		role: 'Full-Stack Developer',
 		company: 'Personal Project',
 		category: 'Game Development',
 		description: [
-			'Built a real-time multiplayer social deduction game where players try to identify the impostor among them.',
-			'Implemented WebSocket-based real-time communication enabling seamless turn-based gameplay for 3-10 players.',
-			'Developed lobby system with unique codes, voting mechanisms, and multiple word categories (Animals, Food, Objects).',
-			'Created responsive React frontend with clean UI and Node.js backend handling game state management and player connections.'
+			'Built a modular real-time multiplayer game platform using Node.js, Express, and Socket.IO with a plugin architecture that allows self-contained games without touching core code.',
+			'Implemented session persistence with automatic reconnection after disconnects, spectator mode for mid-game joins, and quick restart functionality (2 seconds) for seamless replay.',
+			'Developed comprehensive WebSocket-based system with phase timeouts (3min clues, 2min votes), automatic randomization for roles and turn order, and real-time multiplayer updates.',
+			'Created clean REST API for lobby management, comprehensive documentation for developers, and template-based system for rapid game development with one-click deployment to Railway/Render.',
+			'Features social deduction game "Impostor" supporting 3-10 players with automatic impostor count calculation, role assignment, voting system, and spectator integration.'
 		],
-		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Real-time Communication'],
-		projectUrl: 'https://impostor-game-production.up.railway.app/',
-		githubUrl: 'https://github.com/jorget15/impostor',
+		technologies: ['Node.js', 'Express', 'Socket.IO', 'WebSockets', 'REST API', 'Session Management', 'Plugin Architecture', 'Jest'],
+		technicalHighlights: [
+			'Modular plugin system - Games self-register without modifying core code',
+			'Session persistence - LocalStorage + auto-reconnect maintains player state',
+			'Spectator mode - Automatic assignment for mid-game joins and offline players',
+			'Phase timeout system - Auto-complete inactive players to maintain game flow',
+			'Quick restart - Replay with same settings in 2 seconds',
+			'Template-based development - Copy and customize for rapid game creation'
+		],
+		projectUrl: 'https://gamescenter.onrender.com/',
+		githubUrl: 'https://github.com/jorget15/GamesCenter',
 	},
 	{
 		id: 10,
