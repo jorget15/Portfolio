@@ -182,23 +182,6 @@ const projects: Project[] = [
 		githubUrl: '#',
 	},
 	{
-		id: 8,
-		title: 'Business Intelligence Dashboard',
-		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
-		image: '/Unavailable.webp',
-		role: 'Data Analyst',
-		company: 'JP Global Digital',
-		category: 'Professional',
-		description: [
-			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
-			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
-			'Ensured seamless integration and automation of data flows, enhancing the accuracy and efficiency of reporting systems.'
-		],
-		technologies: ['PowerBI', 'Looker Studio', 'HubSpot', 'Google Analytics', 'CSV Databases'],
-		projectUrl: '#',
-		githubUrl: '#',
-	},
-	{
 		id: 3,
 		title: 'Resume Improver',
 		shortDescription: 'Tool for optimizing resumes based on job descriptions',
@@ -238,6 +221,43 @@ const projects: Project[] = [
 		technologies: ['React', 'Node.js', 'Express', 'Socket.IO', 'WebSockets', 'Real-time Communication'],
 		projectUrl: 'https://impostor-game-production.up.railway.app/',
 		githubUrl: 'https://github.com/jorget15/impostor',
+	},
+	{
+		id: 10,
+		title: 'Memento',
+		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
+		image: '/Memento.webp',
+		role: 'Full-Stack Developer',
+		company: 'ShellHacks Hackathon',
+		category: 'Hackathon',
+		description: [
+			'Built an AI-powered slideshow generation system that creates complete educational presentations from a single topic using Google\'s Agent Development Kit (ADK).',
+			'Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, intelligent image search, and narrated audio synthesis.',
+			'Developed dynamic slide layouts with automatic aspect ratio detection, multi-source image fallback (Wikimedia Commons → Google CSE → Generated placeholders), and text-to-speech narration.',
+			'Created comprehensive pipeline generating diverse subtopics, relevant visuals, and complete video presentations with all components automatically assembled.'
+		],
+		technologies: ['Python', 'Google ADK', 'Google Generative AI', 'Multi-Agent Systems', 'Wikimedia Commons API', 'Google CSE', 'Text-to-Speech'],
+		projectUrl: '#',
+		githubUrl: 'https://github.com/jorget15/Memento2',
+	},
+	{
+		id: 9,
+		title: 'UnityAid — Disaster Response System',
+		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
+		image: '/UnityAid/UnityAid.webp',
+		role: 'Full-Stack Developer',
+		company: 'ShellHacks Hackathon',
+		category: 'Hackathon',
+		description: [
+			'Built an intelligent disaster response coordination system featuring conversational AI that asks clarifying questions when confidence is below 70% for accurate emergency triage.',
+			'Implemented multi-agent architecture with smart priority classification (75%+ accuracy), interactive Folium maps for click-to-pin location selection, and real-time ticket management dashboard.',
+			'Developed context-aware question generation tailored to emergency types (medical, safety, vulnerable populations) with dynamic priority adjustment from 1-5 based on responses.',
+			'Created comprehensive Streamlit interface with live monitoring, resource capacity tracking, and intelligent ticket composition from freeform descriptions with transparent confidence scoring.'
+		],
+		technologies: ['Python', 'Streamlit', 'Google ADK', 'Google Generative AI', 'Folium Maps', 'Multi-Agent Systems', 'Natural Language Processing'],
+		projectUrl: 'https://devpost.com/software/unityaid',
+		githubUrl: 'https://github.com/eilyntudares/UnityAid',
+		images: ['/UnityAid/UnityAid.webp', '/UnityAid/UnityAid2.webp'],
 	},
 	{
 		id: 5,
@@ -294,41 +314,21 @@ const projects: Project[] = [
 		githubUrl: '#',
 	},
 	{
-		id: 9,
-		title: 'UnityAid — Disaster Response System',
-		shortDescription: 'Intelligent disaster response coordination system with AI-powered conversational priority classification',
-		image: '/UnityAid/UnityAid.webp',
-		role: 'Full-Stack Developer',
-		company: 'ShellHacks Hackathon',
-		category: 'Hackathon',
+		id: 8,
+		title: 'Business Intelligence Dashboard',
+		shortDescription: 'Real-time analytics and KPI tracking system. NDA prevents sharing actual project.',
+		image: '/Unavailable.webp',
+		role: 'Data Analyst',
+		company: 'JP Global Digital',
+		category: 'Professional',
 		description: [
-			'Built an intelligent disaster response coordination system featuring conversational AI that asks clarifying questions when confidence is below 70% for accurate emergency triage.',
-			'Implemented multi-agent architecture with smart priority classification (75%+ accuracy), interactive Folium maps for click-to-pin location selection, and real-time ticket management dashboard.',
-			'Developed context-aware question generation tailored to emergency types (medical, safety, vulnerable populations) with dynamic priority adjustment from 1-5 based on responses.',
-			'Created comprehensive Streamlit interface with live monitoring, resource capacity tracking, and intelligent ticket composition from freeform descriptions with transparent confidence scoring.'
+			'Utilized PowerBI, Looker, HubSpot, CSV Databases and Google Analytics data to develop comprehensive business intelligence dashboards.',
+			'Enabled real-time insights into key performance metrics and trends, facilitating data-driven decision-making with accessible, accurate, and actionable insights for stakeholders.',
+			'Ensured seamless integration and automation of data flows, enhancing the accuracy and efficiency of reporting systems.'
 		],
-		technologies: ['Python', 'Streamlit', 'Google ADK', 'Google Generative AI', 'Folium Maps', 'Multi-Agent Systems', 'Natural Language Processing'],
-		projectUrl: 'https://devpost.com/software/unityaid',
-		githubUrl: 'https://github.com/eilyntudares/UnityAid',
-		images: ['/UnityAid/UnityAid.webp', '/UnityAid/UnityAid2.webp'],
-	},
-	{
-		id: 10,
-		title: 'Memento',
-		shortDescription: 'AI-powered slideshow generation system creating educational presentations with dynamic layouts',
-		image: '/Memento.webp',
-		role: 'Full-Stack Developer',
-		company: 'ShellHacks Hackathon',
-		category: 'Hackathon',
-		description: [
-			'Built an AI-powered slideshow generation system that creates complete educational presentations from a single topic using Google\'s Agent Development Kit (ADK).',
-			'Implemented multi-agent architecture with 6 specialized agents handling topic breakdown, script generation, intelligent image search, and narrated audio synthesis.',
-			'Developed dynamic slide layouts with automatic aspect ratio detection, multi-source image fallback (Wikimedia Commons → Google CSE → Generated placeholders), and text-to-speech narration.',
-			'Created comprehensive pipeline generating diverse subtopics, relevant visuals, and complete video presentations with all components automatically assembled.'
-		],
-		technologies: ['Python', 'Google ADK', 'Google Generative AI', 'Multi-Agent Systems', 'Wikimedia Commons API', 'Google CSE', 'Text-to-Speech'],
+		technologies: ['PowerBI', 'Looker Studio', 'HubSpot', 'Google Analytics', 'CSV Databases'],
 		projectUrl: '#',
-		githubUrl: 'https://github.com/jorget15/Memento2',
+		githubUrl: '#',
 	},
 ];
 
@@ -353,10 +353,12 @@ const individualProjects = projects.filter(p =>
 	![1.1, 1.2, 2.1, 2.2, 2.3].includes(p.id)
 );
 
-// Combined display projects (main projects from groups + individual projects)
+// Combined display projects - EVE first, LINC second, Soccer third, then rest
 const displayProjects = [
-	...projectGroups.map(group => group.mainProject),
-	...individualProjects
+	projects.find(p => p.id === 0)!, // EVE first
+	projectGroups.find(g => g.id === 1)!.mainProject, // LINC-UP second
+	projectGroups.find(g => g.id === 2)!.mainProject, // Soccer Analytics third
+	...individualProjects.filter(p => p.id !== 0), // Rest of individual projects (excluding EVE)
 ];
 
 interface ProjectModalProps {
