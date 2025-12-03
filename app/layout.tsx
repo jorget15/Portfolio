@@ -96,7 +96,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className="bg-black">
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 				{/* Performance optimization: preconnect to external domains */}
@@ -105,7 +105,7 @@ export default function RootLayout({
 				<link rel="dns-prefetch" href="https://vercel.live" />
 				<link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
 			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}>
 				<OrientationPrompt />
 				{children}
 				<Analytics />
