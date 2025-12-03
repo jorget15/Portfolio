@@ -16,15 +16,23 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000, // 1 year cache for optimized images
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
   // Compress responses
   compress: true,
   
-  // Optimize chunks for better caching
+  // Optimize chunks for better caching and performance
   experimental: {
-    optimizePackageImports: ['framer-motion', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: ['framer-motion', '@react-three/fiber', '@react-three/drei', 'three'],
+    webpackBuildWorker: true,
   },
+  
+  // Performance optimizations
+  reactStrictMode: true,
+  poweredByHeader: false,
   
   // Custom headers for caching
   async headers() {

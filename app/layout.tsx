@@ -7,17 +7,19 @@ import OrientationPrompt from './components/OrientationPrompt';
 const geistSans = Geist({
 	variable: '--font-geist-sans',
 	subsets: ['latin'],
-	display: 'optional',
+	display: 'swap',
 	preload: true,
 	fallback: ['system-ui', 'arial'],
+	adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
 	variable: '--font-geist-mono',
 	subsets: ['latin'],
-	display: 'optional',
+	display: 'swap',
 	preload: true,
 	fallback: ['monospace'],
+	adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -97,68 +99,17 @@ export default function RootLayout({
 		<html lang="en">
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+				{/* Performance optimization: preconnect to external domains */}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 				<link rel="dns-prefetch" href="https://vercel.live" />
-				<style dangerouslySetInnerHTML={{
-					__html: `
-						#preloader {
-							position: fixed;
-							top: 0;
-							left: 0;
-							width: 100%;
-							height: 100%;
-							background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							z-index: 9999;
-							opacity: 1;
-							transition: opacity 0.5s ease-out;
-						}
-						#preloader.fade-out {
-							opacity: 0;
-							pointer-events: none;
-						}
-						.preloader-spinner {
-							width: 50px;
-							height: 50px;
-							border: 3px solid rgba(255,255,255,0.1);
-							border-top-color: rgba(255,255,255,0.8);
-							border-radius: 50%;
-							animation: spin 1s linear infinite;
-						}
-						@keyframes spin {
-							to { transform: rotate(360deg); }
-						}
-					`
-				}} />
+				<link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				<div id="preloader">
-					<div className="preloader-spinner"></div>
-				</div>
-				<script dangerouslySetInnerHTML={{
-					__html: `
-						if (typeof window !== 'undefined') {
-							window.addEventListener('load', function() {
-								setTimeout(function() {
-									var preloader = document.getElementById('preloader');
-									if (preloader) {
-										preloader.classList.add('fade-out');
-										setTimeout(function() {
-											preloader.remove();
-										}, 500);
-									}
-								}, 100);
-							});
-						}
-					`
-				}} />
 				<OrientationPrompt />
 				{children}
+				<Analytics />
 			</body>
-		    <Analytics />
 		</html>
 	);
 }

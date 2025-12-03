@@ -30,7 +30,7 @@ const HeroSection = dynamic(() => import('../HeroSection'));
 type Section = 'space' | 'projects' | 'skills' | 'contact' | 'about';
 
 export default function SpacePortfolio() {
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [currentSection, setCurrentSection] = useState<Section>('space');
 	const { startBackgroundMusic, stopBackgroundMusic, setBackgroundMusicVolume } = useSoundEffect(true);
 
