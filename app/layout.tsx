@@ -23,6 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://jorgetaban.com'),
 	title: 'Jorge Taban - Software Developer',
 	description:
 		'Welcome to my portfolio! I’m a detail-oriented software developer who takes pride in crafting thoughtful, purposeful work. I believe in going the extra mile to make sure every one of my projects resonate with its audience and delivers a memorable experience.',
