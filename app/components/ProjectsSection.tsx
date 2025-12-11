@@ -76,6 +76,37 @@ const projects: Project[] = [
 		videoUrl: 'https://www.youtube.com/watch?v=ZPSZIEP53A0',
 	},
 	{
+		id: 0.1,
+		title: 'CNCT - Student Event Platform',
+		shortDescription: 'Full-stack social platform connecting FIU students through events and activities',
+		image: '/CNCT/CNCT 1.webp',
+		images: [
+			'/CNCT/CNCT 1.webp',
+			'/CNCT/CNCT 2.webp'
+		],
+		role: 'Full-Stack Developer',
+		company: 'INIT Build',
+		category: 'Team Project',
+		description: [
+			'Collaborated with a cross-functional team to build a social platform where FIU students create and join events — from sports to study groups — with integrated messaging and attendee tracking.',
+			'Developed layered backend architecture using Express and Node.js with Supabase (Postgres) for database management, implementing JWT authentication, RLS policies, and RESTful API endpoints.',
+			'Built responsive React + Vite frontend with TypeScript and TailwindCSS, featuring real-time attendee updates through Supabase Realtime subscriptions and smooth animations with Framer Motion.',
+			'Implemented comprehensive image storage system using Supabase Storage with dedicated buckets for posts and profiles, including upload utilities and RLS policies for secure file management.',
+			'Architected modular codebase with services layer for API calls, reusable UI components, and complete API documentation to facilitate team collaboration and future scalability.'
+		],
+		technologies: ['React', 'Vite', 'TypeScript', 'TailwindCSS', 'Express', 'Node.js', 'Supabase', 'PostgreSQL', 'Framer Motion', 'JWT', 'React Router'],
+		technicalHighlights: [
+			'Layered backend architecture - Routes, controllers, middleware, and Supabase config',
+			'Real-time features - Supabase Realtime for live attendee updates and messaging',
+			'Secure authentication - JWT verification with Supabase Auth',
+			'RLS policies - Database-level permissions for data security',
+			'Image storage - Supabase Storage buckets with upload utilities',
+			'Modular frontend - Reusable UI components and service layer abstraction'
+		],
+		projectUrl: 'https://cnct-taupe.vercel.app/',
+		githubUrl: 'https://github.com/jorget15/cnct',
+	},
+	{
 		id: 1.1,
 		title: 'LINC-UP iOS App',
 		shortDescription: 'Mobile app for connecting students for study sessions',
@@ -361,12 +392,13 @@ const individualProjects = projects.filter(p =>
 	![1.1, 1.2, 2.1, 2.2, 2.3].includes(p.id)
 );
 
-// Combined display projects - EVE first, LINC second, Soccer third, then rest
+// Combined display projects - EVE first, LINC-UP second, CNCT third, Soccer fourth, then rest
 const displayProjects = [
 	projects.find(p => p.id === 0)!, // EVE first
 	projectGroups.find(g => g.id === 1)!.mainProject, // LINC-UP second
-	projectGroups.find(g => g.id === 2)!.mainProject, // Soccer Analytics third
-	...individualProjects.filter(p => p.id !== 0), // Rest of individual projects (excluding EVE)
+	projects.find(p => p.id === 0.1)!, // CNCT third
+	projectGroups.find(g => g.id === 2)!.mainProject, // Soccer Analytics fourth
+	...individualProjects.filter(p => p.id !== 0 && p.id !== 0.1), // Rest of individual projects (excluding EVE and CNCT)
 ];
 
 interface ProjectModalProps {
