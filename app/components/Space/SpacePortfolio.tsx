@@ -14,7 +14,6 @@ const SpaceNavigation3D = dynamic(() => import('./SpaceNavigation3D'), {
 	loading: () => (
 		<div className="w-full h-screen flex items-center justify-center text-white" aria-label="Loading 3D space navigation">
 			<div className="text-center">
-				<div className="text-2xl mb-2">🚀</div>
 				<div>Loading Space Navigation...</div>
 			</div>
 		</div>

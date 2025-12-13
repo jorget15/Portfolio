@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 // Capture comprehensive user/browser information for visitor identification
 function captureUserProperties() {
-	const properties: Record<string, any> = {
+	const properties: Record<string, unknown> = {
 		// Browser & Device Info
 		user_agent: navigator.userAgent,
 		browser_language: navigator.language,
@@ -14,12 +14,12 @@ function captureUserProperties() {
 		screen_resolution: `${window.screen.width}x${window.screen.height}`,
 		screen_color_depth: window.screen.colorDepth,
 		screen_pixel_depth: window.screen.pixelDepth,
-		device_memory: (navigator as any).deviceMemory,
-		cores: (navigator as any).hardwareConcurrency,
+		device_memory: (navigator as unknown as { deviceMemory?: number }).deviceMemory,
+		cores: (navigator as unknown as { hardwareConcurrency?: number }).hardwareConcurrency,
 		max_touch_points: navigator.maxTouchPoints,
 		
 		// Network & Location Info
-		connection_type: (navigator as any).connection?.effectiveType || 'unknown',
+		connection_type: (navigator as unknown as { connection?: { effectiveType?: string } }).connection?.effectiveType || 'unknown',
 		timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 		
 		// Browser Features
@@ -45,7 +45,7 @@ function captureUserProperties() {
 		// Browser Session
 		local_storage_size: (() => {
 			let total = 0;
-			for (let key in localStorage) {
+			for (const key in localStorage) {
 				if (localStorage.hasOwnProperty(key)) {
 					total += localStorage[key].length + key.length;
 				}
