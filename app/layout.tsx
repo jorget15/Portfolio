@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Analytics } from "@vercel/analytics/next"
 import OrientationPrompt from './components/OrientationPrompt';
+import { PostHogInit } from './components/PostHogProvider';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -107,9 +108,11 @@ export default function RootLayout({
 				<link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}>
-				<OrientationPrompt />
-				{children}
-				<Analytics />
+				<PostHogInit>
+					<OrientationPrompt />
+					{children}
+					<Analytics />
+				</PostHogInit>
 			</body>
 		</html>
 	);
