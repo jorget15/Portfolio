@@ -7,6 +7,7 @@ import Planet3D from './Planet3D';
 import * as THREE from 'three';
 import { useGLTF, AdaptiveDpr, AdaptiveEvents, Preload } from '@react-three/drei';
 import { DRACOLoader } from 'three-stdlib';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { FOCUS_POSITION_Z, CAMERA_CONFIG, SCALE_BREAKPOINTS, LIGHTING_CONFIG, FOG_CONFIG, getFocusZ } from './config';
 
 // Check if WebGL is supported
@@ -550,6 +551,21 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 						</group>
 					</>
 				)}
+				
+				{/* Postprocessing effects for immersive space visuals */}
+				<EffectComposer>
+					<Bloom 
+						intensity={0.5}
+						luminanceThreshold={0.6}
+						luminanceSmoothing={0.9}
+						mipmapBlur
+					/>
+					<Vignette 
+						offset={0.3}
+						darkness={0.5}
+						eskil={false}
+					/>
+				</EffectComposer>
 			</Canvas>
 			</div>
 

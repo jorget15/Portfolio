@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { memo } from 'react';
+import toast from 'react-hot-toast';
 
 const ContactSection = memo(function ContactSection() {
 	return (
@@ -58,11 +59,17 @@ const ContactSection = memo(function ContactSection() {
 					transition={{ duration: 0.6, delay: 0.4 }}
 					className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
 				>
-					<motion.a
-						href="mailto:jorge.taban@gmail.com"
+					<motion.button
+						onClick={() => {
+							navigator.clipboard.writeText('jorge.taban@gmail.com');
+							toast.success('Email copied to clipboard!', {
+								icon: '📋',
+								duration: 2000,
+							});
+						}}
 						whileHover={{ scale: 1.05, y: -5 }}
 						whileTap={{ scale: 0.95 }}
-						className="group flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-blue-900/40 to-cyan-900/40 backdrop-blur-sm border border-blue-500/30 rounded-2xl hover:border-cyan-400/50 transition-all shadow-lg hover:shadow-cyan-500/20"
+						className="group flex flex-col items-center gap-3 p-6 bg-gradient-to-br from-blue-900/40 to-cyan-900/40 backdrop-blur-sm border border-blue-500/30 rounded-2xl hover:border-cyan-400/50 transition-all shadow-lg hover:shadow-cyan-500/20 cursor-pointer"
 					>
 						<div className="p-3 bg-blue-500/20 rounded-full group-hover:bg-cyan-500/30 transition-colors">
 							<svg className="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
@@ -70,8 +77,8 @@ const ContactSection = memo(function ContactSection() {
 								<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 							</svg>
 						</div>
-						<span className="text-white font-medium">Email Me</span>
-					</motion.a>
+						<span className="text-white font-medium">Copy Email</span>
+					</motion.button>
 
 					<motion.a
 						href="https://docs.google.com/document/d/1jqeEXK9_Vi2vIbikRpXgrPIRNWV48D7j/edit?usp=sharing&ouid=116770001195763770356&rtpof=true&sd=true"
