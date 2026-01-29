@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { memo } from 'react';
 
-export default function HeroSection() {
+const HeroSection = memo(function HeroSection() {
 	return (
 		<motion.section
 			initial={{ opacity: 0 }}
@@ -29,6 +30,7 @@ export default function HeroSection() {
 							src="/Mugshot.jpg"
 							alt="Jorge Taban"
 							fill
+							sizes="(max-width: 768px) 128px, 160px"
 							className="object-cover"
 							priority
 						/>
@@ -68,4 +70,6 @@ export default function HeroSection() {
 			</motion.div>
 		</motion.section>
 	);
-}
+});
+
+export default HeroSection;

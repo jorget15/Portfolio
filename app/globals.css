@@ -17,12 +17,37 @@ body {
 	overflow-y: auto;
 	position: static;
 	overscroll-behavior: contain;
+	/* Optimize text rendering */
+	text-rendering: optimizeSpeed;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 body {
 	--background: #0e0e10;   /* darker background */
 	--foreground: #fdfdfd;   /* brighter white */
 	--accent: #073d94;       /* blue (Tailwind's blue-500) */
+}
+
+/* GPU acceleration hint for animated elements */
+@layer utilities {
+	.gpu-accelerated {
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		will-change: transform;
+	}
 }
 
 /* Custom scrollbar styles */

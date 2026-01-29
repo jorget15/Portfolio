@@ -1,12 +1,40 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 export default function CustomCursor() {
-	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+	const cursorRef = useRef<HTMLDivElement>(null);
+	const glowRef = useRef<HTMLDivElement>(null);
 	const [isPointer, setIsPointer] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
+	const isPointerRef = useRef(false);
+	const rafIdRef = useRef<number | null>(null);
+
+	// Use refs to track position without triggering re-renders
+	const positionRef = useRef({ x: 0, y: 0 });
+
+	// Fast pointer check - avoid getComputedStyle when possible
+	const checkIsPointer = useCallback((target: HTMLElement): boolean => {
+		// Fast path: check tag names and data attributes first
+		if (
+			target.tagName === 'BUTTON' ||
+			target.tagName === 'A' ||
+			target.dataset.pointer === 'true'
+		) {
+			return true;
+		}
+		// Check ancestors (still fast)
+		if (target.closest('button, a, [data-pointer="true"]')) {
+			return true;
+		}
+		// Slow path: only call getComputedStyle as last resort
+		try {
+			return window.getComputedStyle(target).cursor === 'pointer';
+		} catch {
+			return false;
+		}
+	}, []);
 
 	useEffect(() => {
 		// Detect if device has touch (mobile/tablet)
@@ -16,21 +44,40 @@ export default function CustomCursor() {
 		
 		checkMobile();
 
+		// Direct DOM manipulation for zero-latency cursor movement
 		const handleMouseMove = (e: MouseEvent) => {
-			setMousePosition({ x: e.clientX, y: e.clientY });
+			positionRef.current = { x: e.clientX, y: e.clientY };
 			
-			// Check if hovering over clickable element
+			// Update cursor position directly via transform (no React re-render)
+			if (cursorRef.current) {
+				cursorRef.current.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
+			}
+			if (glowRef.current) {
+				glowRef.current.style.transform = `translate3d(${e.clientX - 24}px, ${e.clientY - 24}px, 0)`;
+			}
+			
+			// Defer pointer check to next frame to avoid blocking
 			const target = e.target as HTMLElement;
-			setIsPointer(
-				window.getComputedStyle(target).cursor === 'pointer' ||
-				target.tagName === 'BUTTON' ||
-				target.tagName === 'A'
-			);
+			if (rafIdRef.current === null) {
+				rafIdRef.current = requestAnimationFrame(() => {
+					const newIsPointer = checkIsPointer(target);
+					if (newIsPointer !== isPointerRef.current) {
+						isPointerRef.current = newIsPointer;
+						setIsPointer(newIsPointer);
+					}
+					rafIdRef.current = null;
+				});
+			}
 		};
 
-		window.addEventListener('mousemove', handleMouseMove);
-		return () => window.removeEventListener('mousemove', handleMouseMove);
-	}, []);
+		window.addEventListener('mousemove', handleMouseMove, { passive: true });
+		return () => {
+			window.removeEventListener('mousemove', handleMouseMove);
+			if (rafIdRef.current !== null) {
+				cancelAnimationFrame(rafIdRef.current);
+			}
+		};
+	}, [checkIsPointer]);
 
 	// Don't render custom cursor on mobile/touch devices
 	if (isMobile) {
@@ -47,17 +94,12 @@ export default function CustomCursor() {
 			`}</style>
 
 			{/* Custom cursor - Spaceship/Astronaut */}
-			<motion.div
+			<div
+				ref={cursorRef}
 				className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
-				animate={{
-					x: mousePosition.x - 16,
-					y: mousePosition.y - 16,
-				}}
-				transition={{
-					type: "spring",
-					stiffness: 500,
-					damping: 28,
-					mass: 0.5,
+				style={{
+					willChange: 'transform',
+					transform: 'translate3d(0, 0, 0)',
 				}}
 			>
 				{/* Main cursor - Spaceship */}
@@ -137,19 +179,15 @@ export default function CustomCursor() {
 				>
 					<div className="w-1 h-1 bg-cyan-400 rounded-full" />
 				</motion.div>
-			</motion.div>
+			</div>
 
 			{/* Outer glow ring */}
-			<motion.div
+			<div
+				ref={glowRef}
 				className="fixed top-0 left-0 pointer-events-none z-[9998]"
-				animate={{
-					x: mousePosition.x - 24,
-					y: mousePosition.y - 24,
-				}}
-				transition={{
-					type: "spring",
-					stiffness: 300,
-					damping: 30,
+				style={{
+					willChange: 'transform',
+					transform: 'translate3d(0, 0, 0)',
 				}}
 			>
 				<motion.div
@@ -157,9 +195,10 @@ export default function CustomCursor() {
 						scale: isPointer ? 2 : 1,
 						opacity: isPointer ? 0.6 : 0.3,
 					}}
+					transition={{ duration: 0.15 }}
 					className="w-12 h-12 border border-cyan-400 rounded-full"
 				/>
-			</motion.div>
+			</div>
 		</>
 	);
 }

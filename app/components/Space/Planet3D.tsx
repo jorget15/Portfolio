@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import { DRACOLoader } from 'three-stdlib';
@@ -95,6 +95,11 @@ export default function Planet3D({
 }: Planet3DProps) {
 	const meshRef = useRef<THREE.Group>(null); // outer group: position/scale only (no rotation)
 	const rotatorRef = useRef<THREE.Group>(null); // inner group: handle all rotations
+
+	// Reusable Vector3 objects to avoid GC pressure in useFrame
+	const tempVec3A = useRef(new THREE.Vector3());
+	const tempVec3B = useRef(new THREE.Vector3());
+	const tempVec3C = useRef(new THREE.Vector3());
 
 	// Adaptive HUD settings by viewport size
 	const [hudScale, setHudScale] = useState(1);
@@ -203,15 +208,13 @@ export default function Planet3D({
 			const startScale = landingInitial?.scale ?? focusScale;
 			const startRot = landingInitial?.rotation ?? [rotatorRef.current?.rotation.x ?? 0, rotatorRef.current?.rotation.y ?? 0, rotatorRef.current?.rotation.z ?? 0];
 			const t = Math.min(Math.max(landingProgress, 0), 1);
-			const blendedPos = new THREE.Vector3().lerpVectors(
-				new THREE.Vector3(startPos[0], startPos[1], startPos[2]),
-				new THREE.Vector3(
-					FOCUS_POSITION[0] + focusOffset[0],
-					FOCUS_POSITION[1] + focusOffset[1],
-					focusZ + focusOffset[2]
-				),
-				t
+			const startVec = tempVec3A.current.set(startPos[0], startPos[1], startPos[2]);
+			const endVec = tempVec3B.current.set(
+				FOCUS_POSITION[0] + focusOffset[0],
+				FOCUS_POSITION[1] + focusOffset[1],
+				focusZ + focusOffset[2]
 			);
+			const blendedPos = tempVec3C.current.lerpVectors(startVec, endVec, t);
 			const blendedScale = THREE.MathUtils.lerp(startScale, focusScale, t);
 			meshRef.current.position.set(blendedPos.x, blendedPos.y, blendedPos.z);
 			meshRef.current.scale.set(blendedScale, blendedScale, blendedScale);
@@ -229,12 +232,12 @@ export default function Planet3D({
 			if (isFormationFocus) {
 				const p = meshRef.current.position;
 				meshRef.current.position.lerp(
-					new THREE.Vector3(p.x, FOCUS_POSITION[1] + focusOffset[1], p.z),
+					tempVec3A.current.set(p.x, FOCUS_POSITION[1] + focusOffset[1], p.z),
 					ANIMATION_CONFIG.FOCUS_LERP
 				);
 			} else {
 				meshRef.current.position.lerp(
-					new THREE.Vector3(
+					tempVec3A.current.set(
 						FOCUS_POSITION[0] + focusOffset[0],
 						FOCUS_POSITION[1] + focusOffset[1],
 						focusZ + focusOffset[2]
@@ -247,24 +250,26 @@ export default function Planet3D({
 			const focusScaleMultiplier = ANIMATION_CONFIG.FOCUS_SCALE_BASE / Math.max(scale, 0.5);
 			const targetScale = scale * focusScaleMultiplier;
 			meshRef.current.scale.lerp(
-				new THREE.Vector3(targetScale, targetScale, targetScale),
+				tempVec3B.current.set(targetScale, targetScale, targetScale),
 				ANIMATION_CONFIG.FOCUS_LERP
 			);
 		} else if (isHidden) {
 			// Create parallax effect: planets behind the focused one move away
 			// Planets in front move toward camera (negative z direction)
 			const depthOffset = position[2] < FOCUS_POSITION[2] ? -15 : 20;
-			const targetPos = new THREE.Vector3(
-				position[0] * 2,
-				position[1] * 2,
-				position[2] + depthOffset
-			);
 			
-			meshRef.current.position.lerp(targetPos, ANIMATION_CONFIG.FOCUS_LERP);
+			meshRef.current.position.lerp(
+				tempVec3A.current.set(
+					position[0] * 2,
+					position[1] * 2,
+					position[2] + depthOffset
+				),
+				ANIMATION_CONFIG.FOCUS_LERP
+			);
 			
 			// Fade out other planets
 			meshRef.current.scale.lerp(
-				new THREE.Vector3(0, 0, 0),
+				tempVec3B.current.set(0, 0, 0),
 				ANIMATION_CONFIG.FOCUS_LERP
 			);
 		} else {
@@ -289,27 +294,27 @@ export default function Planet3D({
 			// Smooth scale animation on hover
 			const targetScale = isHovered ? scale * ANIMATION_CONFIG.HOVER_SCALE : scale;
 			meshRef.current.scale.lerp(
-				new THREE.Vector3(targetScale, targetScale, targetScale),
+				tempVec3A.current.set(targetScale, targetScale, targetScale),
 				ANIMATION_CONFIG.SCALE_LERP
 			);
 		}
 	});
 
-	const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
+	const handlePointerOver = useCallback((e: ThreeEvent<PointerEvent>) => {
 		if (isHidden) return;
 		if (!isInteractive) return;
 		e.stopPropagation();
 		onPointerOver?.();
 		document.body.style.cursor = 'pointer';
-	};
+	}, [isHidden, isInteractive, onPointerOver]);
 
-	const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
+	const handlePointerOut = useCallback((e: ThreeEvent<PointerEvent>) => {
 		if (isHidden) return;
 		if (!isInteractive) return;
 		e.stopPropagation();
 		onPointerOut?.();
 		document.body.style.cursor = 'auto';
-	};
+	}, [isHidden, isInteractive, onPointerOut]);
 
 	return (
 		<group

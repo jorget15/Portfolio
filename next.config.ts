@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
   
+  // Set turbopack root to silence lockfile warning
+  turbopack: {
+    root: __dirname,
+  },
+  
   // Image optimization for better performance
   images: {
     formats: ['image/avif', 'image/webp'],

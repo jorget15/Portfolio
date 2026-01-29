@@ -107,6 +107,9 @@ export default function RootLayout({
 				<link rel="dns-prefetch" href="https://vercel.live" />
 				<link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
 				<link rel="dns-prefetch" href="https://us.posthog.com" />
+				{/* Preload critical 3D assets */}
+				<link rel="preload" href="/draco/draco_decoder.js" as="script" />
+				<link rel="preload" href="/draco/draco_wasm_wrapper.js" as="script" />
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}>
 				<PostHogInit>

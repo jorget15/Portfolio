@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState, useMemo, memo } from 'react';
+import { useEffect, useMemo, memo, useRef } from 'react';
 
 interface Star {
 	id: number;
@@ -25,18 +25,30 @@ const SpaceBackground = memo(function SpaceBackground() {
 		}))
 	, []);
 	
-	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+	// Use refs for parallax layers to avoid re-renders on mouse move
+	const nebulaRef = useRef<HTMLDivElement>(null);
+	const starsLayerRef = useRef<HTMLDivElement>(null);
+	const closeStarsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		// Throttle mouse move events to reduce re-renders
+		// Throttle mouse move events and update via direct DOM manipulation
 		let rafId: number | null = null;
 		const handleMouseMove = (e: MouseEvent) => {
 			if (rafId !== null) return;
 			rafId = requestAnimationFrame(() => {
-				setMousePosition({
-					x: (e.clientX / window.innerWidth) * 100,
-					y: (e.clientY / window.innerHeight) * 100,
-				});
+				const x = (e.clientX / window.innerWidth) * 100;
+				const y = (e.clientY / window.innerHeight) * 100;
+				
+				// Direct DOM updates instead of React state
+				if (nebulaRef.current) {
+					nebulaRef.current.style.transform = `translate3d(${x * -0.05}px, ${y * -0.05}px, 0)`;
+				}
+				if (starsLayerRef.current) {
+					starsLayerRef.current.style.transform = `translate3d(${x * -0.02}px, ${y * -0.02}px, 0)`;
+				}
+				if (closeStarsRef.current) {
+					closeStarsRef.current.style.transform = `translate3d(${x * -0.05}px, ${y * -0.05}px, 0)`;
+				}
 				rafId = null;
 			});
 		};
@@ -49,7 +61,10 @@ const SpaceBackground = memo(function SpaceBackground() {
 	}, []);
 
 	return (
-		<div className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" style={{ willChange: 'transform' }}>
+		<div 
+			className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" 
+			style={{ willChange: 'transform', contain: 'paint' }}
+		>
 			{/* Galaxy disc effect with subtle movement */}
 			<div className="absolute inset-0 z-10 flex items-center justify-center">
 				<motion.div 
@@ -72,36 +87,28 @@ const SpaceBackground = memo(function SpaceBackground() {
 						style={{
 							background: 'radial-gradient(ellipse 120% 70% at 50% 50%, transparent 25%, rgba(99, 102, 241, 0.12) 45%, rgba(168, 85, 247, 0.1) 58%, rgba(139, 92, 246, 0.08) 70%, transparent 75%)',
 							transform: 'rotate(-15deg)',
-							filter: 'blur(80px)',
+							filter: 'blur(60px)',
 						}}
 					/>
 				</motion.div>
 			</div>
 
 			{/* Nebula clouds */}
-			<motion.div
+			<div
+				ref={nebulaRef}
 				className="absolute inset-0 opacity-30"
-				style={{ willChange: 'transform' }}
-				animate={{
-					x: mousePosition.x * -0.05,
-					y: mousePosition.y * -0.05,
-				}}
-				transition={{ type: "spring", stiffness: 50 }}
+				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
 			>
-				<div className="absolute top-20 left-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]" />
-				<div className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]" />
-				<div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px]" />
-			</motion.div>
+				<div className="absolute top-20 left-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[80px]" />
+				<div className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[80px]" />
+				<div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-600/10 rounded-full blur-[60px]" />
+			</div>
 
 			{/* Stars with parallax layers */}
-			<motion.div
+			<div
+				ref={starsLayerRef}
 				className="absolute inset-0"
-				style={{ willChange: 'transform' }}
-				animate={{
-					x: mousePosition.x * -0.02,
-					y: mousePosition.y * -0.02,
-				}}
-				transition={{ type: "spring", stiffness: 100 }}
+				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
 			>
 				{stars.slice(0, 100).map((star) => (
 					<motion.div
@@ -125,17 +132,13 @@ const SpaceBackground = memo(function SpaceBackground() {
 						}}
 					/>
 				))}
-			</motion.div>
+			</div>
 
 			{/* Closer stars with more parallax */}
-			<motion.div
+			<div
+				ref={closeStarsRef}
 				className="absolute inset-0"
-				style={{ willChange: 'transform' }}
-				animate={{
-					x: mousePosition.x * -0.05,
-					y: mousePosition.y * -0.05,
-				}}
-				transition={{ type: "spring", stiffness: 80 }}
+				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
 			>
 				{stars.slice(100).map((star) => (
 					<motion.div
@@ -159,7 +162,7 @@ const SpaceBackground = memo(function SpaceBackground() {
 						}}
 					/>
 				))}
-			</motion.div>
+			</div>
 
 			{/* Shooting stars */}
 			{[...Array(3)].map((_, i) => (

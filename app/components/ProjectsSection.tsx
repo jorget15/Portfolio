@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 interface Project {
 	id: number;
@@ -760,7 +760,7 @@ function ProjectModal({ project, isOpen, onClose, relatedProjects = [] }: Projec
 	);
 }
 
-export default function ProjectsSection() {
+const ProjectsSection = memo(function ProjectsSection() {
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 	const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
 
@@ -892,5 +892,7 @@ export default function ProjectsSection() {
 			)}
 		</>
 	);
-}
+});
+
+export default ProjectsSection;
 

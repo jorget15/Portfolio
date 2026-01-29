@@ -23,7 +23,8 @@ const PROGRESS_DURATION = 500;
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
 	const [currentCharIndices, setCurrentCharIndices] = useState<number[]>(STATUS_MESSAGES.map(() => -1));
 	const [hasStarted, setHasStarted] = useState(false);
-	const [progress, setProgress] = useState(0);
+	// Use ref for progress bar to avoid re-renders on every frame
+	const progressBarRef = useRef<HTMLDivElement>(null);
 	const { playPopSound, playEngineStart } = useSoundEffect(true);
 
 	// Stabilize sound callbacks so they don't retrigger effects on every render
@@ -77,24 +78,31 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 			}
 		}, CHAR_DELAY);
 
-		// Progress bar runs for entire duration
-		const progressInterval = setInterval(() => {
+		// Progress bar runs for entire duration - use rAF and direct DOM for smooth animation
+		let animationId: number;
+		const animateProgress = () => {
 			const elapsed = Date.now() - startTime;
 			const newProgress = Math.min((elapsed / totalDuration) * 100, 100);
-			setProgress(newProgress);
+			
+			// Update progress bar directly via DOM (no React re-render)
+			if (progressBarRef.current) {
+				progressBarRef.current.style.width = `${newProgress}%`;
+			}
 			
 			if (newProgress >= 100) {
-				clearInterval(progressInterval);
 				window.clearInterval(charInterval);
 				// Play engine start AFTER text completes, then transition quickly
 				try { playEngineRef.current(); } catch {}
 				setTimeout(onLoadingComplete, 400);
+			} else {
+				animationId = requestAnimationFrame(animateProgress);
 			}
-		}, 16); // ~60fps
+		};
+		animationId = requestAnimationFrame(animateProgress);
 
 		return () => {
 			window.clearInterval(charInterval);
-			clearInterval(progressInterval);
+			cancelAnimationFrame(animationId);
 		};
 	}, [hasStarted, onLoadingComplete]);
 
@@ -152,10 +160,10 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 					<div className="w-72 md:w-96 mb-8">
 						<div className="border-2 border-white bg-black p-1">
 							<div className="h-3 bg-black relative">
-								<motion.div
+								<div
+									ref={progressBarRef}
 									className="h-full bg-white"
-									style={{ width: `${progress}%` }}
-									transition={{ duration: 0.05, ease: "linear" }}
+									style={{ width: '0%', willChange: 'width' }}
 								/>
 							</div>
 						</div>

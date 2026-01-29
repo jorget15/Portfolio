@@ -298,6 +298,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 
 	// Responsive scale factor based on viewport width
 	useEffect(() => {
+		let resizeTimeout: ReturnType<typeof setTimeout>;
 		const updateScaleFactor = () => {
 			const width = window.innerWidth;
 			if (width < SCALE_BREAKPOINTS.MOBILE.max) {
@@ -308,10 +309,18 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 				setScaleFactor(SCALE_BREAKPOINTS.DESKTOP.factor);
 			}
 		};
+		// Debounce resize to avoid excessive recalculations
+		const handleResize = () => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(updateScaleFactor, 100);
+		};
 
 		updateScaleFactor();
-		window.addEventListener('resize', updateScaleFactor);
-		return () => window.removeEventListener('resize', updateScaleFactor);
+		window.addEventListener('resize', handleResize, { passive: true });
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			clearTimeout(resizeTimeout);
+		};
 	}, []);
 
 	// Landing animation
@@ -425,7 +434,13 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 				camera={{ position: CAMERA_CONFIG.POSITION, fov: CAMERA_CONFIG.FOV }}
 				style={{ background: 'transparent' }}
 				dpr={[1, 1.75]}
-				gl={{ powerPreference: 'high-performance' }}
+				gl={{ 
+					powerPreference: 'high-performance',
+					antialias: true,
+					stencil: false,
+					depth: true,
+				}}
+				performance={{ min: 0.5 }}
 			>
 				{/* Adaptive helpers: lower device pixel ratio on slow frames and reduce pointer events cost */}
 				<AdaptiveDpr pixelated />
