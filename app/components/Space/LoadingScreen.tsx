@@ -169,7 +169,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 						</div>
 					</div>
 
-					{/* Status messages */}
+					{/* Status messages - use CSS transitions instead of motion */}
 					<div className="min-h-[100px] flex flex-col items-center gap-2">
 						{STATUS_MESSAGES.map((message, index) => {
 							const visibleChars = currentCharIndices[index] + 1;
@@ -177,14 +177,13 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 							const displayText = isLineStarted ? message.substring(0, visibleChars) : '';
 							
 							return (
-								<motion.p
+								<p
 									key={index}
-									initial={{ opacity: 0 }}
-									animate={{ opacity: isLineStarted ? 1 : 0 }}
-									className="text-white text-sm md:text-base font-mono tracking-wide"
+									className="text-white text-sm md:text-base font-mono tracking-wide transition-opacity duration-200"
+									style={{ opacity: isLineStarted ? 1 : 0 }}
 								>
 									{isLineStarted && `> ${displayText}`}
-								</motion.p>
+								</p>
 							);
 						})}
 					</div>

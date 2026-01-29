@@ -48,6 +48,17 @@ body {
 		backface-visibility: hidden;
 		will-change: transform;
 	}
+	
+	/* Containment for isolated components */
+	.contain-paint {
+		contain: paint;
+	}
+	.contain-layout {
+		contain: layout;
+	}
+	.contain-strict {
+		contain: strict;
+	}
 }
 
 /* Custom scrollbar styles */

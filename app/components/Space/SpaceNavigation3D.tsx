@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Planet3D from './Planet3D';
 import * as THREE from 'three';
@@ -257,28 +257,28 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 
 	// Helpers to traverse planets while focused
 	const planetIds = useMemo(() => PLANETS_DATA.map(p => p.id) as Array<(typeof PLANETS_DATA)[number]['id']>, []);
-	const getNextPlanetId = (currentId: (typeof PLANETS_DATA)[number]['id'], dir: 1 | -1) => {
+	const getNextPlanetId = useCallback((currentId: (typeof PLANETS_DATA)[number]['id'], dir: 1 | -1) => {
 		const idx = planetIds.indexOf(currentId);
 		if (idx === -1) return currentId;
 		const nextIdx = (idx + dir + planetIds.length) % planetIds.length;
 		return planetIds[nextIdx];
-	};
+	}, [planetIds]);
 
-	const traverse = (dir: 1 | -1) => {
+	const traverse = useCallback((dir: 1 | -1) => {
 		if (!focusedPlanet || isLanding) return;
 		const nextId = getNextPlanetId(focusedPlanet as (typeof PLANETS_DATA)[number]['id'], dir);
 		setFocusedPlanet(nextId);
 		setHoveredId(null);
 		setIsLanding(false);
 		setIsFocusComplete(false);
-	};
+	}, [focusedPlanet, isLanding, getNextPlanetId]);
 
-	const handleGoBack = () => {
+	const handleGoBack = useCallback(() => {
 		setFocusedPlanet(null);
 		setHoveredId(null);
 		setIsLanding(false);
 		setIsFocusComplete(false);
-	};
+	}, []);
 
 	// Keyboard traversal disabled by request — on-screen arrows only
 
@@ -640,6 +640,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 					exit={{ opacity: 0, scale: 0.95 }}
 					transition={{ duration: 0.2 }}
 					className="absolute top-8 right-8 z-50 pointer-events-none max-w-md w-full px-4"
+					style={{ contain: 'layout' }}
 				>
 					<div className="relative">
 						{/* Corner brackets */}
