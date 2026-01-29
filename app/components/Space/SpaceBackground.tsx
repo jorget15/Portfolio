@@ -1,37 +1,43 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useMemo, memo, useRef } from 'react';
+import { useEffect, memo, useRef } from 'react';
 
-interface Star {
-	id: number;
-	x: number;
-	y: number;
-	size: number;
-	speed: number;
-	opacity: number;
+// Seeded random for deterministic star positions (SSR-safe)
+function seededRandom(seed: number) {
+	const x = Math.sin(seed) * 10000;
+	return x - Math.floor(x);
 }
 
+// Pre-generate star data at module level (runs once, no Math.random)
+const STAR_COUNT = 100;
+const CLOSE_STAR_COUNT = 50;
+
+const farStars = Array.from({ length: STAR_COUNT }, (_, i) => ({
+	id: i,
+	x: seededRandom(i * 1.1) * 100,
+	y: seededRandom(i * 2.2) * 100,
+	size: seededRandom(i * 3.3) * 1.5 + 0.5,
+	duration: seededRandom(i * 4.4) * 3 + 2,
+	delay: seededRandom(i * 5.5) * 2,
+	opacity: seededRandom(i * 6.6) * 0.4 + 0.3,
+}));
+
+const closeStars = Array.from({ length: CLOSE_STAR_COUNT }, (_, i) => ({
+	id: i + STAR_COUNT,
+	x: seededRandom((i + 100) * 1.1) * 100,
+	y: seededRandom((i + 100) * 2.2) * 100,
+	size: seededRandom((i + 100) * 3.3) * 2 + 1,
+	duration: seededRandom((i + 100) * 4.4) * 4 + 3,
+	delay: seededRandom((i + 100) * 5.5) * 3,
+}));
+
 const SpaceBackground = memo(function SpaceBackground() {
-	// Memoize stars array to avoid regenerating on every render
-	const stars = useMemo<Star[]>(() => 
-		Array.from({ length: 150 }, (_, i) => ({
-			id: i,
-			x: Math.random() * 100,
-			y: Math.random() * 100,
-			size: Math.random() * 2 + 0.5,
-			speed: Math.random() * 2 + 1,
-			opacity: Math.random() * 0.5 + 0.3,
-		}))
-	, []);
-	
-	// Use refs for parallax layers to avoid re-renders on mouse move
+	// Refs for parallax layers
 	const nebulaRef = useRef<HTMLDivElement>(null);
 	const starsLayerRef = useRef<HTMLDivElement>(null);
 	const closeStarsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		// Throttle mouse move events and update via direct DOM manipulation
 		let rafId: number | null = null;
 		const handleMouseMove = (e: MouseEvent) => {
 			if (rafId !== null) return;
@@ -39,7 +45,6 @@ const SpaceBackground = memo(function SpaceBackground() {
 				const x = (e.clientX / window.innerWidth) * 100;
 				const y = (e.clientY / window.innerHeight) * 100;
 				
-				// Direct DOM updates instead of React state
 				if (nebulaRef.current) {
 					nebulaRef.current.style.transform = `translate3d(${x * -0.05}px, ${y * -0.05}px, 0)`;
 				}
@@ -63,23 +68,61 @@ const SpaceBackground = memo(function SpaceBackground() {
 	return (
 		<div 
 			className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" 
-			style={{ willChange: 'transform', contain: 'paint' }}
+			style={{ contain: 'paint' }}
 		>
-			{/* Galaxy disc effect with subtle movement */}
+			{/* CSS Keyframes */}
+			<style>{`
+				@keyframes twinkle {
+					0%, 100% { opacity: var(--star-opacity); transform: scale(1); }
+					50% { opacity: calc(var(--star-opacity) + 0.3); transform: scale(1.2); }
+				}
+				@keyframes twinkle-blue {
+					0%, 100% { opacity: 0.5; transform: scale(1); }
+					50% { opacity: 1; transform: scale(1.3); }
+				}
+				@keyframes galaxy-rotate {
+					from { transform: rotate(0deg); }
+					to { transform: rotate(360deg); }
+				}
+				@keyframes shooting-star {
+					0% { transform: translate(0, 0); opacity: 0; }
+					10% { opacity: 1; }
+					90% { opacity: 1; }
+					100% { transform: translate(300px, 150px); opacity: 0; }
+				}
+				.css-star {
+					position: absolute;
+					border-radius: 50%;
+					background: white;
+					animation: twinkle var(--duration) ease-in-out infinite;
+					animation-delay: var(--delay);
+				}
+				.css-star-blue {
+					position: absolute;
+					border-radius: 50%;
+					background: radial-gradient(circle, rgba(59,130,246,1) 0%, rgba(96,165,250,0.5) 50%, transparent 100%);
+					animation: twinkle-blue var(--duration) ease-in-out infinite;
+					animation-delay: var(--delay);
+				}
+				.css-shooting-star {
+					position: absolute;
+					width: 4px;
+					height: 4px;
+					background: white;
+					border-radius: 50%;
+					box-shadow: 0 0 10px 2px rgba(255,255,255,0.5);
+					animation: shooting-star var(--shoot-duration) linear infinite;
+					animation-delay: var(--shoot-delay);
+				}
+			`}</style>
+
+			{/* Galaxy disc - pure CSS rotation */}
 			<div className="absolute inset-0 z-10 flex items-center justify-center">
-				<motion.div 
+				<div 
 					className="w-full h-full"
 					style={{
 						transformOrigin: 'center center',
-						willChange: 'transform',
-					}}
-					animate={{
-						rotate: [0, 360],
-					}}
-					transition={{
-						duration: 600,
-						repeat: Infinity,
-						ease: "linear",
+						animation: 'galaxy-rotate 600s linear infinite',
 					}}
 				>
 					<div 
@@ -90,103 +133,78 @@ const SpaceBackground = memo(function SpaceBackground() {
 							filter: 'blur(60px)',
 						}}
 					/>
-				</motion.div>
+				</div>
 			</div>
 
 			{/* Nebula clouds */}
 			<div
 				ref={nebulaRef}
 				className="absolute inset-0 opacity-30"
-				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
+				style={{ transform: 'translate3d(0, 0, 0)' }}
 			>
 				<div className="absolute top-20 left-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[80px]" />
 				<div className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[80px]" />
 				<div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-600/10 rounded-full blur-[60px]" />
 			</div>
 
-			{/* Stars with parallax layers */}
+			{/* Far stars - CSS animated */}
 			<div
 				ref={starsLayerRef}
 				className="absolute inset-0"
-				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
+				style={{ transform: 'translate3d(0, 0, 0)' }}
 			>
-				{stars.slice(0, 100).map((star) => (
-					<motion.div
+				{farStars.map((star) => (
+					<div
 						key={star.id}
-						className="absolute rounded-full bg-white"
+						className="css-star"
 						style={{
 							left: `${star.x}%`,
 							top: `${star.y}%`,
 							width: `${star.size}px`,
 							height: `${star.size}px`,
-							opacity: star.opacity,
-						}}
-						animate={{
-							opacity: [star.opacity, star.opacity + 0.3, star.opacity],
-							scale: [1, 1.2, 1],
-						}}
-						transition={{
-							duration: star.speed,
-							repeat: Infinity,
-							repeatType: "reverse",
-						}}
+							'--star-opacity': star.opacity,
+							'--duration': `${star.duration}s`,
+							'--delay': `${star.delay}s`,
+						} as React.CSSProperties}
 					/>
 				))}
 			</div>
 
-			{/* Closer stars with more parallax */}
+			{/* Close stars - CSS animated with blue glow */}
 			<div
 				ref={closeStarsRef}
 				className="absolute inset-0"
-				style={{ willChange: 'transform', transform: 'translate3d(0, 0, 0)' }}
+				style={{ transform: 'translate3d(0, 0, 0)' }}
 			>
-				{stars.slice(100).map((star) => (
-					<motion.div
+				{closeStars.map((star) => (
+					<div
 						key={star.id}
-						className="absolute rounded-full"
+						className="css-star-blue"
 						style={{
 							left: `${star.x}%`,
 							top: `${star.y}%`,
-							width: `${star.size * 1.5}px`,
-							height: `${star.size * 1.5}px`,
-							background: 'radial-gradient(circle, rgba(59,130,246,1) 0%, rgba(96,165,250,0.5) 50%, transparent 100%)',
-						}}
-						animate={{
-							opacity: [0.5, 1, 0.5],
-							scale: [1, 1.3, 1],
-						}}
-						transition={{
-							duration: star.speed * 1.5,
-							repeat: Infinity,
-							repeatType: "reverse",
-						}}
+							width: `${star.size}px`,
+							height: `${star.size}px`,
+							'--duration': `${star.duration}s`,
+							'--delay': `${star.delay}s`,
+						} as React.CSSProperties}
 					/>
 				))}
 			</div>
 
-			{/* Shooting stars */}
-			{[...Array(3)].map((_, i) => (
-				<motion.div
-					key={`shooting-${i}`}
-					className="absolute w-1 h-1 bg-white rounded-full"
-					style={{
-						left: `${Math.random() * 100}%`,
-						top: `${Math.random() * 50}%`,
-						boxShadow: '0 0 10px 2px rgba(255,255,255,0.5)',
-					}}
-					animate={{
-						x: [0, 300],
-						y: [0, 150],
-						opacity: [0, 1, 0],
-					}}
-					transition={{
-						duration: 2,
-						repeat: Infinity,
-						delay: i * 5,
-						repeatDelay: 10,
-					}}
-				/>
-			))}
+			{/* Shooting stars - CSS animated */}
+			<div
+				className="css-shooting-star"
+				style={{ left: '10%', top: '15%', '--shoot-delay': '0s', '--shoot-duration': '2s' } as React.CSSProperties}
+			/>
+			<div
+				className="css-shooting-star"
+				style={{ left: '60%', top: '25%', '--shoot-delay': '5s', '--shoot-duration': '2.5s' } as React.CSSProperties}
+			/>
+			<div
+				className="css-shooting-star"
+				style={{ left: '35%', top: '10%', '--shoot-delay': '12s', '--shoot-duration': '1.8s' } as React.CSSProperties}
+			/>
 		</div>
 	);
 });
