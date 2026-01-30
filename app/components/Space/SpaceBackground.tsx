@@ -169,6 +169,7 @@ const SpaceBackground = memo(function SpaceBackground() {
 					background: linear-gradient(90deg, white, transparent);
 					border-radius: 50%;
 					box-shadow: 0 0 6px 2px rgba(255,255,255,0.8), -10px 0 15px rgba(255,255,255,0.4), -20px 0 20px rgba(255,255,255,0.2);
+					opacity: 0;
 				}
 				.css-shooting-star::after {
 					content: '';

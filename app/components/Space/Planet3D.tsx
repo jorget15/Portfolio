@@ -332,8 +332,8 @@ export default function Planet3D({
 			{/* Glowing ring indicator when focused (shows planet is clickable) */}
 			{isFocused && !isLanding && (
 				<>
-					{/* Outer pulsing ring */}
-					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+					{/* Outer pulsing ring - tilted toward camera */}
+					<mesh rotation={[Math.PI / 3, 0, 0.1]} position={[0, -0.3, 0]}>
 						<ringGeometry args={[dynamicHitbox * 0.85, dynamicHitbox * 0.9, 64]} />
 						<meshBasicMaterial 
 							color="#22d3ee" 
@@ -343,7 +343,7 @@ export default function Planet3D({
 						/>
 					</mesh>
 					{/* Inner brighter ring */}
-					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+					<mesh rotation={[Math.PI / 3, 0, 0.1]} position={[0, -0.3, 0]}>
 						<ringGeometry args={[dynamicHitbox * 0.75, dynamicHitbox * 0.78, 64]} />
 						<meshBasicMaterial 
 							color="#06b6d4" 
@@ -352,8 +352,8 @@ export default function Planet3D({
 							side={THREE.DoubleSide}
 						/>
 					</mesh>
-					{/* Docking indicator arrows pointing inward */}
-					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.3, 0]}>
+					{/* Docking indicator - diamond shape */}
+					<mesh rotation={[Math.PI / 3, 0, 0.1]} position={[0, -0.2, 0]}>
 						<ringGeometry args={[dynamicHitbox * 0.6, dynamicHitbox * 0.62, 4]} />
 						<meshBasicMaterial 
 							color="#22d3ee" 
