@@ -789,24 +789,72 @@ const ProjectsSection = memo(function ProjectsSection() {
 
 	return (
 		<>
-			<section className="py-12 md:py-20 px-4 max-w-7xl mx-auto">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
-					className="text-center mb-12 md:mb-16"
-				>
-					<h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
-						Featured Projects
-					</h2>
-					<p className="text-gray-400 text-lg max-w-2xl mx-auto">
-						Explore my portfolio of full-stack applications, data analytics projects, and innovative solutions
-					</p>
-					<div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mt-6 rounded-full"></div>
-				</motion.div>
+			{/* Galaxy themed wrapper */}
+			<div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-black via-blue-950/20 to-black">
+				{/* Galaxy background effects */}
+				<div className="absolute inset-0 pointer-events-none">
+					{/* Star field */}
+					<div 
+						className="absolute inset-0 opacity-30"
+						style={{
+							backgroundImage: `radial-gradient(1px 1px at 20px 30px, white, transparent),
+								radial-gradient(1px 1px at 40px 70px, rgba(59, 130, 246, 0.5), transparent),
+								radial-gradient(1px 1px at 50px 160px, white, transparent),
+								radial-gradient(1px 1px at 90px 40px, rgba(147, 51, 234, 0.5), transparent),
+								radial-gradient(1px 1px at 130px 80px, white, transparent),
+								radial-gradient(1px 1px at 160px 120px, rgba(59, 130, 246, 0.5), transparent)`,
+							backgroundSize: '200px 200px',
+						}}
+					/>
+					{/* Galaxy spiral glow */}
+					<div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
+					<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px]" />
+					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-600/5 rounded-full blur-[80px]" />
+				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+				{/* Header bar */}
+				<div className="absolute top-0 left-0 right-0 h-12 bg-black/80 border-b border-blue-500/30 flex items-center justify-between px-6 z-20">
+					<div className="flex items-center gap-4">
+						<div className="flex items-center gap-2">
+							<div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+							<span className="text-blue-400 font-mono text-xs">EXPLORING GALAXY</span>
+						</div>
+						<div className="h-4 w-px bg-blue-500/30" />
+						<span className="text-blue-400/70 font-mono text-xs">PROJECTS GALAXY // MISSION ARCHIVE</span>
+					</div>
+				</div>
+
+				{/* Main content */}
+				<section className="relative z-10 pt-20 pb-20 px-4 max-w-7xl mx-auto">
+					{/* Themed header panel */}
+					<div className="relative mb-12 md:mb-16">
+						{/* Corner accents */}
+						<div className="absolute -top-1 -left-1 w-3 h-3 border-l-2 border-t-2 border-blue-500/60 rounded-tl" />
+						<div className="absolute -top-1 -right-1 w-3 h-3 border-r-2 border-t-2 border-blue-500/60 rounded-tr" />
+						<div className="absolute -bottom-1 -left-1 w-3 h-3 border-l-2 border-b-2 border-blue-500/60 rounded-bl" />
+						<div className="absolute -bottom-1 -right-1 w-3 h-3 border-r-2 border-b-2 border-blue-500/60 rounded-br" />
+						
+						<div className="bg-black/70 backdrop-blur-md border border-blue-500/30 rounded-lg overflow-hidden">
+							<div className="bg-blue-950/50 border-b border-blue-500/30 px-4 py-2 flex items-center gap-2">
+								<span className="text-lg">🌌</span>
+								<span className="text-blue-300 font-mono text-sm uppercase tracking-wider">Mission Archive</span>
+								<div className="ml-auto flex items-center gap-1">
+									<div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+									<span className="text-blue-400/60 text-xs font-mono">{displayProjects.length} MISSIONS</span>
+								</div>
+							</div>
+							<div className="p-6 text-center">
+								<h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+									Featured Projects
+								</h2>
+								<p className="text-gray-400 text-lg max-w-2xl mx-auto">
+									Explore my portfolio of full-stack applications, data analytics projects, and innovative solutions
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 					{displayProjects.map((project, index) => (
 						<motion.div
 							key={project.id}
@@ -880,6 +928,14 @@ const ProjectsSection = memo(function ProjectsSection() {
 					))}
 				</div>
 			</section>
+
+			{/* Bottom status bar */}
+			<div className="absolute bottom-0 left-0 right-0 h-8 bg-black/80 border-t border-blue-500/30 flex items-center justify-center px-6 z-10">
+				<span className="text-blue-400/50 font-mono text-xs tracking-wider">
+					◆ GALAXY SCAN COMPLETE ◆ {displayProjects.length} MISSIONS LOGGED ◆
+				</span>
+			</div>
+		</div>
 
 			{/* Modal */}
 			{selectedProject && (

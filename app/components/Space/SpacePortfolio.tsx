@@ -22,9 +22,10 @@ const SpaceNavigation3D = dynamic(() => import('./SpaceNavigation3D'), {
 
 // Content sections are large; code-split them to load on demand
 const ProjectsSection = dynamic(() => import('../ProjectsSection'));
-const SkillsSection = dynamic(() => import('../SkillsSection'));
-const ContactSection = dynamic(() => import('../ContactSection'));
+const SkillsSection = dynamic(() => import('../SkillsSectionThemed'));
+const ContactSection = dynamic(() => import('../ContactSectionThemed'));
 const HeroSection = dynamic(() => import('../HeroSection'));
+const AboutSection = dynamic(() => import('../AboutSection'));
 
 type Section = 'space' | 'projects' | 'skills' | 'contact' | 'about';
 
@@ -157,7 +158,7 @@ export default function SpacePortfolio() {
 							transition={{ duration: 0.4, ease: "easeOut" }}
 						>
 							<BackButton onClick={handleBackToSpace} />
-							<HeroSection />
+							<AboutSection />
 						</motion.div>
 					)}
 				</AnimatePresence>
@@ -166,22 +167,30 @@ export default function SpacePortfolio() {
 	);
 }
 
-// Back button component
+// Back button component - themed to match space sections
 function BackButton({ onClick }: { onClick: () => void }) {
 	return (
 		<button
 			onClick={onClick}
-			className="fixed top-8 left-8 z-50 flex items-center gap-2 bg-black/50 backdrop-blur-md text-white px-6 py-3 rounded-full border border-white/20 hover:border-white/40 transition-all group"
+			className="fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-black/80 backdrop-blur-md text-cyan-400 px-4 py-2.5 rounded-lg border border-cyan-500/40 hover:border-cyan-400/60 hover:bg-cyan-950/30 transition-all group shadow-lg shadow-cyan-500/10"
 		>
+			{/* Corner accents */}
+			<div className="absolute -top-0.5 -left-0.5 w-2 h-2 border-l border-t border-cyan-500/60 rounded-tl" />
+			<div className="absolute -top-0.5 -right-0.5 w-2 h-2 border-r border-t border-cyan-500/60 rounded-tr" />
+			<div className="absolute -bottom-0.5 -left-0.5 w-2 h-2 border-l border-b border-cyan-500/60 rounded-bl" />
+			<div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 border-r border-b border-cyan-500/60 rounded-br" />
+			
 			<svg
-				className="w-5 h-5"
+				className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"
 				fill="none"
 				stroke="currentColor"
 				viewBox="0 0 24 24"
 			>
 				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 			</svg>
-			<span className="font-medium">Back to Space</span>
+			<span className="font-mono text-sm">Back to Ship</span>
+			<div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />
 		</button>
 	);
 }
+

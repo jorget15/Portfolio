@@ -328,6 +328,42 @@ export default function Planet3D({
 				<sphereGeometry args={[dynamicHitbox, 16, 16]} />
 				<meshBasicMaterial transparent opacity={0} depthWrite={false} />
 			</mesh>
+
+			{/* Glowing ring indicator when focused (shows planet is clickable) */}
+			{isFocused && !isLanding && (
+				<>
+					{/* Outer pulsing ring */}
+					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+						<ringGeometry args={[dynamicHitbox * 0.85, dynamicHitbox * 0.9, 64]} />
+						<meshBasicMaterial 
+							color="#22d3ee" 
+							transparent 
+							opacity={0.4} 
+							side={THREE.DoubleSide}
+						/>
+					</mesh>
+					{/* Inner brighter ring */}
+					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+						<ringGeometry args={[dynamicHitbox * 0.75, dynamicHitbox * 0.78, 64]} />
+						<meshBasicMaterial 
+							color="#06b6d4" 
+							transparent 
+							opacity={0.6} 
+							side={THREE.DoubleSide}
+						/>
+					</mesh>
+					{/* Docking indicator arrows pointing inward */}
+					<mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.3, 0]}>
+						<ringGeometry args={[dynamicHitbox * 0.6, dynamicHitbox * 0.62, 4]} />
+						<meshBasicMaterial 
+							color="#22d3ee" 
+							transparent 
+							opacity={0.5} 
+							side={THREE.DoubleSide}
+						/>
+					</mesh>
+				</>
+			)}
 			
 			<group ref={rotatorRef}>
 				<primitive object={clonedScene} position={[-modelCenter.x, -modelCenter.y, -modelCenter.z]} />

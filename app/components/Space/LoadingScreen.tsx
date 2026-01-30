@@ -11,14 +11,13 @@ interface LoadingScreenProps {
 const LOADING_TEXT = "LOADING...";
 const STATUS_MESSAGES = [
 	"PREPPING ROCKET — DUSTING OFF SPACE DUST",
-	"FUEL CHECK — TANKS TOPPED,  FUEL IS FUELING",
-	"SYSTEMS DIAGNOSTICS — ALL GREEN",
-	"NAVIGATION — COURSE LOCKED, STARS ALIGNED",
-	"COMM LINK — LOUD AND CLEAR",
-	"READY FOR LAUNCH — HOLD TIGHT"
+	"FUEL CHECK — TANKS TOPPED",
+	"SYSTEMS — ALL GREEN",
+	"NAVIGATION — COURSE LOCKED",
+	"READY FOR LAUNCH"
 ];
-const CHAR_DELAY = 40; // Delay per character in ms
-const PROGRESS_DURATION = 500;
+const CHAR_DELAY = 25; // Delay per character in ms (faster typing)
+const PROGRESS_DURATION = 300;
 
 export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
 	const [currentCharIndices, setCurrentCharIndices] = useState<number[]>(STATUS_MESSAGES.map(() => -1));
@@ -93,7 +92,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 				window.clearInterval(charInterval);
 				// Play engine start AFTER text completes, then transition quickly
 				try { playEngineRef.current(); } catch {}
-				setTimeout(onLoadingComplete, 400);
+				setTimeout(onLoadingComplete, 250);
 			} else {
 				animationId = requestAnimationFrame(animateProgress);
 			}

@@ -632,25 +632,51 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 				</>
 			)}
 
-			{/* Spaceship HUD overlay - always visible during focus */}
+			{/* Spaceship HUD overlay - always visible during focus - NOW CLICKABLE */}
 			{focusedPlanet && !isLanding && (
 				<motion.div
 					initial={{ opacity: 0, scale: 0.95 }}
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.95 }}
 					transition={{ duration: 0.2 }}
-					className="absolute top-8 right-8 z-50 pointer-events-none max-w-md w-full px-4"
+					className="absolute top-8 right-8 z-50 max-w-md w-full px-4"
 					style={{ contain: 'layout' }}
 				>
-					<div className="relative">
-						{/* Corner brackets */}
-						<div className="absolute -top-2 -left-2 w-8 h-8 border-l-2 border-t-2 border-cyan-400/60"></div>
-						<div className="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyan-400/60"></div>
-						<div className="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyan-400/60"></div>
-						<div className="absolute -bottom-2 -right-2 w-8 h-8 border-r-2 border-b-2 border-cyan-400/60"></div>
+					<button
+						onClick={() => {
+							// Trigger the same landing logic as clicking the planet
+							const planet = PLANETS_DATA.find(p => p.id === focusedPlanet);
+							if (planet && formationRef.current) {
+								formationRef.current.rotation.y = targetRotationY;
+								formationRef.current.position.z = targetGroupZ;
+								formationRef.current.updateMatrixWorld(true);
+							}
+							const node = focusedPlanet ? planetRefs.current[focusedPlanet] : null;
+							if (node) {
+								const wp = new THREE.Vector3();
+								const ws = new THREE.Vector3();
+								const wq = new THREE.Quaternion();
+								node.getWorldPosition(wp);
+								node.getWorldScale(ws);
+								node.getWorldQuaternion(wq);
+								const uniformScale = (ws.x + ws.y + ws.z) / 3;
+								const euler = new THREE.Euler().setFromQuaternion(wq);
+								setLandingInitial({ position: [wp.x, wp.y, wp.z], scale: uniformScale, rotation: [euler.x, euler.y, euler.z] });
+							} else {
+								setLandingInitial(null);
+							}
+							setIsLanding(true);
+						}}
+						className="relative w-full text-left group cursor-pointer"
+					>
+						{/* Corner brackets - animate on hover */}
+						<div className="absolute -top-2 -left-2 w-8 h-8 border-l-2 border-t-2 border-cyan-400/60 group-hover:border-cyan-400 group-hover:w-10 group-hover:h-10 transition-all duration-300"></div>
+						<div className="absolute -top-2 -right-2 w-8 h-8 border-r-2 border-t-2 border-cyan-400/60 group-hover:border-cyan-400 group-hover:w-10 group-hover:h-10 transition-all duration-300"></div>
+						<div className="absolute -bottom-2 -left-2 w-8 h-8 border-l-2 border-b-2 border-cyan-400/60 group-hover:border-cyan-400 group-hover:w-10 group-hover:h-10 transition-all duration-300"></div>
+						<div className="absolute -bottom-2 -right-2 w-8 h-8 border-r-2 border-b-2 border-cyan-400/60 group-hover:border-cyan-400 group-hover:w-10 group-hover:h-10 transition-all duration-300"></div>
 
 						{/* Main HUD panel */}
-						<div className="bg-black/85 backdrop-blur-md border border-cyan-400/30 rounded-lg p-6 shadow-2xl shadow-cyan-500/20">
+						<div className="bg-black/85 backdrop-blur-md border border-cyan-400/30 group-hover:border-cyan-400/60 rounded-lg p-6 shadow-2xl shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300">
 							{/* Scan lines effect */}
 							<div className="absolute inset-0 pointer-events-none overflow-hidden rounded-lg">
 								<div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/5 to-transparent animate-pulse"></div>
@@ -690,16 +716,25 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 								))}
 							</div>
 
-							{/* Bottom indicator */}
-							<div className="mt-4 pt-4 border-t border-cyan-400/20 flex items-center justify-center gap-2 relative">
-								<div className="w-1 h-1 bg-cyan-400 rounded-full"></div>
-								<p className="text-cyan-400/70 text-xs font-mono uppercase tracking-widest">
-									Click to initiate docking sequence
-								</p>
-								<div className="w-1 h-1 bg-cyan-400 rounded-full"></div>
+							{/* Bottom indicator - more prominent call to action */}
+							<div className="mt-4 pt-4 border-t border-cyan-400/20 relative">
+								<div className="flex items-center justify-center gap-3 py-2 px-4 rounded-lg bg-cyan-400/10 group-hover:bg-cyan-400/20 border border-cyan-400/30 group-hover:border-cyan-400/60 transition-all duration-300">
+									<svg 
+										className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform duration-300" 
+										fill="none" 
+										stroke="currentColor" 
+										viewBox="0 0 24 24"
+									>
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+									</svg>
+									<span className="text-cyan-400 text-sm font-mono uppercase tracking-widest group-hover:text-cyan-300 transition-colors">
+										Click to Enter
+									</span>
+									<div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse group-hover:animate-ping"></div>
+								</div>
 							</div>
 						</div>
-					</div>
+					</button>
 				</motion.div>
 			)}
 		</div>
