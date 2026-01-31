@@ -185,7 +185,7 @@ Combines technical depth with business acumen to solve real-world problems throu
 			{/* Main content */}
 			<div className="relative z-10 pt-20 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
 				{/* Top row: Profile + Bio Terminal */}
-				<div className="grid md:grid-cols-[300px_1fr] gap-6 mb-6">
+				<div className="grid md:grid-cols-[300px_1fr] gap-4 mb-4">
 					{/* Profile Panel */}
 					<StationPanel title="Crew ID" delay={100}>
 						<div className="flex flex-col items-center">
@@ -248,33 +248,53 @@ Combines technical depth with business acumen to solve real-world problems throu
 					</StationPanel>
 				</div>
 
-				{/* Middle row: Stats + Skills */}
-				<div className="grid md:grid-cols-2 gap-6 mb-6">
-					{/* Mission Stats */}
+				{/* Mission Stats - Full Width */}
+				<div className="grid gap-4 mb-4">
 					<StationPanel title="Mission Stats" delay={500}>
 						<div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
 							<StatDisplay icon="🚀" value="10+" label="Projects" />
-							<StatDisplay icon="🏆" value="2" label="Hackathon Wins" />
+							<StatDisplay icon="🏆" value="1" label="Hackathon Wins" />
 							<StatDisplay icon="📱" value="2" label="App Store Launches" />
 							<StatDisplay icon="⚡" value="15+" label="Technologies" />
 						</div>
 					</StationPanel>
+				</div>
 
-					{/* Core Skills */}
-					<StationPanel title="Core Systems" delay={700}>
-						<SkillBar name="React / Next.js" level={95} delay={900} />
-						<SkillBar name="TypeScript / JavaScript" level={92} delay={1000} />
-						<SkillBar name="Python" level={88} delay={1100} />
-						<SkillBar name="Node.js / Express" level={85} delay={1200} />
-						<SkillBar name="PostgreSQL / Supabase" level={82} delay={1300} />
+				{/* Background & Education */}
+				<div className="grid gap-4 mb-4">
+					<StationPanel title="Background & Education" delay={700}>
+						<div className="grid md:grid-cols-3 gap-4">
+							<div className="flex items-start gap-3">
+								<span className="text-2xl">🎓</span>
+								<div>
+									<p className="text-white font-medium mb-1">Florida International University</p>
+									<p className="text-gray-400 text-sm">Bachelor of Science in Computer Science</p>
+									<p className="text-cyan-400 text-xs font-mono mt-1">Expected Graduation: 2025</p>
+								</div>
+							</div>
+							<div className="flex items-start gap-3">
+								<span className="text-2xl">💼</span>
+								<div>
+									<p className="text-white font-medium mb-1">Professional Focus</p>
+									<p className="text-gray-400 text-sm">Full-stack development, AI integration, real-time systems, and scalable web applications</p>
+								</div>
+							</div>
+							<div className="flex items-start gap-3">
+								<span className="text-2xl">🌟</span>
+								<div>
+									<p className="text-white font-medium mb-1">Currently</p>
+									<p className="text-gray-400 text-sm">Building innovative solutions, competing in hackathons, and exploring edge AI</p>
+								</div>
+							</div>
+						</div>
 					</StationPanel>
 				</div>
 
-				{/* Bottom row: Achievements + Tech Stack */}
-				<div className="grid md:grid-cols-2 gap-6">
+				{/* Bottom row: Achievements */}
+				<div className="grid gap-4 mb-4">
 					{/* Achievements */}
 					<StationPanel title="Mission Highlights" delay={900}>
-						<div className="space-y-3">
+						<div className="grid md:grid-cols-3 gap-3">
 							<div className="flex items-start gap-3 p-3 bg-cyan-950/30 rounded-lg border border-cyan-500/20">
 								<span className="text-2xl">🥈</span>
 								<div>
@@ -298,25 +318,17 @@ Combines technical depth with business acumen to solve real-world problems throu
 							</div>
 						</div>
 					</StationPanel>
+				</div>
 
-					{/* Tech Arsenal */}
-					<StationPanel title="Tech Arsenal" delay={1100}>
-						<div className="flex flex-wrap gap-2">
-							{[
-								'React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 
-								'PostgreSQL', 'Supabase', 'WebSockets', 'Socket.IO',
-								'React Native', 'TailwindCSS', 'Express', 'FastAPI',
-								'Google AI', 'TensorRT', 'Docker', 'Vercel'
-							].map((tech, i) => (
-								<span 
-									key={tech}
-									className="px-3 py-1.5 bg-cyan-950/40 border border-cyan-500/30 rounded-full text-cyan-300 text-sm font-mono hover:border-cyan-400 hover:bg-cyan-950/60 transition-colors cursor-default"
-									style={{ animationDelay: `${1200 + i * 50}ms` }}
-								>
-									{tech}
-								</span>
-							))}
-						</div>
+				{/* Experience Overview */}
+				<div className="grid gap-4">
+					<StationPanel title="Mission Log" delay={1100}>
+						<p className="text-gray-300 leading-relaxed">
+							I've led backend development for social platforms like <span className="text-cyan-400 font-semibold">CNCT</span> and founded <span className="text-cyan-400 font-semibold">LINC-UP</span>, a study coordination app targeting 56,000+ students. 
+							My work spans <span className="text-cyan-300">multiplayer systems</span>, <span className="text-cyan-300">AI-powered features</span>, and <span className="text-cyan-300">real-time data pipelines</span>—from building scalable backends with TypeScript and PostgreSQL to creating production mobile apps and enterprise dashboards.
+							<br /><br />
+							With experience in <span className="text-purple-400">operations management</span>, <span className="text-purple-400">data analytics</span>, and <span className="text-purple-400">Agile workflows</span>, I bridge technical execution with strategic thinking to deliver systems that solve real problems efficiently.
+						</p>
 					</StationPanel>
 				</div>
 			</div>
