@@ -16,8 +16,9 @@ const STAR_COLORS: StarType[] = ['white', 'blue', 'purple', 'cyan', 'warm'];
 const ANIMATION_TYPES: AnimationType[] = ['twinkle', 'pulse', 'drift', 'shimmer', 'glow'];
 
 // Pre-generate star data at module level (runs once, no Math.random)
-const STAR_COUNT = 120;
-const CLOSE_STAR_COUNT = 40;
+// Reduced count for better performance while maintaining visual density
+const STAR_COUNT = 80;
+const CLOSE_STAR_COUNT = 25;
 
 const farStars = Array.from({ length: STAR_COUNT }, (_, i) => {
 	const colorIndex = Math.floor(seededRandom(i * 7.7) * STAR_COLORS.length);
@@ -62,8 +63,13 @@ const SpaceBackground = memo(function SpaceBackground() {
 
 	useEffect(() => {
 		let rafId: number | null = null;
+		let lastUpdate = 0;
+		const THROTTLE_MS = 32; // ~30fps for parallax (more than enough)
+		
 		const handleMouseMove = (e: MouseEvent) => {
-			if (rafId !== null) return;
+			const now = performance.now();
+			if (rafId !== null || now - lastUpdate < THROTTLE_MS) return;
+			
 			rafId = requestAnimationFrame(() => {
 				const x = (e.clientX / window.innerWidth) * 100;
 				const y = (e.clientY / window.innerHeight) * 100;
@@ -77,6 +83,7 @@ const SpaceBackground = memo(function SpaceBackground() {
 				if (closeStarsRef.current) {
 					closeStarsRef.current.style.transform = `translate3d(${x * -0.05}px, ${y * -0.05}px, 0)`;
 				}
+				lastUpdate = now;
 				rafId = null;
 			});
 		};
@@ -91,7 +98,7 @@ const SpaceBackground = memo(function SpaceBackground() {
 	return (
 		<div 
 			className="fixed inset-0 bg-gradient-to-b from-[#000000] via-[#0a0a1a] to-[#050510] overflow-hidden z-0" 
-			style={{ contain: 'paint' }}
+			style={{ contain: 'strict' }}
 		>
 			{/* CSS Keyframes - multiple animation types for variety */}
 			<style>{`

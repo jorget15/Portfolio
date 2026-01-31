@@ -433,14 +433,16 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 			<Canvas 
 				camera={{ position: CAMERA_CONFIG.POSITION, fov: CAMERA_CONFIG.FOV }}
 				style={{ background: 'transparent' }}
-				dpr={[1, 1.75]}
+				dpr={[1, 1.5]}
 				gl={{ 
 					powerPreference: 'high-performance',
-					antialias: true,
+					antialias: false,
 					stencil: false,
 					depth: true,
+					alpha: true,
+					failIfMajorPerformanceCaveat: true,
 				}}
-				performance={{ min: 0.5 }}
+				performance={{ min: 0.4 }}
 			>
 				{/* Adaptive helpers: lower device pixel ratio on slow frames and reduce pointer events cost */}
 				<AdaptiveDpr pixelated />
@@ -567,17 +569,18 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 					</>
 				)}
 				
-				{/* Postprocessing effects for immersive space visuals */}
-				<EffectComposer>
+				{/* Postprocessing effects - optimized for performance */}
+				<EffectComposer multisampling={0}>
 					<Bloom 
-						intensity={0.5}
-						luminanceThreshold={0.6}
+						intensity={0.4}
+						luminanceThreshold={0.7}
 						luminanceSmoothing={0.9}
 						mipmapBlur
+						levels={3}
 					/>
 					<Vignette 
 						offset={0.3}
-						darkness={0.5}
+						darkness={0.4}
 						eskil={false}
 					/>
 				</EffectComposer>
