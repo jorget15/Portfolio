@@ -190,7 +190,7 @@ const ContactSectionThemed = memo(function ContactSectionThemed() {
 	const [copiedEmail, setCopiedEmail] = useState(false);
 
 	const handleCopyEmail = useCallback(() => {
-		navigator.clipboard.writeText('jorgetaban17@gmail.com');
+		navigator.clipboard.writeText('jorge.taban@gmail.com');
 		setCopiedEmail(true);
 		setTimeout(() => setCopiedEmail(false), 2000);
 	}, []);
@@ -264,7 +264,7 @@ const ContactSectionThemed = memo(function ContactSectionThemed() {
 						<TransmissionButton
 							icon={copiedEmail ? "✅" : "📧"}
 							label={copiedEmail ? "Email Copied!" : "Copy Email"}
-							sublabel="jorgetaban17@gmail.com"
+							sublabel="jorge.taban@gmail.com"
 							onClick={handleCopyEmail}
 							delay={300}
 							color="teal"
@@ -279,8 +279,8 @@ const ContactSectionThemed = memo(function ContactSectionThemed() {
 						/>
 						<TransmissionButton
 							icon="🏆"
-							label="AWS Certification"
-							sublabel="Cloud Practitioner credentials"
+							label="Scrum Master Certification"
+							sublabel="View my Scrum Master badge"
 							onClick={handleViewCertification}
 							delay={500}
 							color="blue"
@@ -298,7 +298,7 @@ const ContactSectionThemed = memo(function ContactSectionThemed() {
 								</svg>
 							}
 							label="GitHub"
-							url="https://github.com/jorgetab1997"
+							url="https://github.com/jorget15"
 							delay={700}
 						/>
 						<SocialLink
@@ -308,7 +308,7 @@ const ContactSectionThemed = memo(function ContactSectionThemed() {
 								</svg>
 							}
 							label="LinkedIn"
-							url="https://www.linkedin.com/in/jorge-taban-8b39b7221/"
+							url="https://www.linkedin.com/in/jorgetaban/"
 							delay={800}
 						/>
 					</div>
