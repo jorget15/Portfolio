@@ -112,6 +112,8 @@ export function PostHogInit({ children }: { children: React.ReactNode }) {
 				
 				// Performance optimizations
 				loaded: () => {
+					// Force-disable recording in case a previous session enabled it.
+					posthog?.stopSessionRecording();
 					// Capture comprehensive user properties only once after initialization
 					captureUserProperties();
 				},

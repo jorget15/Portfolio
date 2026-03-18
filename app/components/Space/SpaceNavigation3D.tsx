@@ -118,6 +118,34 @@ function CameraRig({ isFocused, isLanding, landingProgress, planetScale = 1.0, i
 	return null;
 }
 
+// Guard against transient GPU resets by preventing default context-loss behavior
+// and remounting the scene when context is restored.
+function WebGLContextGuard({ onContextRestored }: { onContextRestored: () => void }) {
+	const { gl } = useThree();
+
+	useEffect(() => {
+		const canvas = gl.domElement;
+
+		const handleContextLost = (event: Event) => {
+			event.preventDefault();
+		};
+
+		const handleContextRestored = () => {
+			onContextRestored();
+		};
+
+		canvas.addEventListener('webglcontextlost', handleContextLost, false);
+		canvas.addEventListener('webglcontextrestored', handleContextRestored, false);
+
+		return () => {
+			canvas.removeEventListener('webglcontextlost', handleContextLost, false);
+			canvas.removeEventListener('webglcontextrestored', handleContextRestored, false);
+		};
+	}, [gl, onContextRestored]);
+
+	return null;
+}
+
 // Planet configuration data
 const PLANETS_DATA = [
 	{
@@ -170,6 +198,7 @@ interface SpaceNavigation3DProps {
 
 export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps) {
 	const [webGLSupported, setWebGLSupported] = useState(true);
+	const [canvasInstanceKey, setCanvasInstanceKey] = useState(0);
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
 	const [scaleFactor, setScaleFactor] = useState<number>(SCALE_BREAKPOINTS.DESKTOP.factor);
 	const [focusedPlanet, setFocusedPlanet] = useState<string | null>(null);
@@ -192,6 +221,15 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 	const planetRefs = useRef<Record<string, THREE.Group | null>>({});
 	const [targetRotationY, setTargetRotationY] = useState(0);
 	const [targetGroupZ, setTargetGroupZ] = useState(0);
+
+	const handleContextRestored = useCallback(() => {
+		// Reset interaction state and remount Canvas subtree after context restore.
+		setFocusedPlanet(null);
+		setIsLanding(false);
+		setLandingProgress(0);
+		setLandingInitial(null);
+		setCanvasInstanceKey(prev => prev + 1);
+	}, []);
 
 	// When a planet becomes focused (but not landing), compute rotation and z-shift so the
 	// selected planet rotates to face forward (x≈0) and sits at z≈FOCUS_POSITION_Z.
@@ -431,6 +469,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 			{/* 3D Canvas (above behind-content) */}
 			<div className="absolute inset-0 z-20">
 			<Canvas 
+				key={canvasInstanceKey}
 				camera={{ position: CAMERA_CONFIG.POSITION, fov: CAMERA_CONFIG.FOV }}
 				style={{ background: 'transparent' }}
 				dpr={[1, 1.5]}
@@ -444,6 +483,7 @@ export default function SpaceNavigation3D({ onNavigate }: SpaceNavigation3DProps
 				}}
 				performance={{ min: 0.4 }}
 			>
+				<WebGLContextGuard onContextRestored={handleContextRestored} />
 				{/* Adaptive helpers: lower device pixel ratio on slow frames and reduce pointer events cost */}
 				<AdaptiveDpr pixelated />
 				<AdaptiveEvents />
