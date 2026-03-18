@@ -123,7 +123,7 @@ const PLANETS_DATA = [
 	{
 		id: 'projects',
 		name: 'Projects Galaxy',
-		modelPath: '/3D planets/planet1_compressed.glb',
+		modelPath: '/3D planets/IcePlanet_compressed.glb',
 		position: [0, -2.2, 5] as [number, number, number],
 		scale: 1.5,
 		section: 'projects' as const,
@@ -133,7 +133,7 @@ const PLANETS_DATA = [
 	{
 		id: 'skills',
 		name: 'Skills Nebula',
-		modelPath: '/3D planets/planet2_compressed.glb',
+		modelPath: '/3D planets/Giants deep_compressed.glb',
 		position: [-8.5, 0.5, 0.5] as [number, number, number],
 		scale: 1.0,
 		section: 'skills' as const,
@@ -143,7 +143,7 @@ const PLANETS_DATA = [
 	{
 		id: 'contact',
 		name: 'Contact Portal',
-		modelPath: '/3D planets/planet3_compressed.glb',
+		modelPath: '/3D planets/Hollow Planet_compressed.glb',
 		position: [0, 2.8, -7] as [number, number, number],
 		scale: 0.9,
 		section: 'contact' as const,
